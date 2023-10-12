@@ -1,4 +1,4 @@
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
+ 
 import 'package:flutter/material.dart';
 import 'package:xbox_ui/xbox_colors.dart';
 
@@ -42,7 +42,7 @@ class _XboxAchievementBase extends StatefulWidget {
     this.isCircle = false,
     this.elevation = 2,
     this.icon = const Icon(
-      FluentIcons.diamond_20_filled,
+      Icons.diamond,
       color: XboxColors.White,
     ),
     this.onTap,
@@ -356,7 +356,7 @@ class XboxAchievement {
     this.overlay,
     this.isCircle = false,
     this.icon = const Icon(
-      FluentIcons.diamond_28_filled,
+      Icons.diamond,
       color: Colors.blueAccent,
     ),
     this.typeAnimationContent = AnimationTypeAchievement.fadeSlideToUp,

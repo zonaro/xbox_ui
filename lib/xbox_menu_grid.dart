@@ -1,10 +1,9 @@
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
- 
 
 class XboxMenuGrid extends StatefulWidget {
-  const XboxMenuGrid({super.key, required this.views});
+  const XboxMenuGrid({super.key, required this.views, this.startView});
   final Map<String, List<Widget>> views;
+  final String? startView;
 
   @override
   State<XboxMenuGrid> createState() => _XboxMenuGridState();
@@ -14,10 +13,18 @@ class _XboxMenuGridState extends State<XboxMenuGrid> {
   String? currentKey;
 
   @override
-  Widget build(BuildContext context) {
-    currentKey ??= widget.views.keys.firstOrNull;
+  void initState() {
+    if (widget.startView != null) {
+      currentKey = widget.startView!;
+    }
 
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     if (widget.views.isNotEmpty) {
+      currentKey ??= widget.views.keys.firstOrNull;
       if (!widget.views.keys.contains(currentKey)) {
         currentKey ??= widget.views.keys.first;
       }
@@ -53,7 +60,7 @@ class _XboxMenuGridState extends State<XboxMenuGrid> {
       color: Theme.of(context).colorScheme.background,
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
-      child: const Center(child: Icon(FluentIcons.error_circle_24_filled)),
+      child: const Center(child: Icon(Icons.error)),
     );
   }
 }

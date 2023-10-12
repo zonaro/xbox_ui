@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 
 import 'xbox_colors.dart';
 
+GlobalKey<ScaffoldState> globalkey = GlobalKey();
+
 class XboxDashboard extends StatefulWidget {
-  const XboxDashboard({super.key, required this.globalkey, required this.body, required this.topBarItens, this.wallpaper, this.avatar, this.menu, required this.username, required this.userdetail});
+  const XboxDashboard({super.key, required this.body, required this.topBarItens, this.wallpaper, this.avatar, this.menu, required this.username, required this.userdetail});
 
   final List<Widget> topBarItens;
 
@@ -14,8 +16,6 @@ class XboxDashboard extends StatefulWidget {
   final Widget? menu;
   final String username;
   final String userdetail;
-
-  final GlobalKey<ScaffoldState> globalkey;
 
   @override
   State<XboxDashboard> createState() => _XboxDashboardState();
@@ -27,13 +27,9 @@ class _XboxDashboardState extends State<XboxDashboard> {
     return Stack(
       fit: StackFit.expand,
       children: [
-        if (widget.wallpaper != null)
-          SizedBox(
-              width: MediaQuery.of(context).size.width,
-              // height: MediaQuery.of(context).size.height,
-              child: widget.wallpaper),
+        if (widget.wallpaper != null) SizedBox(width: MediaQuery.of(context).size.width, child: widget.wallpaper),
         Scaffold(
-          key: widget.key,
+          key: globalkey,
           backgroundColor: Theme.of(context).colorScheme.background.withOpacity(.7),
           drawer: Padding(
             padding: const EdgeInsets.all(25),
@@ -45,7 +41,7 @@ class _XboxDashboardState extends State<XboxDashboard> {
             surfaceTintColor: Colors.transparent,
             leadingWidth: MediaQuery.of(context).size.width * 0.3,
             leading: GestureDetector(
-              onTap: () => widget.globalkey.currentState?.openDrawer(),
+              onTap: () => globalkey.currentState?.openDrawer(),
               child: Padding(
                 padding: const EdgeInsets.only(left: 20, top: 20),
                 child: Wrap(

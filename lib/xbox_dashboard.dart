@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'xbox_colors.dart';
 
 class XboxDashboard extends StatefulWidget {
-  const XboxDashboard({super.key, required GlobalKey<ScaffoldState> this.globalkey, required this.body, required this.topBarItens, this.wallpaper, this.avatar, this.menu, required this.username, required this.userdetail});
+  const XboxDashboard({super.key, required this.globalkey, required this.body, required this.topBarItens, this.wallpaper, this.avatar, this.menu, required this.username, required this.userdetail});
 
   final List<Widget> topBarItens;
 
@@ -118,7 +118,7 @@ class XboxMenu extends StatelessWidget {
             decoration: BoxDecoration(
               color: XboxColors.currentAccentColor,
             ),
-            child: Text("devInf.manufacturer"),
+            child: const Text("devInf.manufacturer"),
           ),
           ListTile(
             title: const Text('Home'),

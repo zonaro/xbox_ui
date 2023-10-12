@@ -1,6 +1,6 @@
-
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:xbox_ui/xbox_colors.dart';
 
 enum AchievementState {
   opening,
@@ -26,7 +26,7 @@ class _XboxAchievementBase extends StatefulWidget {
   final BorderRadiusGeometry? borderRadius;
   final double elevation;
   final Color color;
-  final Color? iconBackgroundColor;
+  final Color iconBackgroundColor;
   final BorderRadiusGeometry? iconBorderRadius;
   final TextStyle? textStyleTitle;
   final TextStyle? textStyleSubTitle;
@@ -43,13 +43,13 @@ class _XboxAchievementBase extends StatefulWidget {
     this.elevation = 2,
     this.icon = const Icon(
       FluentIcons.diamond_20_filled,
-      color: Colors.white,
+      color: XboxColors.White,
     ),
     this.onTap,
     this.typeAnimationContent = AnimationTypeAchievement.fadeSlideToUp,
     this.borderRadius,
-    this.color = Colors.blueGrey,
-    this.iconBackgroundColor,
+    this.color = XboxColors.XboxGreen,
+    this.iconBackgroundColor = XboxColors.SlateGray,
     this.iconBorderRadius,
     this.textStyleTitle,
     this.textStyleSubTitle,
@@ -62,8 +62,7 @@ class _XboxAchievementBase extends StatefulWidget {
   _XboxAchievementBaseState createState() => _XboxAchievementBaseState();
 }
 
-class _XboxAchievementBaseState extends State<_XboxAchievementBase>
-    with TickerProviderStateMixin {
+class _XboxAchievementBaseState extends State<_XboxAchievementBase> with TickerProviderStateMixin {
   static const heightCard = 60.0;
   static const marginCard = 20.0;
 
@@ -85,17 +84,16 @@ class _XboxAchievementBaseState extends State<_XboxAchievementBase>
       vsync: this,
       duration: const Duration(milliseconds: 300),
     );
-    _curvedAnimationScale =
-        CurvedAnimation(parent: _controllerScale, curve: Curves.easeInOut)
-          ..addStatusListener((status) {
-            if (status == AnimationStatus.completed) {
-              _controllerSize.forward();
-            }
-            if (status == AnimationStatus.dismissed) {
-              _notifyListener(AchievementState.closed);
-              widget.finish?.call();
-            }
-          });
+    _curvedAnimationScale = CurvedAnimation(parent: _controllerScale, curve: Curves.easeInOut)
+      ..addStatusListener((status) {
+        if (status == AnimationStatus.completed) {
+          _controllerSize.forward();
+        }
+        if (status == AnimationStatus.dismissed) {
+          _notifyListener(AchievementState.closed);
+          widget.finish?.call();
+        }
+      });
 
     _controllerSize = AnimationController(
       vsync: this,
@@ -256,8 +254,7 @@ class _XboxAchievementBaseState extends State<_XboxAchievementBase>
       child: Text(
         title,
         softWrap: true,
-        style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)
-            .merge(widget.textStyleTitle),
+        style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold).merge(widget.textStyleTitle),
       ),
     );
   }
@@ -276,8 +273,7 @@ class _XboxAchievementBaseState extends State<_XboxAchievementBase>
         },
         child: Text(
           subTitle,
-          style: const TextStyle(color: Colors.white)
-              .merge(widget.textStyleSubTitle),
+          style: const TextStyle(color: Colors.white).merge(widget.textStyleSubTitle),
         ));
   }
 
@@ -288,11 +284,7 @@ class _XboxAchievementBaseState extends State<_XboxAchievementBase>
     return widget.borderRadius ?? const BorderRadius.all(Radius.circular(5));
   }
 
-  EdgeInsets _buildPaddingContent() => EdgeInsets.fromLTRB(
-      widget.iconBackgroundColor != null ? 15 : 0,
-      15,
-      widget.isCircle ? 25 : 15,
-      15);
+  EdgeInsets _buildPaddingContent() => EdgeInsets.fromLTRB(0, 15, widget.isCircle ? 25 : 15, 15);
 
   Animation<Offset> _buildAnimatedContent(AnimationController controller) {
     double dx = 0.0;
@@ -312,8 +304,7 @@ class _XboxAchievementBaseState extends State<_XboxAchievementBase>
         {}
         break;
     }
-    return Tween(begin: Offset(dx, dy), end: const Offset(0.0, 0.0))
-        .animate(CurvedAnimation(parent: controller, curve: Curves.decelerate));
+    return Tween(begin: Offset(dx, dy), end: const Offset(0.0, 0.0)).animate(CurvedAnimation(parent: controller, curve: Curves.decelerate));
   }
 
   void _notifyListener(AchievementState state) {
@@ -337,8 +328,6 @@ class _XboxAchievementBaseState extends State<_XboxAchievementBase>
   }
 }
 
- 
-
 class XboxAchievement {
   final AlignmentGeometry alignment;
   final Duration duration;
@@ -349,7 +338,7 @@ class XboxAchievement {
   final AnimationTypeAchievement typeAnimationContent;
   final BorderRadiusGeometry? borderRadius;
   final BorderRadiusGeometry? iconBorderRadius;
-  final Color color;
+  final Color? color;
   final Color? iconBackgroundColor;
   final TextStyle? textStyleTitle;
   final TextStyle? textStyleSubTitle;
@@ -367,13 +356,13 @@ class XboxAchievement {
     this.overlay,
     this.isCircle = false,
     this.icon = const Icon(
-      Icons.insert_emoticon,
-      color: Colors.white,
+      FluentIcons.diamond_28_filled,
+      color: Colors.blueAccent,
     ),
     this.typeAnimationContent = AnimationTypeAchievement.fadeSlideToUp,
     this.borderRadius,
     this.iconBorderRadius,
-    this.color = Colors.blueGrey,
+    this.color,
     this.iconBackgroundColor,
     this.textStyleTitle,
     this.textStyleSubTitle,
@@ -403,8 +392,8 @@ class XboxAchievement {
           typeAnimationContent: typeAnimationContent,
           borderRadius: borderRadius,
           iconBorderRadius: iconBorderRadius,
-          color: color,
-          iconBackgroundColor: iconBackgroundColor,
+          color: color ?? XboxColors.currentAccentColor,
+          iconBackgroundColor: iconBackgroundColor ?? (color ?? XboxColors.SlateGray.withOpacity(.8)),
           finish: _hide,
         ),
       );

@@ -1,20 +1,20 @@
 // ignore_for_file: constant_identifier_names, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
- 
-import 'package:/xbox_tile.dart';
+
+import 'package:xbox_ui/xbox_tile.dart';
 
 mixin XboxColors {
-  static ThemeData getTheme( ) => ThemeData.from(
+  static ThemeData getTheme({Brightness brightness = Brightness.dark}) => ThemeData.from(
         useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(brightness: Brightness.dark, seedColor: XboxColors.currentAccentColor, background: XboxColors.GrayBackground),
-      ).copyWith(
-        visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
+        colorScheme: ColorScheme.fromSeed(brightness: brightness, seedColor: XboxColors.currentAccentColor, background: brightness == Brightness.dark ? XboxColors.SlateGray : XboxColors.White),
       );
 
-  static const XboxGreen = Color(0xFF0e7a0d);
-  static const GrayBackground = Color(0xFF2E2E2E);
-  static const XboxGray = Color(0xFF444444);
+  static const XboxGreen = Color(0xFF107C10);
+
+  static const SlateGray = Color(0xFF3A3A3A);
+
+  static const White = Color(0xFFEEEEEE);
 
   static Color currentAccentColor = XboxColors.XboxGreen;
 
@@ -27,7 +27,7 @@ mixin XboxColors {
                 }
               : null,
           backgroundColor: c,
-          title: c.hexadecimal,
+          title: c.value.toRadixString(16).padLeft(8, '0'),
           width: width,
           height: height,
         ),

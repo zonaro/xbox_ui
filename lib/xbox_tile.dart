@@ -2,10 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-
-import 'package:rbox_launcher/util/global.dart';
-import 'package:string_extensions/string_extensions.dart';
-
+import 'package:xbox_ui/xbox_utils.dart';
 import 'xbox_colors.dart';
 
 /// `XboxTile` is a [Widget] that represents a tile in an Xbox-themed UI.
@@ -37,10 +34,10 @@ class XboxTile extends StatefulWidget {
   final Widget? background;
 
   /// The title of the game. This is optional and can be null.
-  final String? title;
+  final String title;
 
   /// A description for the tile. This is optional and can be null.
-  final String? description;
+  final String description;
 
   /// An icon to display on the tile. This is optional and can be null.
   final Widget? icon;
@@ -59,7 +56,7 @@ class XboxTile extends StatefulWidget {
 
   final Map<Widget, void Function()?>? menuItems;
 
-  const XboxTile({super.key, this.background, this.title, this.tileColor, this.growOnFocus = 0, this.icon, required this.width, this.description, this.onTap, required this.height, this.menuItems, required this.autoFocus});
+  const XboxTile({super.key, this.background, this.title = "", this.tileColor, this.growOnFocus = 0, this.icon, required this.width, this.description = "", this.onTap, required this.height, this.menuItems, required this.autoFocus});
 
   @override
   State<XboxTile> createState() => _XboxTileState();
@@ -161,6 +158,10 @@ class XboxTile extends StatefulWidget {
         growOnFocus: growOnFocus,
         menuItems: menuItems,
       );
+
+  double getHeight(bool hasFocus) => growOnFocus > 0 && hasFocus ? height + (height * growOnFocus) : height;
+
+  double getWidth(bool hasFocus) => growOnFocus > 0 && hasFocus ? width + (width * growOnFocus) : width;
 }
 
 class _XboxTileState extends State<XboxTile> {
@@ -174,16 +175,17 @@ class _XboxTileState extends State<XboxTile> {
 
   @override
   Widget build(BuildContext context) {
+
     const double radius = 7;
 
-    final bool hideDescription = widget.description.isBlank || (widget.title.isNotBlank && !hasFocus);
-
-    final bool hideGameTitle = (widget.title.isBlank || !hasFocus);
+    final bool showTitleBox = hasFocus && widget.title.trim().isNotEmpty && widget.description.trim().isEmpty;
 
     return GestureDetector(
       onTap: widget.onTap,
       onLongPress: () async {
-        if (widget.menuItems != null && widget.menuItems!.isNotEmpty) await showOptionsDialog(context, widget.title ?? "", widget.menuItems!);
+        if (widget.menuItems != null && widget.menuItems!.isNotEmpty) {
+          await XboxPopupMenu.showMenu(context, widget.title, widget.menuItems!);
+        }
       },
       child: FocusableActionDetector(
         descendantsAreFocusable: false,
@@ -191,7 +193,6 @@ class _XboxTileState extends State<XboxTile> {
         onShowHoverHighlight: onFocus,
         onShowFocusHighlight: onFocus,
         autofocus: widget.autoFocus,
-    
         child: Padding(
           padding: const EdgeInsets.all(8),
           child: Container(
@@ -216,7 +217,7 @@ class _XboxTileState extends State<XboxTile> {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(radius),
                   child: GridTile(
-                    footer: hideGameTitle
+                    footer: !showTitleBox
                         ? null
                         : Animate(
                             effects: const [SlideEffect(begin: Offset(0, 1), duration: Duration(milliseconds: 50))],
@@ -229,7 +230,7 @@ class _XboxTileState extends State<XboxTile> {
                                   child: Padding(
                                     padding: const EdgeInsets.all(10.0),
                                     child: Text(
-                                      widget.title ?? "",
+                                      widget.title,
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 16,
@@ -258,16 +259,28 @@ class _XboxTileState extends State<XboxTile> {
                             child: widget.background,
                           ),
                         Container(
-                          decoration: !hideDescription ? const BoxDecoration(gradient: LinearGradient(colors: [Colors.transparent, Colors.transparent, Colors.black], begin: Alignment.topCenter, end: Alignment.bottomCenter)) : null,
+                          decoration: showTitleBox ? const BoxDecoration(gradient: LinearGradient(colors: [Colors.transparent, Colors.transparent, Colors.black], begin: Alignment.topCenter, end: Alignment.bottomCenter)) : null,
                           child: GridTile(
-                              footer: !hideDescription
+                              footer: showTitleBox
                                   ? Padding(
                                       padding: const EdgeInsets.all(10),
-                                      child: Text(
-                                        widget.description ?? "",
-                                        style: const TextStyle(
-                                          color: Colors.white,
-                                        ),
+                                      child: Column(
+                                        children: [
+                                          if (widget.title.trim().isNotEmpty)
+                                            Text(
+                                              widget.title,
+                                              style: const TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          Text(
+                                            widget.description,
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     )
                                   : null,
@@ -285,7 +298,6 @@ class _XboxTileState extends State<XboxTile> {
     );
   }
 
-  double getHeight() => widget.growOnFocus > 0 && hasFocus ? widget.height + (widget.height * widget.growOnFocus) : widget.height;
-
-  double getWidth() => widget.growOnFocus > 0 && hasFocus ? widget.width + (widget.width * widget.growOnFocus) : widget.width;
+  double getWidth() => widget.getWidth(hasFocus);
+  double getHeight() => widget.getHeight(hasFocus);
 }

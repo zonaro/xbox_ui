@@ -11,6 +11,12 @@ dependencies:
   flutter:
     sdk: flutter
 
+  auto_size_text:
+  fluentui_system_icons:
+  flutter_animate:
+
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

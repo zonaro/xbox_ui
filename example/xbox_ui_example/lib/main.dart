@@ -93,7 +93,7 @@ class _BasicXboxUiState extends State<BasicXboxUi> {
               width: 100,
               height: 100,
               image: Image.network(
-                'https://picsum.photos/id/1/100/100?a=1',
+                'https://picsum.photos/100/100?a=1',
                 fit: BoxFit.cover,
               ),
             ),

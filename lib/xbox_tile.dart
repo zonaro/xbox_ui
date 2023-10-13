@@ -281,6 +281,8 @@ class _XboxTileState extends State<XboxTile> {
                                         child: Padding(
                                           padding: const EdgeInsets.all(10),
                                           child: Column(
+                                            mainAxisAlignment: MainAxisAlignment.end,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               if (widget.title.trim().isNotEmpty)
                                                 Text(

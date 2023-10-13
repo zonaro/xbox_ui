@@ -205,7 +205,7 @@ class _XboxNotificationState extends State<XboxNotification> with TickerProvider
 
   Widget _buildIcon() {
     return Container(
-      color: Xbox.SlateGray.withOpacity(.5),
+      color: Xbox.SlateGray.withOpacity(.8),
       width: heightCard,
       alignment: Alignment.center,
       child: widget.icon ??

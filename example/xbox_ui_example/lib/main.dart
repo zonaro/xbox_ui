@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:xbox_ui/xbox.dart';
 import 'package:xbox_ui/xbox_ui.dart';
 
 void main() {
@@ -76,16 +75,14 @@ class _BasicXboxUiState extends State<BasicXboxUi> {
           XboxTile.icon(
             icon: Icons.settings,
             title: "Settings",
-            width: 60,
-            height: 60,
+            size: const Size.square(60),
             iconSize: 30,
             growOnFocus: 1,
           ),
           XboxTile.icon(
             icon: Icons.usb_rounded,
             title: "Devices",
-            width: 60,
-            height: 60,
+            size: const Size.square(60),
             iconSize: 30,
             growOnFocus: 1,
           ),
@@ -93,8 +90,7 @@ class _BasicXboxUiState extends State<BasicXboxUi> {
         XboxTileList(title: "Game Style", tiles: [
           XboxTile.game(
             title: "Game Name",
-            width: 200,
-            height: 200,
+            size: const Size.square(200),
             image: Image.network(
               'https://picsum.photos/100/100?a=1',
               fit: BoxFit.cover,
@@ -105,41 +101,33 @@ class _BasicXboxUiState extends State<BasicXboxUi> {
           XboxTile.banner(
             title: "Banner Title",
             description: "A short banner description",
-            width: 200,
-            height: 120,
+            size: Xbox.calculateDimension("16:9", height: 200),
             image: Image.network(
               'https://picsum.photos/200/120?a=2',
               fit: BoxFit.cover,
             ),
           ),
-          XboxTile.banner(
+          XboxTile.iconBanner(
             description: "Sometimes we have icons",
-            width: 200,
-            height: 120,
+            size: Xbox.calculateDimension("16:9", height: 200),
             image: Image.network(
               'https://picsum.photos/200/120?a=3',
               fit: BoxFit.cover,
             ),
-            icon: Icon(
-              color: Xbox.currentAccentColor,
-              Icons.gamepad,
-              size: 60,
-            ),
+            iconSize: 60,
+            icon: Icons.gamepad,
           ),
         ]),
         XboxTileList(title: "Icon Gradient", tiles: [
           XboxTile.iconGradient(
             title: "A Gradient background with Icon",
-            width: 300,
-            height: 150,
+            size: Xbox.calculateDimension("16:9", height: 120),
             icon: Icons.color_lens,
             gradient: LinearGradient(colors: [Colors.purple[700]!, Colors.blue[800]!]),
             iconSize: 60,
           ),
         ]),
-        XboxTileList(
-          title: "Colors",
-            tiles: Xbox.colorTiles(Colors.primaries, width: 100, height: 100, onTap: (x) => setState(() => Xbox.currentAccentColor = x)))
+        XboxTileList(title: "Colors", tiles: Xbox.colorTiles(Colors.primaries, onTap: (x) => setState(() => Xbox.currentAccentColor = x)))
       ]),
     );
   }

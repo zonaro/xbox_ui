@@ -1,3 +1,5 @@
+import 'dart:js_interop';
+
 import 'package:flutter/material.dart';
 import 'package:xbox_ui/xbox_colors.dart';
 
@@ -31,7 +33,7 @@ class _XboxIconButtonState extends State<XboxIconButton> {
             shape: BoxShape.circle,
           ),
           child: InkWell(
-            splashColor: XboxColors.currentAccentColor,
+            splashColor: Colors.transparent,
             onFocusChange: (v) {
               setState(() {
                 hasFocus = v;

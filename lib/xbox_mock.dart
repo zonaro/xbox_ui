@@ -9,14 +9,18 @@ import 'package:xbox_ui/xbox_tile_list.dart';
 import 'package:xbox_ui/xbox_tile_view.dart';
 import 'package:xbox_ui/xbox_ui.dart';
 
-class XboxMock extends StatelessWidget {
+class XboxMock extends StatefulWidget {
   const XboxMock({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context) {
-    return XboxApp(
+  State<XboxMock> createState() => _XboxMockState();
+}
+
+class _XboxMockState extends State<XboxMock> {
+  @override
+  Widget build(BuildContext context) => XboxApp(
         title: 'Xbox Demo',
         themeMode: ThemeMode.system,
         theme: XboxLightTheme,
@@ -92,5 +96,4 @@ class XboxMock extends StatelessWidget {
             // ]),
           ]),
         ));
-  }
 }

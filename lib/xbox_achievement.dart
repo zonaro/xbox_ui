@@ -21,7 +21,7 @@ class _XboxAchievementBase extends StatefulWidget {
   final ValueChanged<AchievementState>? listener;
   final Duration duration;
   final bool isCircle;
-  final Widget icon;
+  final Widget? icon;
   final AnimationTypeAchievement typeAnimationContent;
   final BorderRadiusGeometry? borderRadius;
   final double elevation;
@@ -41,10 +41,7 @@ class _XboxAchievementBase extends StatefulWidget {
     this.listener,
     this.isCircle = true,
     this.elevation = 2,
-    this.icon = const Icon(
-      Icons.diamond,
-      color: XboxColors.White,
-    ),
+    this.icon,
     this.onTap,
     this.typeAnimationContent = AnimationTypeAchievement.fadeSlideToUp,
     this.borderRadius,
@@ -190,7 +187,11 @@ class _XboxAchievementBaseState extends State<_XboxAchievementBase> with TickerP
       ),
       width: heightCard,
       alignment: Alignment.center,
-      child: widget.icon,
+      child: widget.icon ??
+          Icon(
+            Icons.diamond,
+            color: XboxColors.currentAccentColor,
+          ),
     );
   }
 

@@ -15,7 +15,7 @@ class XboxPopupMenu extends StatelessWidget {
   Widget build(BuildContext context) => SimpleDialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(xboxTileRadius)),
       backgroundColor: Theme.of(context).colorScheme.background,
-      title: title.trim().isNotEmpty ? const Text(title) : null,
+      title: title.trim().isNotEmpty ? Text(title) : null,
       children: menuItems.entries
           .map(
             (e) => SimpleDialogOption(

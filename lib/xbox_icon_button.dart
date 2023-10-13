@@ -1,35 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:xbox_ui/xbox_colors.dart';
 
-class XboxIconButton extends StatefulWidget {
-  const XboxIconButton({
+class XboxCircleButton extends StatefulWidget {
+  const XboxCircleButton({
     super.key,
     this.onPressed,
-    required this.icon,
-    this.selectedIcon,
+    required this.child,
+    this.selectedChild,
     this.size = 30,
+    this.backgroundColor,
   });
 
-  factory XboxIconButton.size(double size, IconData icon, {IconData? selectedIcon, void Function()? onPressed}) {
+  factory XboxCircleButton.icon(double size, IconData icon, {IconData? selectedIcon, void Function()? onPressed}) {
     final iconsize = size - size * .3;
-    return XboxIconButton(
-      icon: Icon(icon, size: iconsize),
-      selectedIcon: Icon(selectedIcon ?? icon, size: iconsize),
+    return XboxCircleButton(
+      selectedChild: Icon(selectedIcon ?? icon, size: iconsize),
       onPressed: onPressed,
+      child: Icon(icon, size: iconsize),
     );
   }
 
   final void Function()? onPressed;
 
-  final Widget icon;
-  final Widget? selectedIcon;
+  final Widget child;
+  final Widget? selectedChild;
   final double size;
+  final Color? backgroundColor;
 
   @override
-  State<XboxIconButton> createState() => _XboxIconButtonState();
+  State<XboxCircleButton> createState() => _XboxCircleButtonState();
 }
 
-class _XboxIconButtonState extends State<XboxIconButton> {
+class _XboxCircleButtonState extends State<XboxCircleButton> {
   bool hasFocus = false;
 
   @override
@@ -43,7 +45,7 @@ class _XboxIconButtonState extends State<XboxIconButton> {
             child: Ink(
               decoration: BoxDecoration(
                 border: Border.all(color: hasFocus ? XboxColors.currentAccentColor : Colors.transparent, width: 2.5),
-                color: Theme.of(context).colorScheme.background.withOpacity(.5),
+                color: widget.backgroundColor ?? Theme.of(context).colorScheme.background.withOpacity(.5),
                 shape: BoxShape.circle,
               ),
               child: InkWell(
@@ -61,7 +63,7 @@ class _XboxIconButtonState extends State<XboxIconButton> {
                 //This keeps the splash effect within the circle
                 borderRadius: BorderRadius.circular(double.infinity), //Something large to ensure a circle
                 onTap: widget.onPressed,
-                child: Center(child: hasFocus ? (widget.selectedIcon ?? widget.icon) : widget.icon),
+                child: Center(child: hasFocus ? (widget.selectedChild ?? widget.child) : widget.child),
               ),
             ),
           ),

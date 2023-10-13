@@ -1,5 +1,5 @@
- 
 import 'package:flutter/material.dart';
+import 'package:xbox_ui/xbox_icon_button.dart';
 
 import 'xbox_colors.dart';
 
@@ -44,13 +44,10 @@ class _XboxDashboardState extends State<XboxDashboard> {
                 child: Wrap(
                   spacing: 10,
                   children: [
-                    CircleAvatar(
+                    XboxCircleButton(
+                      size: 30,
                       backgroundColor: XboxColors.currentAccentColor,
-                      //child: Text("${initials.first.first()}${initials.skip(1).lastOrNull.ifBlank("")?.last()}"),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(double.infinity),
-                        child: widget.avatar ?? const Icon(Icons.person),
-                      ),
+                      child: widget.avatar ?? const Icon(Icons.person),
                     ),
                     FittedBox(
                       fit: BoxFit.contain,

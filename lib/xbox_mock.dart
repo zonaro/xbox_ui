@@ -30,14 +30,14 @@ class XboxMock extends StatelessWidget {
             ],
           ),
           topBarItens: [
-            XboxIconButton.size(
+            XboxCircleButton.icon(
               20,
               Icons.music_note,
               onPressed: () {
                 XboxAchievement(title: "Got a Song").show(context);
               },
             ),
-            XboxIconButton.size(
+            XboxCircleButton.icon(
               20,
               Icons.book,
               onPressed: () {
@@ -55,12 +55,12 @@ class XboxMock extends StatelessWidget {
                 );
               },
             ),
-            XboxIconButton.size(
+            XboxCircleButton.icon(
               20,
               Icons.access_time_filled_outlined,
               onPressed: () {},
             ),
-            XboxIconButton.size(
+            XboxCircleButton.icon(
               20,
               Icons.settings,
               onPressed: () {},

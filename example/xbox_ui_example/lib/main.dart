@@ -101,7 +101,7 @@ class _BasicXboxUiState extends State<BasicXboxUi> {
           XboxTile.banner(
             title: "Banner Title",
             description: "A short banner description",
-            size: Xbox.calculateDimension("16:9", height: 200),
+            size: Xbox.getSizeFromAspectRatio("16:9", height: 200),
             image: Image.network(
               'https://picsum.photos/200/120?a=2',
               fit: BoxFit.cover,
@@ -109,7 +109,7 @@ class _BasicXboxUiState extends State<BasicXboxUi> {
           ),
           XboxTile.iconBanner(
             description: "Sometimes we have icons",
-            size: Xbox.calculateDimension("16:9", height: 200),
+            size: Xbox.getSizeFromAspectRatio("16:9", height: 200),
             image: Image.network(
               'https://picsum.photos/200/120?a=3',
               fit: BoxFit.cover,
@@ -121,7 +121,7 @@ class _BasicXboxUiState extends State<BasicXboxUi> {
         XboxTileList(title: "Icon Gradient", tiles: [
           XboxTile.iconGradient(
             title: "A Gradient background with Icon",
-            size: Xbox.calculateDimension("16:9", height: 120),
+            size: Xbox.getSizeFromAspectRatio("16:9", height: 120),
             icon: Icons.color_lens,
             gradient: LinearGradient(colors: [Colors.purple[700]!, Colors.blue[800]!]),
             iconSize: 60,

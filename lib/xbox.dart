@@ -60,16 +60,21 @@ extension Xbox on MaterialApp {
       .toList();
 
   /// Help calculate and create [XboxTile] based on aspect ratio
-  static Size calculateDimension(String aspectRatio, {double? width, double? height}) {
-    var ratio = aspectRatio.split(':').map((e) => double.parse(e)).toList();
+  static Size getSizeFromAspectRatio(double aspectRatio, {double? width, double? height}) {
     if (width == null && height == null) {
-      width = ratio.first;
-      height = ratio.last;
+      width = aspectRatio;
+      height = 1.0;
     } else if (width != null && height == null) {
-      height = (width * ratio.first) / ratio.last;
+      height = width / aspectRatio;
     } else if (height != null && width == null) {
-      width = (height * ratio.first) / ratio.last;
+      width = height * aspectRatio;
     }
     return Size(width!, height!);
+  }
+
+  /// Help calculate and create [XboxTile] based on aspect ratio
+  static Size getSizefromAspectRatioString(String aspectRatio, {double? width, double? height}) {
+    var ratio = aspectRatio.split(':').map((e) => double.parse(e)).toList();
+    return getSizeFromAspectRatio(ratio.first / ratio.last);
   }
 }

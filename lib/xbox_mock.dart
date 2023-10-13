@@ -41,10 +41,10 @@ class _XboxMockState extends State<XboxMock> {
             20,
             Icons.book,
             onPressed: () {
-              XboxPopupMenu.showMenu(
+              XboxDialog.menu(
                 context,
                 title: "Book Menu",
-                menuItems: {
+                menuEntries: {
                   "Book 1": () {
                     XboxAchievement(title: "Got book 1", color: Colors.yellow).show(context);
                   },

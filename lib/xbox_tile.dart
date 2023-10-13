@@ -177,7 +177,7 @@ class _XboxTileState extends State<XboxTile> {
 
   _showMenu() async {
     if (widget.menuItems != null && widget.menuItems!.isNotEmpty) {
-      await XboxPopupMenu.showMenu(context, title: widget.title, menuItems: widget.menuItems!);
+      await XboxDialog.menu( context, title: widget.title, menuEntries: widget.menuItems!);
     }
   }
 

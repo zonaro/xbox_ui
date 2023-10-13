@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:xbox_ui/xbox_tile.dart';
 
 class XboxTileList extends StatelessWidget {
-  final String? title;
+  final String title;
 
   final List<XboxTile> tiles;
 
-  const XboxTileList({Key? key, this.title, required this.tiles}) : super(key: key);
+  const XboxTileList({Key? key, this.title = '', required this.tiles}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,11 +17,11 @@ class XboxTileList extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (title?.trim() != "")
+          if (title.trim() != "")
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                title!,
+                title,
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: MediaQuery.of(context).size.height * 0.05),
               ),
             ),
@@ -43,7 +43,7 @@ class XboxTileList extends StatelessWidget {
   }
 
   double getHeight() {
-    var l =  tiles.map((e) => e.getHeight(true)).toList()..sort();
+    var l = tiles.map((e) => e.getHeight(true)).toList()..sort();
     return l.last;
   }
 }

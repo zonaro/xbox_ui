@@ -1,13 +1,14 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+ 
 import 'xbox_colors.dart';
 
 class XboxDashboard extends StatefulWidget {
-  const XboxDashboard({super.key, required this.body, required this.topBarItens, this.wallpaper, this.avatar, this.menu, required this.username, required this.userdetail});
+  const XboxDashboard({super.key, required this.child, required this.topBarItens, this.wallpaper, this.avatar, this.menu, required this.username, required this.userdetail});
 
   final List<Widget> topBarItens;
 
-  final Widget body;
+  final Widget child;
   final Widget? wallpaper;
   final Widget? avatar;
   final Widget? menu;
@@ -48,7 +49,7 @@ class _XboxDashboardState extends State<XboxDashboard> {
                       //child: Text("${initials.first.first()}${initials.skip(1).lastOrNull.ifBlank("")?.last()}"),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(100),
-                        child: widget.avatar,
+                        child: widget.avatar ?? const Icon(Icons.person),
                       ),
                     ),
                     Column(
@@ -85,7 +86,7 @@ class _XboxDashboardState extends State<XboxDashboard> {
               children: widget.topBarItens,
             ),
           ),
-          body: widget.body,
+          body: widget.child,
         ),
       ],
     );

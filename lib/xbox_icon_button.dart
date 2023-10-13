@@ -23,7 +23,7 @@ class _XboxIconButtonState extends State<XboxIconButton> {
 
   @override
   Widget build(BuildContext context) => Padding(
-    padding: const EdgeInsets.all(8.0),
+    padding: const EdgeInsets.all(10),
     child: Material(
           type: MaterialType.transparency,
           child: Ink(

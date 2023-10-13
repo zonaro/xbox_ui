@@ -10,6 +10,15 @@ class XboxIconButton extends StatefulWidget {
     this.size = 30,
   });
 
+  factory XboxIconButton.size(double size, IconData icon, {IconData? selectedIcon, void Function()? onPressed}) {
+    final iconsize = size - size * .3;
+    return XboxIconButton(
+      icon: Icon(icon, size: iconsize),
+      selectedIcon: Icon(selectedIcon ?? icon, size: iconsize),
+      onPressed: onPressed,
+    );
+  }
+
   final void Function()? onPressed;
 
   final Widget icon;
@@ -54,11 +63,7 @@ class _XboxIconButtonState extends State<XboxIconButton> {
                 onTap: widget.onPressed,
                 child: Padding(
                   padding: const EdgeInsets.all(15.0),
-                  child: SizedBox(
-                    width: widget.size * 0.7,
-                    height: widget.size * 0.7,
-                    child: hasFocus ? (widget.selectedIcon ?? widget.icon) : widget.icon,
-                  ),
+                  child: hasFocus ? (widget.selectedIcon ?? widget.icon) : widget.icon,
                 ),
               ),
             ),

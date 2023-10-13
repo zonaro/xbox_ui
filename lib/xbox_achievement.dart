@@ -26,7 +26,7 @@ class _XboxAchievementBase extends StatefulWidget {
 
   final double elevation;
   final Color? color;
-  final Color? iconBackgroundColor;
+ 
 
   final String? title;
   final String? subTitle;
@@ -35,7 +35,7 @@ class _XboxAchievementBase extends StatefulWidget {
   final bool isCircle;
 
   const _XboxAchievementBase({
-    Key? key,
+    
     this.finish,
     this.duration = const Duration(seconds: 3),
     this.listener,
@@ -43,13 +43,12 @@ class _XboxAchievementBase extends StatefulWidget {
     this.icon,
     this.onTap,
     this.typeAnimationContent = AnimationTypeAchievement.fadeSlideToUp,
-    this.color,
-    this.iconBackgroundColor,
+    this.color, 
     this.title,
     this.subTitle,
     this.content,
     this.isCircle = true,
-  }) : super(key: key);
+  });
 
   @override
   _XboxAchievementBaseState createState() => _XboxAchievementBaseState();
@@ -160,16 +159,18 @@ class _XboxAchievementBaseState extends State<_XboxAchievementBase> with TickerP
       type: MaterialType.transparency,
       elevation: widget.elevation,
       borderRadius: _buildBorderCard(),
-      color: widget.color ?? XboxColors.currentAccentColor,
-      child: InkWell(
-        onTap: () => widget.onTap?.call(),
-        child: IntrinsicHeight(
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              _buildIcon(),
-              _buildContent(),
-            ],
+      child: Container(
+        color: widget.color ?? XboxColors.currentAccentColor,
+        child: InkWell(
+          onTap: widget.onTap,
+          child: IntrinsicHeight(
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                _buildIcon(),
+                _buildContent(),
+              ],
+            ),
           ),
         ),
       ),
@@ -178,15 +179,12 @@ class _XboxAchievementBaseState extends State<_XboxAchievementBase> with TickerP
 
   Widget _buildIcon() {
     return Container(
-      decoration: BoxDecoration(
-        color: widget.iconBackgroundColor ?? XboxColors.SlateGray.withOpacity(.8),
-      ),
       width: heightCard,
       alignment: Alignment.center,
       child: widget.icon ??
           Icon(
             Icons.diamond,
-            color: XboxColors.currentAccentColor,
+            color: widget.color ?? XboxColors.currentAccentColor,
           ),
     );
   }
@@ -338,7 +336,6 @@ class XboxAchievement {
   final BorderRadiusGeometry? borderRadius;
   final BorderRadiusGeometry? iconBorderRadius;
   final Color? color;
-  final Color? iconBackgroundColor;
   final bool isCircle;
   final String? title;
   final String? subTitle;
@@ -347,7 +344,7 @@ class XboxAchievement {
   final Widget? content;
   OverlayEntry? _overlayEntry;
 
-  XboxAchievement({
+  XboxAchievement({    
     this.isCircle = true,
     this.elevation = 3,
     this.onTap,
@@ -357,8 +354,7 @@ class XboxAchievement {
     this.typeAnimationContent = AnimationTypeAchievement.fadeSlideToUp,
     this.borderRadius,
     this.iconBorderRadius,
-    this.color,
-    this.iconBackgroundColor,
+    this.color,  
     this.alignment = Alignment.topCenter,
     this.duration = const Duration(seconds: 3),
     this.title,
@@ -370,7 +366,7 @@ class XboxAchievement {
     return OverlayEntry(builder: (context) {
       return Align(
         alignment: alignment,
-        child: _XboxAchievementBase(
+        child: _XboxAchievementBase(       
           isCircle: isCircle,
           title: title,
           subTitle: subTitle,
@@ -386,7 +382,7 @@ class XboxAchievement {
               ),
           typeAnimationContent: typeAnimationContent,
           color: color,
-          iconBackgroundColor: iconBackgroundColor ?? color,
+         
           finish: _hide,
         ),
       );

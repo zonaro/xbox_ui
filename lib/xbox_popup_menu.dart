@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:xbox_ui/xbox_ui.dart';
 
 class XboxPopupMenu extends StatelessWidget {
   const XboxPopupMenu({
@@ -12,7 +13,7 @@ class XboxPopupMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => SimpleDialog(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(xboxTileRadius)),
       backgroundColor: Theme.of(context).colorScheme.background,
       title: Text(title),
       children: menuItems.entries

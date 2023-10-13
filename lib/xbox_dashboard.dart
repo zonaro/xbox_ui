@@ -48,7 +48,7 @@ class _XboxDashboardState extends State<XboxDashboard> {
                       backgroundColor: XboxColors.currentAccentColor,
                       //child: Text("${initials.first.first()}${initials.skip(1).lastOrNull.ifBlank("")?.last()}"),
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(100),
+                        borderRadius: BorderRadius.circular(double.infinity),
                         child: widget.avatar ?? const Icon(Icons.person),
                       ),
                     ),

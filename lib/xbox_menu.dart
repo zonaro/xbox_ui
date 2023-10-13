@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:xbox_ui/xbox_ui.dart';
 
 class XboxMenu extends StatelessWidget {
   final List<Widget> items;
@@ -10,7 +11,7 @@ class XboxMenu extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(25),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(xboxTileRadius),
         child: Drawer(
           backgroundColor: Theme.of(context).colorScheme.background,
           child: ListView(shrinkWrap: true, children: items),

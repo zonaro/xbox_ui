@@ -1,6 +1,7 @@
 // ignore_for_file: constant_identifier_names, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:xbox_ui/xbox_ui.dart';
 
 import 'xbox_colors.dart';
 import 'xbox_popup_menu.dart';
@@ -175,7 +176,7 @@ class _XboxTileState extends State<XboxTile> {
 
   @override
   Widget build(BuildContext context) {
-    const double radius = 7;
+   
 
     final bool showTitleBox = hasFocus && widget.title.trim().isNotEmpty && widget.description.trim().isEmpty;
 
@@ -207,19 +208,19 @@ class _XboxTileState extends State<XboxTile> {
                         spreadRadius: 2.0,
                       ),
                     ],
-                    borderRadius: BorderRadius.circular(radius),
+                    borderRadius: BorderRadius.circular(xboxTileRadius),
                   )
                 : null,
             child: Stack(
               fit: StackFit.expand,
               children: [
                 ClipRRect(
-                  borderRadius: BorderRadius.circular(radius),
+                  borderRadius: BorderRadius.circular(xboxTileRadius),
                   child: GridTile(
                     footer: !showTitleBox
                         ? null
                         : ClipRRect(
-                            borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(radius), bottomRight: Radius.circular(radius)),
+                            borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(xboxTileRadius), bottomRight: Radius.circular(xboxTileRadius)),
                             child: Container(
                               color: Colors.black.withOpacity(.8),
                               child: Align(
@@ -251,7 +252,7 @@ class _XboxTileState extends State<XboxTile> {
                         Container(color: widget.tileColor ?? XboxColors.currentAccentColor),
                         if (widget.background != null)
                           ClipRRect(
-                            borderRadius: BorderRadius.circular(radius),
+                            borderRadius: BorderRadius.circular(xboxTileRadius),
                             child: widget.background,
                           ),
                         Container(

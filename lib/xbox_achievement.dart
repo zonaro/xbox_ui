@@ -1,6 +1,6 @@
- 
 import 'package:flutter/material.dart';
 import 'package:xbox_ui/xbox_colors.dart';
+import 'package:xbox_ui/xbox_ui.dart';
 
 enum AchievementState {
   opening,
@@ -39,7 +39,7 @@ class _XboxAchievementBase extends StatefulWidget {
     this.finish,
     this.duration = const Duration(seconds: 3),
     this.listener,
-    this.isCircle = false,
+    this.isCircle = true,
     this.elevation = 2,
     this.icon = const Icon(
       Icons.diamond,
@@ -281,7 +281,7 @@ class _XboxAchievementBaseState extends State<_XboxAchievementBase> with TickerP
     if (widget.isCircle) {
       return const BorderRadius.all(Radius.circular(heightCard / 2));
     }
-    return widget.borderRadius ?? const BorderRadius.all(Radius.circular(5));
+    return widget.borderRadius ?? const BorderRadius.all(Radius.circular(xboxTileRadius));
   }
 
   EdgeInsets _buildPaddingContent() => EdgeInsets.fromLTRB(0, 15, widget.isCircle ? 25 : 15, 15);
@@ -334,7 +334,7 @@ class XboxAchievement {
   final GestureTapCallback? onTap;
   final Function(AchievementState)? listener;
   final bool isCircle;
-  final Widget icon;
+  final Widget? icon;
   final AnimationTypeAchievement typeAnimationContent;
   final BorderRadiusGeometry? borderRadius;
   final BorderRadiusGeometry? iconBorderRadius;
@@ -355,10 +355,7 @@ class XboxAchievement {
     this.listener,
     this.overlay,
     this.isCircle = false,
-    this.icon = const Icon(
-      Icons.diamond,
-      color: Colors.blueAccent,
-    ),
+    this.icon,
     this.typeAnimationContent = AnimationTypeAchievement.fadeSlideToUp,
     this.borderRadius,
     this.iconBorderRadius,
@@ -388,7 +385,11 @@ class XboxAchievement {
           elevation: elevation,
           textStyleSubTitle: textStyleSubTitle,
           textStyleTitle: textStyleTitle,
-          icon: icon,
+          icon: icon ??
+              Icon(
+                Icons.diamond,
+                color: XboxColors.currentAccentColor,
+              ),
           typeAnimationContent: typeAnimationContent,
           borderRadius: borderRadius,
           iconBorderRadius: iconBorderRadius,

@@ -38,6 +38,11 @@ class _XboxIconButtonState extends State<XboxIconButton> {
                 shape: BoxShape.circle,
               ),
               child: InkWell(
+                highlightColor: Colors.transparent,
+                hoverColor: Colors.transparent,
+                focusColor: Colors.transparent,
+                splashColor: Colors.transparent,
+
                 enableFeedback: false,
                 onFocusChange: (v) {
                   setState(() {

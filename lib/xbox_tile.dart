@@ -1,6 +1,7 @@
 // ignore_for_file: constant_identifier_names, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:xbox_ui/xbox_ui.dart';
 
 import 'xbox_colors.dart';
@@ -188,7 +189,7 @@ class _XboxTileState extends State<XboxTile> {
 
     return KeyboardListener(
       focusNode: FocusNode(),
-      autofocus: true,
+      autofocus: hasFocus,
       onKeyEvent: (k) {
         if (k.logicalKey == LogicalKeyboardKey.gameButtonX) {
           _showMenu();

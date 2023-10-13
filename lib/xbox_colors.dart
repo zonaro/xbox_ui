@@ -18,6 +18,10 @@ mixin XboxColors {
 
   static Color currentAccentColor = XboxColors.XboxGreen;
 
+  static Color getTextColor(BuildContext context) {
+    return Theme.of(context).brightness == Brightness.dark ? White : SlateGray;
+  }
+
   static List<XboxTile> colorTiles(List<Color> colors, {double width = 50, double height = 50, void Function(Color)? onTap}) => colors
       .map(
         (c) => XboxTile.flatColor(

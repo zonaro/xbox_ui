@@ -157,6 +157,7 @@ class _XboxAchievementBaseState extends State<_XboxAchievementBase> with TickerP
 
   Widget _buildAchievement() {
     return Material(
+      type: MaterialType.transparency,
       elevation: widget.elevation,
       borderRadius: _buildBorderCard(),
       color: widget.color,
@@ -252,7 +253,7 @@ class _XboxAchievementBaseState extends State<_XboxAchievementBase> with TickerP
         child: Text(
           title,
           softWrap: true,
-          style: TextStyle(color: Theme.of(context).colorScheme.onPrimary, fontWeight: FontWeight.bold),
+          style: TextStyle(color: XboxColors.getTextColor(context), fontWeight: FontWeight.bold),
         ),
       ),
     );
@@ -274,7 +275,7 @@ class _XboxAchievementBaseState extends State<_XboxAchievementBase> with TickerP
           padding: const EdgeInsets.only(left: 8.0),
           child: Text(
             subTitle,
-            style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
+            style: TextStyle(color: XboxColors.getTextColor(context)),
           ),
         ));
   }

@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:xbox_ui/xbox_colors.dart';
 import 'package:xbox_ui/xbox_ui.dart';
@@ -15,44 +17,65 @@ enum AnimationTypeAchievement {
   fade,
 }
 
-class _XboxAchievementBase extends StatefulWidget {
-  final VoidCallback? finish;
-  final GestureTapCallback? onTap;
-  final ValueChanged<AchievementState>? listener;
+class XboxAchievement extends StatefulWidget {
+  
+  final AlignmentGeometry alignment;
   final Duration duration;
-
+  final GestureTapCallback? onTap;
+  final Function(AchievementState)? listener;
   final Widget? icon;
   final AnimationTypeAchievement typeAnimationContent;
-
-  final double elevation;
+  final BorderRadiusGeometry? borderRadius;
+  final BorderRadiusGeometry? iconBorderRadius;
   final Color? color;
-
+  final bool isCircle;
   final String? title;
   final String? subTitle;
+  final double elevation;
+  final OverlayState? overlay;
   final Widget? content;
 
-  final bool isCircle;
-
-  const _XboxAchievementBase({
-    this.finish,
-    this.duration = const Duration(seconds: 3),
-    this.listener,
+  XboxAchievement({
+    super.key,
+    this.isCircle = true,
     this.elevation = 3,
-    this.icon,
     this.onTap,
+    this.listener,
+    this.overlay,
+    this.icon,
     this.typeAnimationContent = AnimationTypeAchievement.fadeSlideToUp,
+    this.borderRadius,
+    this.iconBorderRadius,
     this.color,
+    this.alignment = Alignment.bottomCenter,
+    this.duration = const Duration(seconds: 3),
     this.title,
     this.subTitle,
     this.content,
-    this.isCircle = true,
+    this.finish,
   });
 
+  final VoidCallback? finish;
+  OverlayEntry? _overlayEntry;
+
+  OverlayEntry _buildOverlay() {
+    return OverlayEntry(builder: (context) {
+      return this;
+    });
+  }
+
+  void show(BuildContext context) {
+    if (_overlayEntry == null) {
+      _overlayEntry = _buildOverlay();
+      (overlay ?? Overlay.of(context)).insert(_overlayEntry!);
+    }
+  }
+
   @override
-  _XboxAchievementBaseState createState() => _XboxAchievementBaseState();
+  createState() => _XboxAchievementState();
 }
 
-class _XboxAchievementBaseState extends State<_XboxAchievementBase> with TickerProviderStateMixin {
+class _XboxAchievementState extends State<XboxAchievement> with TickerProviderStateMixin {
   static const heightCard = 60.0;
   static const marginCard = 20.0;
 
@@ -153,21 +176,24 @@ class _XboxAchievementBaseState extends State<_XboxAchievementBase> with TickerP
   }
 
   Widget _buildAchievement() {
-    return Material(
-      type: MaterialType.transparency,
-      elevation: widget.elevation,
-      borderRadius: _buildBorderCard(),
-      child: Ink(
-        color: widget.color ?? XboxColors.currentAccentColor,
-        child: InkWell(
-          onTap: widget.onTap,
-          child: IntrinsicHeight(
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                _buildIcon(),
-                _buildContent(),
-              ],
+    return Align(
+      alignment: widget.alignment,
+      child: Material(
+        type: MaterialType.transparency,
+        elevation: widget.elevation,
+        borderRadius: _buildBorderCard(),
+        child: Ink(
+          color: widget.color ?? XboxColors.currentAccentColor,
+          child: InkWell(
+            onTap: widget.onTap,
+            child: IntrinsicHeight(
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  _buildIcon(),
+                  _buildContent(),
+                ],
+              ),
             ),
           ),
         ),
@@ -322,76 +348,5 @@ class _XboxAchievementBaseState extends State<_XboxAchievementBase> with TickerP
     _controllerTitle.dispose();
     _controllerSubTitle.dispose();
     super.dispose();
-  }
-}
-
-class XboxAchievement {
-  final AlignmentGeometry alignment;
-  final Duration duration;
-  final GestureTapCallback? onTap;
-  final Function(AchievementState)? listener;
-  final Widget? icon;
-  final AnimationTypeAchievement typeAnimationContent;
-  final BorderRadiusGeometry? borderRadius;
-  final BorderRadiusGeometry? iconBorderRadius;
-  final Color? color;
-  final bool isCircle;
-  final String? title;
-  final String? subTitle;
-  final double elevation;
-  final OverlayState? overlay;
-  final Widget? content;
-  OverlayEntry? _overlayEntry;
-
-  XboxAchievement({
-    this.isCircle = true,
-    this.elevation = 3,
-    this.onTap,
-    this.listener,
-    this.overlay,
-    this.icon,
-    this.typeAnimationContent = AnimationTypeAchievement.fadeSlideToUp,
-    this.borderRadius,
-    this.iconBorderRadius,
-    this.color,
-    this.alignment = Alignment.topCenter,
-    this.duration = const Duration(seconds: 3),
-    this.title,
-    this.subTitle,
-    this.content,
-  });
-
-  OverlayEntry _buildOverlay() {
-    return OverlayEntry(builder: (context) {
-      return Align(
-        alignment: alignment,
-        child: _XboxAchievementBase(
-          isCircle: isCircle,
-          title: title,
-          subTitle: subTitle,
-          content: content,
-          duration: duration,
-          listener: listener,
-          onTap: onTap,
-          elevation: elevation,
-          icon: icon,
-          typeAnimationContent: typeAnimationContent,
-          color: color,
-          finish: _hide,
-        ),
-      );
-    });
-  }
-
-  void show(BuildContext context) {
-    if (_overlayEntry == null) {
-      _overlayEntry = _buildOverlay();
-      (overlay ?? Overlay.of(context)).insert(_overlayEntry!);
-    }
-  }
-
-  void _hide() {
-    _overlayEntry?.remove();
-    _overlayEntry = null;
   }
 }

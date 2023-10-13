@@ -115,7 +115,7 @@ class XboxTile extends StatefulWidget {
         icon: Icon(
           icon,
           color: Colors.white,
-          size: iconSize,
+          size: iconSize,          
           shadows: const [
             BoxShadow(
               blurStyle: BlurStyle.solid,
@@ -319,7 +319,7 @@ class _SlideUpAnimationWrapperState extends State<_SlideUpAnimationWrapper> with
     super.initState();
 
     _controller = AnimationController(
-      duration: const Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 150),
       vsync: this,
     );
 

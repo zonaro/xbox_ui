@@ -92,7 +92,10 @@ class _BasicXboxUiState extends State<BasicXboxUi> {
               title: "Game Name",
               width: 100,
               height: 100,
-              image: Image.network('https://picsum.photos/id/1/100/100?a=1'),
+              image: Image.network(
+                'https://picsum.photos/id/1/100/100?a=1',
+                fit: BoxFit.cover,
+              ),
             ),
           ]),
           XboxTileList(title: "Banner", tiles: [
@@ -101,13 +104,19 @@ class _BasicXboxUiState extends State<BasicXboxUi> {
               description: "A short banner description",
               width: 200,
               height: 120,
-              image: Image.network('https://picsum.photos/200/120?a=2'),
+              image: Image.network(
+                'https://picsum.photos/200/120?a=2',
+                fit: BoxFit.cover,
+              ),
             ),
             XboxTile.banner(
               description: "Sometimes we have icons",
               width: 200,
               height: 120,
-              image: Image.network('https://picsum.photos/200/120?a=3'),
+              image: Image.network(
+                'https://picsum.photos/200/120?a=3',
+                fit: BoxFit.cover,
+              ),
               icon: const Icon(
                 Icons.gamepad,
                 size: 60,

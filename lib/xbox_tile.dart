@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:xbox_ui/xbox_ui.dart';
-import 'package:xbox_ui/xbox.dart';
 
 /// `XboxTile` is a [Widget] that represents a tile in an Xbox-themed UI.
 ///
@@ -48,7 +47,7 @@ class XboxTile extends StatefulWidget {
   /// The height of the tile.
   final double height;
 
-  /// a double thats indicate how mutch a tile grow when in focus. 
+  /// a double thats indicate how mutch a tile grow when in focus.
   final double growOnFocus;
 
   final bool autoFocus;
@@ -170,13 +169,14 @@ class XboxTile extends StatefulWidget {
 class _XboxTileState extends State<XboxTile> {
   bool hasFocus = false;
 
-  void onFocus(bool value) {
+  void _onFocus(bool value) {
     setState(() {
       hasFocus = value;
     });
   }
 
   _showMenu() async {
+    _onFocus(true);
     if (widget.menuItems != null && widget.menuItems!.isNotEmpty) {
       await XboxDialog.menu(context, title: widget.title, menuEntries: widget.menuItems!);
     }
@@ -197,13 +197,16 @@ class _XboxTileState extends State<XboxTile> {
         }
       },
       child: GestureDetector(
-        onTap: widget.onTap,
+        onTap: () {
+          _onFocus(true);
+          widget.onTap?.call();
+        },
         onLongPress: _showMenu,
         child: FocusableActionDetector(
           descendantsAreFocusable: false,
           descendantsAreTraversable: false,
-          onShowHoverHighlight: onFocus,
-          onShowFocusHighlight: onFocus,
+          onShowHoverHighlight: _onFocus,
+          onShowFocusHighlight: _onFocus,
           autofocus: widget.autoFocus,
           child: Padding(
             padding: const EdgeInsets.all(8),

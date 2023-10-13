@@ -29,7 +29,7 @@ class _XboxIconButtonState extends State<XboxIconButton> {
         child: Ink(
           decoration: BoxDecoration(
             border: Border.all(color: hasFocus ? XboxColors.currentAccentColor : Colors.transparent, width: 4.0),
-            color: Theme.of(context).colorScheme.background,
+            color: Theme.of(context).colorScheme.background.withOpacity(.7),
             shape: BoxShape.circle,
           ),
           child: InkWell(

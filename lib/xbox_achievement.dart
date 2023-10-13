@@ -162,6 +162,7 @@ class _XboxAchievementBaseState extends State<_XboxAchievementBase> with TickerP
       borderRadius: _buildBorderCard(),
       color: widget.color,
       child: InkWell(
+        highlightColor: XboxColors.currentAccentColor,
         onTap: () => widget.onTap?.call(),
         child: IntrinsicHeight(
           child: Row(

@@ -36,24 +36,32 @@ class XboxMock extends StatelessWidget {
                 XboxAchievement(title: "Got a Song").show(context);
               },
             ),
-            XboxIconButton(
-              icon: const Icon(Icons.book),
+            XboxIconButton.size(
+              20,
+              Icons.book,
               onPressed: () {
                 XboxPopupMenu.showMenu(
                   context,
-                 title: "Book Menu",
-                 menuItems: {
-                    "Book 1" : () {},
+                  title: "Book Menu",
+                  menuItems: {
+                    "Book 1": () {
+                      XboxAchievement(title: "Got book 1").show(context);
+                    },
+                    "Book 2": () {
+                      XboxAchievement(title: "Got book 2").show(context);
+                    },
                   },
                 );
               },
             ),
-            XboxIconButton(
-              icon: const Icon(Icons.access_time_filled_outlined),
+            XboxIconButton.size(
+              20,
+              Icons.access_time_filled_outlined,
               onPressed: () {},
             ),
-            XboxIconButton(
-              icon: const Icon(Icons.settings),
+            XboxIconButton.size(
+              20,
+              Icons.settings,
               onPressed: () {},
             ),
           ],

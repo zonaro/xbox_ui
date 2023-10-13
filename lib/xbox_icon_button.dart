@@ -42,7 +42,7 @@ class _XboxIconButtonState extends State<XboxIconButton> {
             type: MaterialType.transparency,
             child: Ink(
               decoration: BoxDecoration(
-                border: Border.all(color: hasFocus ? XboxColors.currentAccentColor : Colors.transparent, width: 4.0),
+                border: Border.all(color: hasFocus ? XboxColors.currentAccentColor : Colors.transparent, width: 2.5),
                 color: Theme.of(context).colorScheme.background.withOpacity(.5),
                 shape: BoxShape.circle,
               ),
@@ -61,10 +61,7 @@ class _XboxIconButtonState extends State<XboxIconButton> {
                 //This keeps the splash effect within the circle
                 borderRadius: BorderRadius.circular(double.infinity), //Something large to ensure a circle
                 onTap: widget.onPressed,
-                child: Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: hasFocus ? (widget.selectedIcon ?? widget.icon) : widget.icon,
-                ),
+                child: Center(child: hasFocus ? (widget.selectedIcon ?? widget.icon) : widget.icon),
               ),
             ),
           ),

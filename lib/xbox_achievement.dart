@@ -20,14 +20,14 @@ class _XboxAchievementBase extends StatefulWidget {
   final GestureTapCallback? onTap;
   final ValueChanged<AchievementState>? listener;
   final Duration duration;
-  final bool isCircle;
+
   final Widget? icon;
   final AnimationTypeAchievement typeAnimationContent;
-  final BorderRadiusGeometry? borderRadius;
+
   final double elevation;
   final Color color;
   final Color iconBackgroundColor;
-  final BorderRadiusGeometry? iconBorderRadius;
+
   final TextStyle? textStyleTitle;
   final TextStyle? textStyleSubTitle;
   final String? title;
@@ -39,15 +39,12 @@ class _XboxAchievementBase extends StatefulWidget {
     this.finish,
     this.duration = const Duration(seconds: 3),
     this.listener,
-    this.isCircle = true,
     this.elevation = 2,
     this.icon,
     this.onTap,
     this.typeAnimationContent = AnimationTypeAchievement.fadeSlideToUp,
-    this.borderRadius,
     this.color = XboxColors.XboxGreen,
     this.iconBackgroundColor = XboxColors.SlateGray,
-    this.iconBorderRadius,
     this.textStyleTitle,
     this.textStyleSubTitle,
     this.title,
@@ -182,7 +179,6 @@ class _XboxAchievementBaseState extends State<_XboxAchievementBase> with TickerP
   Widget _buildIcon() {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: widget.iconBorderRadius,
         color: widget.iconBackgroundColor,
       ),
       width: heightCard,
@@ -279,13 +275,10 @@ class _XboxAchievementBaseState extends State<_XboxAchievementBase> with TickerP
   }
 
   BorderRadiusGeometry _buildBorderCard() {
-    if (widget.isCircle) {
-      return const BorderRadius.all(Radius.circular(heightCard / 2));
-    }
-    return widget.borderRadius ?? const BorderRadius.all(Radius.circular(xboxTileRadius));
+    return const BorderRadius.all(Radius.circular(xboxTileRadius));
   }
 
-  EdgeInsets _buildPaddingContent() => EdgeInsets.fromLTRB(0, 15, widget.isCircle ? 25 : 15, 15);
+  EdgeInsets _buildPaddingContent() => const EdgeInsets.fromLTRB(0, 15, 15, 15);
 
   Animation<Offset> _buildAnimatedContent(AnimationController controller) {
     double dx = 0.0;
@@ -382,7 +375,6 @@ class XboxAchievement {
           duration: duration,
           listener: listener,
           onTap: onTap,
-          isCircle: isCircle,
           elevation: elevation,
           textStyleSubTitle: textStyleSubTitle,
           textStyleTitle: textStyleTitle,
@@ -392,8 +384,6 @@ class XboxAchievement {
                 color: XboxColors.currentAccentColor,
               ),
           typeAnimationContent: typeAnimationContent,
-          borderRadius: borderRadius,
-          iconBorderRadius: iconBorderRadius,
           color: color ?? XboxColors.currentAccentColor,
           iconBackgroundColor: iconBackgroundColor ?? (color ?? XboxColors.SlateGray.withOpacity(.8)),
           finish: _hide,

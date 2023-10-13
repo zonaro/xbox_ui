@@ -176,8 +176,6 @@ class _XboxTileState extends State<XboxTile> {
 
   @override
   Widget build(BuildContext context) {
-   
-
     final bool showTitleBox = hasFocus && widget.title.trim().isNotEmpty && widget.description.trim().isEmpty;
 
     return GestureDetector(
@@ -219,26 +217,28 @@ class _XboxTileState extends State<XboxTile> {
                   child: GridTile(
                     footer: !showTitleBox
                         ? null
-                        : ClipRRect(
-                            borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(xboxTileRadius), bottomRight: Radius.circular(xboxTileRadius)),
-                            child: Container(
-                              color: Colors.black.withOpacity(.8),
-                              child: Align(
-                                alignment: Alignment.bottomLeft,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(10.0),
-                                  child: Text(
-                                    widget.title,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 16,
-                                      shadows: <Shadow>[
-                                        Shadow(
-                                          offset: const Offset(1.0, 1.0),
-                                          blurRadius: 3.0,
-                                          color: Colors.black.withOpacity(.8),
-                                        ),
-                                      ],
+                        : _SlideUpAnimationWrapper(
+                            child: ClipRRect(
+                              borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(xboxTileRadius), bottomRight: Radius.circular(xboxTileRadius)),
+                              child: Container(
+                                color: Colors.black.withOpacity(.8),
+                                child: Align(
+                                  alignment: Alignment.bottomLeft,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: Text(
+                                      widget.title,
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 16,
+                                        shadows: <Shadow>[
+                                          Shadow(
+                                            offset: const Offset(1.0, 1.0),
+                                            blurRadius: 3.0,
+                                            color: Colors.black.withOpacity(.8),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),

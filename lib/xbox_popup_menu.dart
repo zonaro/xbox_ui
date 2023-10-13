@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:xbox_ui/xbox_ui.dart';
 
 mixin XboxDialog {
-  static RoundedRectangleBorder get defaultShape => RoundedRectangleBorder(borderRadius: BorderRadius.circular(Xbox.TileRadius));
-
   static Future<void> menu(BuildContext context, {required String title, required XboxMenuEntries menuEntries}) => showDialog(
         context: context,
         builder: (BuildContext context) => SimpleDialog(
-            shape: defaultShape,
+            shape: Xbox.defaultShape,
             backgroundColor: Theme.of(context).colorScheme.background,
             title: title.trim().isNotEmpty ? Text(title) : null,
             children: menuEntries.entries
@@ -30,7 +28,7 @@ mixin XboxDialog {
     final bool? isConfirm = await showDialog<bool>(
       context: context,
       builder: (_) => AlertDialog(
-        shape: defaultShape,
+        shape: Xbox.defaultShape,
         backgroundColor: Theme.of(context).colorScheme.background,
         title: Text(title ?? ""),
         content: SingleChildScrollView(
@@ -62,7 +60,7 @@ mixin XboxDialog {
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
-        shape: defaultShape,
+        shape: Xbox.defaultShape,
         backgroundColor: Theme.of(context).colorScheme.background,
         title: Text(title ?? ""),
         content: SingleChildScrollView(
@@ -95,7 +93,7 @@ mixin XboxDialog {
     final bool? isConfirm = await showDialog<bool>(
       context: context,
       builder: (_) => AlertDialog(
-        shape: defaultShape,
+        shape: Xbox.defaultShape,
         backgroundColor: Theme.of(context).colorScheme.background,
         title: Text(title ?? ""),
         content: SingleChildScrollView(

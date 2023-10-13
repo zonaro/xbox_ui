@@ -10,12 +10,10 @@ class XboxMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(25),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(Xbox.TileRadius),
-        child: Drawer(
-          backgroundColor: Theme.of(context).colorScheme.background,
-          child: ListView(shrinkWrap: true, children: items),
-        ),
+      child: Drawer(
+        shape: Xbox.defaultShape,
+        backgroundColor: Theme.of(context).colorScheme.background,
+        child: ListView(shrinkWrap: true, children: items),
       ),
     );
   }

@@ -20,7 +20,7 @@ class XboxMock extends StatefulWidget {
 
 class _XboxMockState extends State<XboxMock> {
   @override
-  Widget build(BuildContext context) => XboxApp(
+  Widget build(BuildContext context) => MaterialApp(
         title: 'Xbox Demo',
         themeMode: ThemeMode.system,
         theme: XboxLightTheme,

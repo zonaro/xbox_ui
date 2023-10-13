@@ -44,7 +44,7 @@ class _XboxDashboardState extends State<XboxDashboard> {
                 children: [
                   XboxCircleButton(
                     onPressed: () => scaffoldKey.currentState?.openDrawer(),
-                    size: 30,
+                    size: 50,
                     backgroundColor: XboxColors.currentAccentColor,
                     child: widget.avatar ?? const Icon(Icons.person),
                   ),

@@ -22,17 +22,26 @@ class XboxDashboard extends StatefulWidget {
 }
 
 class _XboxDashboardState extends State<XboxDashboard> {
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  _showHomeMenu() {
+    if (scaffoldKey.currentState != null) {
+      if (scaffoldKey.currentState!.isDrawerOpen) {
+        scaffoldKey.currentState!.closeDrawer();
+      } else {
+        scaffoldKey.currentState!.openDrawer();
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    final scaffoldKey = GlobalKey<ScaffoldState>();
-    return KeyboardListener(
+    return RawKeyboardListener(
       focusNode: FocusNode(descendantsAreFocusable: true),
-      onKeyEvent: (key) {
-        if (key.logicalKey == LogicalKeyboardKey.gameButtonMode || key.logicalKey == LogicalKeyboardKey.escape) {
-          if (scaffoldKey.currentState?.isDrawerOpen ?? false) {
-            scaffoldKey.currentState?.closeDrawer();
-          } else {
-            scaffoldKey.currentState?.openDrawer();
+      onKey: (event) {
+        if (event is RawKeyDownEvent) {
+          if (event.isKeyPressed(LogicalKeyboardKey.gameButtonMode) || event.isKeyPressed(LogicalKeyboardKey.escape)) {
+            _showHomeMenu()
           }
         }
       },
@@ -56,7 +65,7 @@ class _XboxDashboardState extends State<XboxDashboard> {
                   spacing: 10,
                   children: [
                     XboxCircleButton(
-                      onPressed: () => scaffoldKey.currentState?.openDrawer(),
+                      onPressed: () =>_showHomeMenu(),
                       size: 50,
                       backgroundColor: XboxColors.currentAccentColor,
                       child: widget.avatar ?? const Icon(Icons.person),

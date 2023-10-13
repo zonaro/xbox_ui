@@ -3,12 +3,12 @@ import 'package:xbox_ui/xbox.dart';
 import 'package:xbox_ui/xbox_ui.dart';
 
 void main() {
-  
+
   Xbox.currentAccentColor = Xbox.Green; //change this
 
   runApp(
     XboxApp(
-      themeMode: ThemeMode.dark,
+      themeMode: ThemeMode.light,
       theme: Xbox.LightTheme, // getter for light and dark theme. apply the currentAccentColor to all tiles
       darkTheme: Xbox.DarkTheme,
       home: const BasicXboxUi(),

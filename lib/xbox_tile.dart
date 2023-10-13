@@ -273,7 +273,7 @@ class _XboxTileState extends State<XboxTile> {
                               child: widget.background,
                             ),
                           Container(
-                            decoration: isBanner ? const BoxDecoration(gradient: LinearGradient(colors: [Colors.transparent, Colors.transparent, Colors.black], begin: Alignment.topCenter, end: Alignment.bottomCenter)) : null,
+                            decoration: isBanner ? const BoxDecoration(gradient: LinearGradient(colors: [Colors.transparent,   Colors.black], begin: Alignment.topCenter, end: Alignment.bottomCenter)) : null,
                             child: GridTile(
                                 footer: isBanner
                                     ? Align(

@@ -75,11 +75,19 @@ class _XboxDashboardState extends State<XboxDashboard> {
             backgroundColor: Colors.transparent,
             shadowColor: Colors.transparent,
             elevation: 0,
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: widget.topBarItens,
+            title: SizedBox(
+              width: MediaQuery.of(context).size.width * .3,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: widget.topBarItens,
+              ),
             ),
+            actions: [
+              SizedBox(
+                width: MediaQuery.of(context).size.width * .3,
+              )
+            ],
           ),
           body: widget.child,
         ),

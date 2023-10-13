@@ -22,26 +22,29 @@ class _XboxIconButtonState extends State<XboxIconButton> {
   bool hasFocus = false;
 
   @override
-  Widget build(BuildContext context) => Material(
-        type: MaterialType.transparency,
-        child: Ink(
-          decoration: BoxDecoration(
-            border: Border.all(color: hasFocus ? XboxColors.currentAccentColor : Colors.transparent, width: 4.0),
-            color: Theme.of(context).colorScheme.background.withOpacity(.7),
-            shape: BoxShape.circle,
-          ),
-          child: InkWell(
-            enableFeedback: false,
-            onFocusChange: (v) {
-              setState(() {
-                hasFocus = v;
-              });
-            },
-            //This keeps the splash effect within the circle
-            borderRadius: BorderRadius.circular(double.infinity), //Something large to ensure a circle
-            onTap: widget.onPressed,
-            child: Padding(padding: const EdgeInsets.all(20.0), child: hasFocus ? (widget.selectedIcon ?? widget.icon) : widget.icon),
+  Widget build(BuildContext context) => Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: Material(
+          type: MaterialType.transparency,
+          child: Ink(
+            decoration: BoxDecoration(
+              border: Border.all(color: hasFocus ? XboxColors.currentAccentColor : Colors.transparent, width: 4.0),
+              color: Theme.of(context).colorScheme.background.withOpacity(.7),
+              shape: BoxShape.circle,
+            ),
+            child: InkWell(
+              enableFeedback: false,
+              onFocusChange: (v) {
+                setState(() {
+                  hasFocus = v;
+                });
+              },
+              //This keeps the splash effect within the circle
+              borderRadius: BorderRadius.circular(double.infinity), //Something large to ensure a circle
+              onTap: widget.onPressed,
+              child: Padding(padding: const EdgeInsets.all(20.0), child: hasFocus ? (widget.selectedIcon ?? widget.icon) : widget.icon),
+            ),
           ),
         ),
-      );
+  );
 }

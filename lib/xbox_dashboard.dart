@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:xbox_ui/xbox_icon_button.dart';
+import 'package:xbox_ui/xbox_menu.dart';
 
 import 'xbox_colors.dart';
 
@@ -11,7 +12,7 @@ class XboxDashboard extends StatefulWidget {
   final Widget child;
   final Widget? wallpaper;
   final Widget? avatar;
-  final Widget? menu;
+  final XboxMenu? menu;
   final String username;
   final String userdetail;
 
@@ -36,6 +37,7 @@ class _XboxDashboardState extends State<XboxDashboard> {
             centerTitle: true,
             surfaceTintColor: Colors.transparent,
             leadingWidth: MediaQuery.of(context).size.width * 0.3,
+            
             automaticallyImplyLeading: true,
             leading: Padding(
               padding: const EdgeInsets.only(left: 20, top: 20),
@@ -76,7 +78,7 @@ class _XboxDashboardState extends State<XboxDashboard> {
             elevation: 0,
             title: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
+              // mainAxisAlignment: MainAxisAlignment.center,
               children: widget.topBarItens,
             ),
           ),

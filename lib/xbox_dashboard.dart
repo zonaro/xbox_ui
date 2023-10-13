@@ -1,6 +1,6 @@
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/material.dart';
  
+import 'package:flutter/material.dart';
+
 import 'xbox_colors.dart';
 
 class XboxDashboard extends StatefulWidget {
@@ -52,25 +52,24 @@ class _XboxDashboardState extends State<XboxDashboard> {
                         child: widget.avatar ?? const Icon(Icons.person),
                       ),
                     ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        AutoSizeText(
-                          widget.userdetail,
-                          maxLines: 1,
-                          minFontSize: 4,
-                          maxFontSize: 20,
-                          style: const TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        AutoSizeText(
-                          widget.username,
-                          maxLines: 1,
-                          minFontSize: 2,
-                          maxFontSize: 15,
-                          style: const TextStyle(fontWeight: FontWeight.bold),
-                        )
-                      ],
+                    FittedBox(
+                      fit: BoxFit.contain,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            widget.userdetail,
+                            maxLines: 1,
+                            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                          ),
+                          Text(
+                            widget.username,
+                            maxLines: 1,
+                            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                          )
+                        ],
+                      ),
                     ),
                   ],
                 ),

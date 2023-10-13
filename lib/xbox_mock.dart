@@ -30,8 +30,9 @@ class XboxMock extends StatelessWidget {
             ],
           ),
           topBarItens: [
-            XboxIconButton(
-              icon: const Icon(Icons.music_note),
+            XboxIconButton.size(
+              20,
+              Icons.music_note,
               onPressed: () {
                 XboxAchievement(title: "Got a Song").show(context);
               },

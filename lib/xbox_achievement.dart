@@ -157,8 +157,8 @@ class _XboxAchievementBaseState extends State<_XboxAchievementBase> with TickerP
       type: MaterialType.transparency,
       elevation: widget.elevation,
       borderRadius: _buildBorderCard(),
-      color: widget.color ?? XboxColors.currentAccentColor,
-      child: Container(
+      child: Ink(
+        color: widget.color ?? XboxColors.currentAccentColor,
         child: InkWell(
           onTap: widget.onTap,
           child: IntrinsicHeight(

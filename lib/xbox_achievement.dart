@@ -250,7 +250,7 @@ class _XboxAchievementBaseState extends State<_XboxAchievementBase> with TickerP
         child: Text(
           title,
           softWrap: true,
-          style: TextStyle(color: XboxColors.getTextColor(context), fontWeight: FontWeight.bold),
+          style: TextStyle(color: XboxColors.getReadableColor(widget.color ?? XboxColors.currentAccentColor), fontWeight: FontWeight.bold),
         ),
       ),
     );
@@ -272,7 +272,7 @@ class _XboxAchievementBaseState extends State<_XboxAchievementBase> with TickerP
           padding: const EdgeInsets.only(left: 8.0),
           child: Text(
             subTitle,
-            style: TextStyle(color: XboxColors.getTextColor(context)),
+            style: TextStyle(color: XboxColors.getReadableColor(widget.color ?? XboxColors.currentAccentColor)),
           ),
         ));
   }

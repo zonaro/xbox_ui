@@ -18,6 +18,8 @@ mixin XboxColors {
 
   static Color currentAccentColor = XboxColors.XboxGreen;
 
+  static Color getReadableColor([Color? color]) => (color ?? currentAccentColor).computeLuminance() > 0.5 ? Colors.black : Colors.white;
+
   static Color getTextColor(BuildContext context) {
     return Theme.of(context).brightness == Brightness.dark ? White : SlateGray;
   }

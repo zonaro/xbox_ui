@@ -16,3 +16,6 @@ ThemeData get XboxLightTheme => XboxColors.getTheme(brightness: Brightness.light
 
 Color get xboxAccentColor => XboxColors.currentAccentColor;
 set xboxAccentColor(Color? color) => XboxColors.currentAccentColor = color ?? XboxColors.XboxGreen;
+
+
+

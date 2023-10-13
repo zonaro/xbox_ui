@@ -1,4 +1,4 @@
-// ignore_for_file: constant_identifier_names
+// ignore_for_file: constant_identifier_names, non_constant_identifier_names
 
 import 'package:flutter/material.dart';
 
@@ -15,6 +15,8 @@ mixin XboxColors {
   static const SlateGray = Color(0xFF3A3A3A);
 
   static const White = Color(0xFFEEEEEE);
+
+  static TextStyle get XboxFont => const TextStyle(fontFamily: "Xbox");
 
   static Color currentAccentColor = XboxColors.XboxGreen;
 

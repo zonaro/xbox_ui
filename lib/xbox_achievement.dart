@@ -17,7 +17,7 @@ enum AnimationTypeAchievement {
   fade,
 }
 
-class XboxAchievement extends StatefulWidget {
+class XboxNotification extends StatefulWidget {
   final AlignmentGeometry alignment;
   final Duration duration;
   final GestureTapCallback? onTap;
@@ -34,7 +34,7 @@ class XboxAchievement extends StatefulWidget {
   final OverlayState? overlay;
   final Widget? content;
 
-  XboxAchievement({
+  XboxNotification({
     super.key,
     this.isCircle = true,
     this.elevation = 3,
@@ -71,10 +71,10 @@ class XboxAchievement extends StatefulWidget {
   }
 
   @override
-  createState() => _XboxAchievementState();
+  createState() => _XboxNotificationState();
 }
 
-class _XboxAchievementState extends State<XboxAchievement> with TickerProviderStateMixin {
+class _XboxNotificationState extends State<XboxNotification> with TickerProviderStateMixin {
   static const heightCard = 60.0;
   static const marginCard = 20.0;
 

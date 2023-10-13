@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:xbox_ui/xbox_achievement.dart';
 import 'package:xbox_ui/xbox_ui.dart';
 
 mixin XboxDialog {
@@ -20,12 +21,6 @@ mixin XboxDialog {
                 .toList()),
       );
 
-  /// The `title` argument is used to title of alert dialog.
-  /// The `content` argument is used to content of alert dialog.
-  /// The `textOK` argument is used to text for 'OK' Button of alert dialog.
-  /// The `textCancel` argument is used to text for 'Cancel' Button of alert dialog.
-  ///
-  /// Returns a [Future<bool>].
   Future<bool> confirm(
     BuildContext context, {
     String? title,
@@ -128,5 +123,13 @@ mixin XboxDialog {
     );
 
     return isConfirm == true ? controller.text : null;
+  }
+
+  void notification(BuildContext context, {required String title, String? subtitle, IconData? icon}) {
+    return XboxNotification(
+      title: title,
+      subTitle: subtitle,
+      icon: icon != null ? Icon(icon) : null,
+    ).show(context);
   }
 }

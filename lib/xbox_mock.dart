@@ -34,7 +34,7 @@ class _XboxMockState extends State<XboxMock> {
             20,
             Icons.music_note,
             onPressed: () {
-              XboxAchievement(title: "Got a Song").show(context);
+              XboxNotification(title: "Got a Song").show(context);
             },
           ),
           XboxCircleButton.icon(
@@ -46,10 +46,10 @@ class _XboxMockState extends State<XboxMock> {
                 title: "Book Menu",
                 menuEntries: {
                   "Book 1": () {
-                    XboxAchievement(title: "Got book 1", color: Colors.yellow).show(context);
+                    XboxNotification(title: "Got book 1", color: Colors.yellow).show(context);
                   },
                   "Book 2": () {
-                    XboxAchievement(title: "Got book 2").show(context);
+                    XboxNotification(title: "Got book 2").show(context);
                   },
                 },
               );

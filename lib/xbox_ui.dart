@@ -12,3 +12,4 @@ export 'package:xbox_ui/xbox_tile_list.dart';
 export 'package:xbox_ui/xbox_tile_view.dart';
 export 'package:xbox_ui/xbox_tile.dart';
 export 'package:xbox_ui/xbox_ui.dart';
+export 'package:xbox_ui/xbox.dart';

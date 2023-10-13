@@ -1,4 +1,4 @@
-// ignore_for_file: constant_identifier_names, use_build_context_synchronously
+// ignore_for_file: constant_identifier_names
 
 import 'package:flutter/material.dart';
 
@@ -20,7 +20,7 @@ mixin XboxColors {
 
   static Color getReadableColor([Color? color]) => (color ?? currentAccentColor).computeLuminance() > 0.5 ? Colors.black : Colors.white;
 
-  static Color getTextColor(BuildContext context) {
+  static Color getContrastThemeColor(BuildContext context) {
     return Theme.of(context).brightness == Brightness.dark ? White : SlateGray;
   }
 

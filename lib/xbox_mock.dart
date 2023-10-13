@@ -8,6 +8,7 @@ import 'package:xbox_ui/xbox_popup_menu.dart';
 import 'package:xbox_ui/xbox_tile.dart';
 import 'package:xbox_ui/xbox_tile_list.dart';
 import 'package:xbox_ui/xbox_tile_view.dart';
+import 'package:xbox_ui/xbox_ui.dart';
 
 class XboxMock extends StatelessWidget {
   const XboxMock({
@@ -16,12 +17,13 @@ class XboxMock extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return XboxApp(
         title: 'Xbox Demo',
-        theme: XboxColors.getTheme(),
+        theme: XboxLightTheme,
+        darkTheme: XboxDarkTheme,
         home: XboxDashboard(
-          userdetail: 'XboxUser',
-          username: '1234 points',
+          username: 'XboxUser',
+          userdetail: '1234 points',
           menu: const XboxMenu(
             items: [
               ListTile(title: Text("First")),

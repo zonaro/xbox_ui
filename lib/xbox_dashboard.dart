@@ -56,12 +56,12 @@ class _XboxDashboardState extends State<XboxDashboard> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          widget.userdetail,
+                          widget.username,
                           maxLines: 1,
                           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                         ),
                         Text(
-                          widget.username,
+                          widget.userdetail,
                           maxLines: 1,
                           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                         )

@@ -9,7 +9,7 @@ class XboxPopupMenu extends StatelessWidget {
   });
 
   final String title;
-  final Map<String, void Function()?> menuItems;
+  final XboxMenuEntries menuItems;
 
   @override
   Widget build(BuildContext context) => SimpleDialog(
@@ -32,5 +32,5 @@ class XboxPopupMenu extends StatelessWidget {
         },
       );
 
-  static Future<void> showMenu(BuildContext context, {required String title, required Map<String, void Function()?> menuItems}) => XboxPopupMenu(title: title, menuItems: menuItems).show(context);
+  static Future<void> showMenu(BuildContext context, {required String title, required XboxMenuEntries menuItems}) => XboxPopupMenu(title: title, menuItems: menuItems).show(context);
 }

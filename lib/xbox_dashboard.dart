@@ -26,10 +26,9 @@ class _XboxDashboardState extends State<XboxDashboard> {
   Widget build(BuildContext context) {
     final scaffoldKey = GlobalKey<ScaffoldState>();
     return KeyboardListener(
-      focusNode: FocusNode(),
-      autofocus: true,
+      focusNode: FocusNode(descendantsAreFocusable: true),
       onKeyEvent: (key) {
-        if (key.logicalKey == LogicalKeyboardKey.gameButtonMode) {
+        if (key.logicalKey == LogicalKeyboardKey.gameButtonMode || key.logicalKey == LogicalKeyboardKey.escape) {
           if (scaffoldKey.currentState?.isDrawerOpen ?? false) {
             scaffoldKey.currentState?.closeDrawer();
           } else {

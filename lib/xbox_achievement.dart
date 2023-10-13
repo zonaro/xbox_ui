@@ -28,28 +28,27 @@ class _XboxAchievementBase extends StatefulWidget {
   final Color color;
   final Color iconBackgroundColor;
 
-  final TextStyle? textStyleTitle;
-  final TextStyle? textStyleSubTitle;
   final String? title;
   final String? subTitle;
   final Widget? content;
+
+  final bool isCircle;
 
   const _XboxAchievementBase({
     Key? key,
     this.finish,
     this.duration = const Duration(seconds: 3),
     this.listener,
-    this.elevation = 2,
+    this.elevation = 3,
     this.icon,
     this.onTap,
     this.typeAnimationContent = AnimationTypeAchievement.fadeSlideToUp,
     this.color = XboxColors.XboxGreen,
     this.iconBackgroundColor = XboxColors.SlateGray,
-    this.textStyleTitle,
-    this.textStyleSubTitle,
     this.title,
     this.subTitle,
     this.content,
+    this.isCircle = true,
   }) : super(key: key);
 
   @override
@@ -253,7 +252,7 @@ class _XboxAchievementBaseState extends State<_XboxAchievementBase> with TickerP
         child: Text(
           title,
           softWrap: true,
-          style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold).merge(widget.textStyleTitle),
+          style: TextStyle(color: Theme.of(context).colorScheme.onPrimary, fontWeight: FontWeight.bold),
         ),
       ),
     );
@@ -275,13 +274,13 @@ class _XboxAchievementBaseState extends State<_XboxAchievementBase> with TickerP
           padding: const EdgeInsets.only(left: 8.0),
           child: Text(
             subTitle,
-            style: const TextStyle(color: Colors.white).merge(widget.textStyleSubTitle),
+            style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
           ),
         ));
   }
 
   BorderRadiusGeometry _buildBorderCard() {
-    return const BorderRadius.all(Radius.circular(xboxTileRadius));
+    return widget.isCircle ? const BorderRadius.all(Radius.circular(heightCard / 2)) : const BorderRadius.all(Radius.circular(xboxTileRadius));
   }
 
   EdgeInsets _buildPaddingContent() => const EdgeInsets.fromLTRB(0, 15, 15, 15);
@@ -333,15 +332,13 @@ class XboxAchievement {
   final Duration duration;
   final GestureTapCallback? onTap;
   final Function(AchievementState)? listener;
-  final bool isCircle;
   final Widget? icon;
   final AnimationTypeAchievement typeAnimationContent;
   final BorderRadiusGeometry? borderRadius;
   final BorderRadiusGeometry? iconBorderRadius;
   final Color? color;
   final Color? iconBackgroundColor;
-  final TextStyle? textStyleTitle;
-  final TextStyle? textStyleSubTitle;
+  final bool isCircle;
   final String? title;
   final String? subTitle;
   final double elevation;
@@ -350,19 +347,17 @@ class XboxAchievement {
   OverlayEntry? _overlayEntry;
 
   XboxAchievement({
-    this.elevation = 2,
+    this.isCircle = true,
+    this.elevation = 3,
     this.onTap,
     this.listener,
     this.overlay,
-    this.isCircle = false,
     this.icon,
     this.typeAnimationContent = AnimationTypeAchievement.fadeSlideToUp,
     this.borderRadius,
     this.iconBorderRadius,
     this.color,
     this.iconBackgroundColor,
-    this.textStyleTitle,
-    this.textStyleSubTitle,
     this.alignment = Alignment.topCenter,
     this.duration = const Duration(seconds: 3),
     this.title,
@@ -375,6 +370,7 @@ class XboxAchievement {
       return Align(
         alignment: alignment,
         child: _XboxAchievementBase(
+          isCircle: isCircle,
           title: title,
           subTitle: subTitle,
           content: content,
@@ -382,8 +378,6 @@ class XboxAchievement {
           listener: listener,
           onTap: onTap,
           elevation: elevation,
-          textStyleSubTitle: textStyleSubTitle,
-          textStyleTitle: textStyleTitle,
           icon: icon ??
               Icon(
                 Icons.diamond,

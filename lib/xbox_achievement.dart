@@ -63,15 +63,12 @@ class XboxAchievement extends StatefulWidget {
     });
   }
 
-
   void show(BuildContext context) {
     if (_overlayEntry == null) {
       _overlayEntry = _buildOverlay();
       (overlay ?? Overlay.of(context)).insert(_overlayEntry!);
     }
   }
-
- 
 
   @override
   createState() => _XboxAchievementState();
@@ -183,18 +180,22 @@ class _XboxAchievementState extends State<XboxAchievement> with TickerProviderSt
       child: Material(
         type: MaterialType.transparency,
         elevation: widget.elevation,
-        borderRadius: _buildBorderCard(),
-        child: Ink(
-          color: widget.color ?? XboxColors.currentAccentColor,
-          child: InkWell(
-            onTap: widget.onTap,
-            child: IntrinsicHeight(
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  _buildIcon(),
-                  _buildContent(),
-                ],
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: _buildBorderCard(),
+          ),
+          child: Ink(
+            color: widget.color ?? XboxColors.currentAccentColor,
+            child: InkWell(
+              onTap: widget.onTap,
+              child: IntrinsicHeight(
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    _buildIcon(),
+                    _buildContent(),
+                  ],
+                ),
               ),
             ),
           ),

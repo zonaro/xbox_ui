@@ -26,7 +26,6 @@ class _XboxAchievementBase extends StatefulWidget {
 
   final double elevation;
   final Color? color;
- 
 
   final String? title;
   final String? subTitle;
@@ -35,7 +34,6 @@ class _XboxAchievementBase extends StatefulWidget {
   final bool isCircle;
 
   const _XboxAchievementBase({
-    
     this.finish,
     this.duration = const Duration(seconds: 3),
     this.listener,
@@ -43,7 +41,7 @@ class _XboxAchievementBase extends StatefulWidget {
     this.icon,
     this.onTap,
     this.typeAnimationContent = AnimationTypeAchievement.fadeSlideToUp,
-    this.color, 
+    this.color,
     this.title,
     this.subTitle,
     this.content,
@@ -344,7 +342,7 @@ class XboxAchievement {
   final Widget? content;
   OverlayEntry? _overlayEntry;
 
-  XboxAchievement({    
+  XboxAchievement({
     this.isCircle = true,
     this.elevation = 3,
     this.onTap,
@@ -354,7 +352,7 @@ class XboxAchievement {
     this.typeAnimationContent = AnimationTypeAchievement.fadeSlideToUp,
     this.borderRadius,
     this.iconBorderRadius,
-    this.color,  
+    this.color,
     this.alignment = Alignment.topCenter,
     this.duration = const Duration(seconds: 3),
     this.title,
@@ -366,7 +364,7 @@ class XboxAchievement {
     return OverlayEntry(builder: (context) {
       return Align(
         alignment: alignment,
-        child: _XboxAchievementBase(       
+        child: _XboxAchievementBase(
           isCircle: isCircle,
           title: title,
           subTitle: subTitle,
@@ -375,14 +373,9 @@ class XboxAchievement {
           listener: listener,
           onTap: onTap,
           elevation: elevation,
-          icon: icon ??
-              Icon(
-                Icons.diamond,
-                color: XboxColors.currentAccentColor,
-              ),
+          icon: icon,
           typeAnimationContent: typeAnimationContent,
           color: color,
-         
           finish: _hide,
         ),
       );

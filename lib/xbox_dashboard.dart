@@ -37,7 +37,6 @@ class _XboxDashboardState extends State<XboxDashboard> {
             centerTitle: true,
             surfaceTintColor: Colors.transparent,
             leadingWidth: MediaQuery.of(context).size.width * 0.3,
-            
             automaticallyImplyLeading: true,
             leading: Padding(
               padding: const EdgeInsets.only(left: 20, top: 20),
@@ -77,8 +76,8 @@ class _XboxDashboardState extends State<XboxDashboard> {
             shadowColor: Colors.transparent,
             elevation: 0,
             title: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
-              // mainAxisAlignment: MainAxisAlignment.center,
               children: widget.topBarItens,
             ),
           ),

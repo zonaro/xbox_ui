@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:xbox_ui/xbox.dart';
 import 'package:xbox_ui/xbox_ui.dart';
+
+void main() {
+  runApp(const BasicXboxUi());
+}
 
 class BasicXboxUi extends StatefulWidget {
   const BasicXboxUi({super.key});
@@ -11,9 +16,11 @@ class BasicXboxUi extends StatefulWidget {
 class _BasicXboxUiState extends State<BasicXboxUi> {
   @override
   Widget build(BuildContext context) {
+    Xbox.currentAccentColor = Xbox.Green; //change this
+
     return XboxApp(
-      themeMode: ThemeMode.system,
-      theme: Xbox.LightTheme,
+      themeMode: ThemeMode.dark,
+      theme: Xbox.LightTheme, // getter for light and dark theme. apply the currentAccentColor to all tiles
       darkTheme: Xbox.DarkTheme,
       home: XboxDashboard(
         username: 'XboxUser',
@@ -62,7 +69,7 @@ class _BasicXboxUiState extends State<BasicXboxUi> {
           ),
         ],
         child: XboxTileView(items: [
-          XboxTileList(title: "Icons", tiles: [
+          XboxTileList(title: "Icons with default accent color", tiles: [
             XboxTile.icon(
               icon: Icons.settings,
               title: "Settings",
@@ -81,17 +88,37 @@ class _BasicXboxUiState extends State<BasicXboxUi> {
             ),
           ]),
           XboxTileList(title: "Game Style", tiles: [
-            XboxTile.game(title: "Game Name", width: 100, height: 100, image: Image.network('https://picsum.photos/id/1/200/300')),
+            XboxTile.game(
+              title: "Game Name",
+              width: 100,
+              height: 100,
+              image: Image.network('https://picsum.photos/id/1/100/100?a=1'),
+            ),
           ]),
           XboxTileList(title: "Banner", tiles: [
-            XboxTile.banner(title: "Banner Title", description: "A short banner description", width: 200, height: 120, image: Image.network('https://picsum.photos/id/1/200/300')),
-            XboxTile.banner(description: "Sometimes we have icons", width: 200, height: 120, image: Image.network('https://picsum.photos/id/1/200/300')),
+            XboxTile.banner(
+              title: "Banner Title",
+              description: "A short banner description",
+              width: 200,
+              height: 120,
+              image: Image.network('https://picsum.photos/200/120?a=2'),
+            ),
+            XboxTile.banner(
+              description: "Sometimes we have icons",
+              width: 200,
+              height: 120,
+              image: Image.network('https://picsum.photos/200/120?a=3'),
+              icon: const Icon(
+                Icons.gamepad,
+                size: 60,
+              ),
+            ),
           ]),
           XboxTileList(title: "Icon Gradient", tiles: [
             XboxTile.iconGradient(
-              title: "A Gradient Icon",
-              width: 200,
-              height: 120,
+              title: "A Gradient background with Icon",
+              width: 400,
+              height: 300,
               icon: Icons.color_lens,
               gradient: LinearGradient(colors: [Colors.purple[700]!, Colors.blue[800]!]),
               iconSize: 60,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:xbox_ui/xbox.dart';
 import 'package:xbox_ui/xbox_ui.dart';
 
 mixin XboxDialog {

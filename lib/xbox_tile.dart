@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:xbox_ui/xbox_ui.dart';
+import 'package:xbox_ui/xbox.dart';
 
 /// `XboxTile` is a [Widget] that represents a tile in an Xbox-themed UI.
 ///

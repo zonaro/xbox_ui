@@ -1,7 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
-import 'package:xbox_ui/xbox_ui.dart';
+import 'package:xbox_ui/xbox.dart';
 
 enum AchievementState {
   opening,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:xbox_ui/xbox_ui.dart';
+import 'package:xbox_ui/xbox.dart';
 
 class XboxMenu extends StatelessWidget {
   final List<Widget> items;

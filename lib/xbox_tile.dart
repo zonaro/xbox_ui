@@ -115,7 +115,7 @@ class XboxTile extends StatefulWidget {
         icon: Icon(
           icon,
           color: Colors.white,
-          size: iconSize,          
+          size: iconSize,
           shadows: const [
             BoxShadow(
               blurStyle: BlurStyle.solid,
@@ -259,25 +259,29 @@ class _XboxTileState extends State<XboxTile> {
                           decoration: !showTitleBox ? const BoxDecoration(gradient: LinearGradient(colors: [Colors.transparent, Colors.transparent, Colors.black], begin: Alignment.topCenter, end: Alignment.bottomCenter)) : null,
                           child: GridTile(
                               footer: !showTitleBox
-                                  ? Padding(
-                                      padding: const EdgeInsets.all(10),
-                                      child: Column(
-                                        children: [
-                                          if (widget.title.trim().isNotEmpty)
-                                            Text(
-                                              widget.title,
-                                              style: const TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold,
+                                  ? Align(
+                                      alignment: Alignment.bottomLeft,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(10),
+                                        child: Column(
+                                          children: [
+                                            if (widget.title.trim().isNotEmpty)
+                                              Text(
+                                                widget.title,
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
                                               ),
-                                            ),
-                                          Text(
-                                            widget.description,
-                                            style: const TextStyle(
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                        ],
+                                            if (widget.description.trim().isNotEmpty)
+                                              Text(
+                                                widget.description,
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                          ],
+                                        ),
                                       ),
                                     )
                                   : null,

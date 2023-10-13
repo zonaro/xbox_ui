@@ -4,7 +4,6 @@ import 'package:xbox_ui/xbox_utils.dart';
 
 import 'xbox_colors.dart';
 
-
 class XboxDashboard extends StatefulWidget {
   const XboxDashboard({super.key, required this.body, required this.topBarItens, this.wallpaper, this.avatar, this.menu, required this.username, required this.userdetail});
 
@@ -31,7 +30,7 @@ class _XboxDashboardState extends State<XboxDashboard> {
         Scaffold(
           key: Xbox.globalkey,
           backgroundColor: Theme.of(context).colorScheme.background.withOpacity(.7),
-          drawer: widget.menu, 
+          drawer: widget.menu,
           extendBody: true,
           appBar: AppBar(
             centerTitle: true,
@@ -90,44 +89,6 @@ class _XboxDashboardState extends State<XboxDashboard> {
           body: widget.body,
         ),
       ],
-    );
-  }
-}
-
-class XboxMenu extends StatelessWidget {
-  const XboxMenu({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Drawer(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      backgroundColor: XboxColors.SlateGray,
-      child: ListView(
-        shrinkWrap: true,
-        children: <Widget>[
-          DrawerHeader(
-            decoration: BoxDecoration(
-              color: XboxColors.currentAccentColor,
-            ),
-            child: const Text("devInf.manufacturer"),
-          ),
-          ListTile(
-            title: const Text('Home'),
-            onTap: () {},
-          ),
-          ListTile(title: const Text('Accent Color'), onTap: () async {}),
-          ListTile(
-            title: const Text('Wallpaper'),
-            onTap: () async {},
-          ),
-          ListTile(
-            title: const Text('Achievements'),
-            onTap: () async {},
-          ),
-        ],
-      ),
     );
   }
 }

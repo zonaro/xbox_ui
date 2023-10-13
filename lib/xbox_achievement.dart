@@ -306,7 +306,7 @@ class _XboxAchievementState extends State<XboxAchievement> with TickerProviderSt
   }
 
   BorderRadiusGeometry _buildBorderCard() {
-    return widget.isCircle ? const BorderRadius.all(Radius.circular(heightCard / 2)) : const BorderRadius.all(Radius.circular(xboxTileRadius));
+    return widget.isCircle ? const BorderRadius.all(Radius.circular(double.infinity)) : const BorderRadius.all(Radius.circular(xboxTileRadius));
   }
 
   EdgeInsets _buildPaddingContent() => const EdgeInsets.fromLTRB(0, 15, 15, 15);

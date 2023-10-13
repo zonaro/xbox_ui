@@ -7,7 +7,6 @@ import 'package:xbox_ui/xbox_popup_menu.dart';
 import 'package:xbox_ui/xbox_tile.dart';
 import 'package:xbox_ui/xbox_tile_list.dart';
 import 'package:xbox_ui/xbox_tile_view.dart';
-import 'package:xbox_ui/xbox_ui.dart';
 
 class XboxMock extends StatefulWidget {
   const XboxMock({

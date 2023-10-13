@@ -4,9 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:xbox_ui/xbox_ui.dart';
 
-import 'xbox_colors.dart';
-import 'xbox_popup_menu.dart';
-
 /// `XboxTile` is a [Widget] that represents a tile in an Xbox-themed UI.
 ///
 /// This widget displays an image, title, description, and an icon within a colored tile.
@@ -50,6 +47,7 @@ class XboxTile extends StatefulWidget {
   /// The height of the tile.
   final double height;
 
+  /// a double thats indicate how mutch a tile grow when in focus. 
   final double growOnFocus;
 
   final bool autoFocus;
@@ -69,7 +67,7 @@ class XboxTile extends StatefulWidget {
         title: title,
         width: width,
         height: height,
-        tileColor: color ?? XboxColors.currentAccentColor,
+        tileColor: color ?? Xbox.currentAccentColor,
         onTap: onTap,
         growOnFocus: growOnFocus,
         menuItems: menuItems,
@@ -84,7 +82,7 @@ class XboxTile extends StatefulWidget {
         width: width,
         height: height,
         growOnFocus: growOnFocus,
-        tileColor: color ?? XboxColors.currentAccentColor,
+        tileColor: color ?? Xbox.currentAccentColor,
       );
 
   factory XboxTile.iconBanner({required IconData icon, required String description, required double width, required double height, required double iconSize, double growOnFocus = 0, Color? color, Widget? image, void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false}) => XboxTile(
@@ -106,7 +104,7 @@ class XboxTile extends StatefulWidget {
         description: description,
         width: width,
         height: height,
-        tileColor: color ?? XboxColors.currentAccentColor,
+        tileColor: color ?? Xbox.currentAccentColor,
         background: image,
         onTap: onTap,
         menuItems: menuItems,
@@ -130,23 +128,25 @@ class XboxTile extends StatefulWidget {
         title: title,
         width: width,
         height: height,
-        tileColor: color ?? XboxColors.currentAccentColor,
+        tileColor: color ?? Xbox.currentAccentColor,
         onTap: onTap,
         menuItems: menuItems,
         growOnFocus: growOnFocus,
         background: Container(decoration: BoxDecoration(gradient: gradient)),
       );
 
-  factory XboxTile.banner({required String description, required double width, required double height, required Widget image, Color? color, double growOnFocus = 0, void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false}) => XboxTile(
+  factory XboxTile.banner({required String description, String title = "", required double width, required double height, required Widget image, Color? color, double growOnFocus = 0, void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false, Widget? icon}) => XboxTile(
         autoFocus: autoFocus,
         background: image,
         description: description,
         width: width,
         height: height,
-        tileColor: color ?? XboxColors.currentAccentColor,
+        tileColor: color ?? Xbox.currentAccentColor,
         onTap: onTap,
         growOnFocus: growOnFocus,
         menuItems: menuItems,
+        title: title,
+        icon: icon,
       );
 
   factory XboxTile.game({required String title, required double width, required double height, required Widget image, Color? color, double growOnFocus = 0, void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false}) => XboxTile(
@@ -155,7 +155,7 @@ class XboxTile extends StatefulWidget {
         title: title,
         width: width,
         height: height,
-        tileColor: color ?? XboxColors.currentAccentColor,
+        tileColor: color ?? Xbox.currentAccentColor,
         onTap: onTap,
         growOnFocus: growOnFocus,
         menuItems: menuItems,
@@ -177,7 +177,7 @@ class _XboxTileState extends State<XboxTile> {
 
   _showMenu() async {
     if (widget.menuItems != null && widget.menuItems!.isNotEmpty) {
-      await XboxDialog.menu( context, title: widget.title, menuEntries: widget.menuItems!);
+      await XboxDialog.menu(context, title: widget.title, menuEntries: widget.menuItems!);
     }
   }
 
@@ -215,24 +215,24 @@ class _XboxTileState extends State<XboxTile> {
                       color: Theme.of(context).colorScheme.background,
                       boxShadow: [
                         BoxShadow(
-                          color: XboxColors.currentAccentColor,
+                          color: Xbox.currentAccentColor,
                           spreadRadius: 2.0,
                         ),
                       ],
-                      borderRadius: BorderRadius.circular(xboxTileRadius),
+                      borderRadius: BorderRadius.circular(Xbox.TileRadius),
                     )
                   : null,
               child: Stack(
                 fit: StackFit.expand,
                 children: [
                   ClipRRect(
-                    borderRadius: BorderRadius.circular(xboxTileRadius),
+                    borderRadius: BorderRadius.circular(Xbox.TileRadius),
                     child: GridTile(
                       footer: !showTitleBox
                           ? null
                           : _SlideUpAnimationWrapper(
                               child: ClipRRect(
-                                borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(xboxTileRadius), bottomRight: Radius.circular(xboxTileRadius)),
+                                borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(Xbox.TileRadius), bottomRight: Radius.circular(Xbox.TileRadius)),
                                 child: Container(
                                   color: Colors.black.withOpacity(.8),
                                   child: Align(
@@ -262,10 +262,10 @@ class _XboxTileState extends State<XboxTile> {
                         fit: StackFit.expand,
                         alignment: Alignment.center,
                         children: [
-                          Container(color: widget.tileColor ?? XboxColors.currentAccentColor),
+                          Container(color: widget.tileColor ?? Xbox.currentAccentColor),
                           if (widget.background != null)
                             ClipRRect(
-                              borderRadius: BorderRadius.circular(xboxTileRadius),
+                              borderRadius: BorderRadius.circular(Xbox.TileRadius),
                               child: widget.background,
                             ),
                           Container(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:xbox_ui/xbox_colors.dart';
+import 'package:xbox_ui/xbox.dart';
 
 class XboxCircleButton extends StatefulWidget {
   const XboxCircleButton({
@@ -42,7 +42,7 @@ class _XboxCircleButtonState extends State<XboxCircleButton> {
       type: MaterialType.transparency,
       child: Ink(
         decoration: BoxDecoration(
-          border: Border.all(color: hasFocus ? XboxColors.currentAccentColor : Colors.transparent, width: 2.5),
+          border: Border.all(color: hasFocus ? Xbox.currentAccentColor : Colors.transparent, width: 2.5),
           color: widget.backgroundColor ?? Theme.of(context).colorScheme.background.withOpacity(.5),
           shape: BoxShape.circle,
         ),

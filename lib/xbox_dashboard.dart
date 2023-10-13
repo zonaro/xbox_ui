@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:xbox_ui/xbox_icon_button.dart';
 import 'package:xbox_ui/xbox_menu.dart';
 
-import 'xbox_colors.dart';
+import 'xbox.dart';
 
 class XboxDashboard extends StatefulWidget {
   const XboxDashboard({super.key, required this.child, required this.topBarItens, this.wallpaper, this.avatar, this.menu, required this.username, required this.userdetail});
@@ -67,7 +67,7 @@ class _XboxDashboardState extends State<XboxDashboard> {
                     XboxCircleButton(
                       onPressed: () => _showHomeMenu(),
                       size: 50,
-                      backgroundColor: XboxColors.currentAccentColor,
+                      backgroundColor: Xbox.currentAccentColor,
                       child: widget.avatar ?? const Icon(Icons.person),
                     ),
                     FittedBox(

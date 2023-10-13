@@ -4,13 +4,26 @@ import 'package:flutter/material.dart';
 
 import 'package:xbox_ui/xbox_tile.dart';
 
-mixin XboxColors {
+typedef XboxMenuEntries = Map<String, void Function()?>;
+
+typedef XboxApp = MaterialApp;
+
+extension Xbox on MaterialApp {
+  
+  static const double TileRadius = 7;
+
+  static ThemeData get DarkTheme => Xbox.getTheme();
+  static ThemeData get LightTheme => Xbox.getTheme(brightness: Brightness.light);
+
+  Color get xboxAccentColor => Xbox.currentAccentColor;
+  set xboxAccentColor(Color? color) => Xbox.currentAccentColor = color ?? Xbox.Green;
+
   static ThemeData getTheme({Brightness brightness = Brightness.dark}) => ThemeData.from(
         useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(brightness: brightness, seedColor: XboxColors.currentAccentColor, background: brightness == Brightness.dark ? XboxColors.SlateGray : XboxColors.White),
+        colorScheme: ColorScheme.fromSeed(brightness: brightness, seedColor: Xbox.currentAccentColor, background: brightness == Brightness.dark ? Xbox.SlateGray : Xbox.White),
       );
 
-  static const XboxGreen = Color(0xFF107C10);
+  static const Green = Color(0xFF107C10);
 
   static const SlateGray = Color(0xFF3A3A3A);
 
@@ -18,7 +31,7 @@ mixin XboxColors {
 
   static TextStyle get XboxFont => const TextStyle(fontFamily: "Xbox");
 
-  static Color currentAccentColor = XboxColors.XboxGreen;
+  static Color currentAccentColor = Green;
 
   static Color getReadableColor([Color? color]) => (color ?? currentAccentColor).computeLuminance() > 0.5 ? Colors.black : Colors.white;
 

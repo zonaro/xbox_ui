@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:xbox_ui/xbox_achievement.dart';
 import 'package:xbox_ui/xbox_ui.dart';
 
 mixin XboxDialog {
-  static RoundedRectangleBorder get defaultShape => RoundedRectangleBorder(borderRadius: BorderRadius.circular(xboxTileRadius));
+  static RoundedRectangleBorder get defaultShape => RoundedRectangleBorder(borderRadius: BorderRadius.circular(Xbox.TileRadius));
 
   static Future<void> menu(BuildContext context, {required String title, required XboxMenuEntries menuEntries}) => showDialog(
         context: context,
@@ -21,7 +20,7 @@ mixin XboxDialog {
                 .toList()),
       );
 
-  Future<bool> confirm(
+  static Future<bool> confirm(
     BuildContext context, {
     String? title,
     String? content,
@@ -53,7 +52,7 @@ mixin XboxDialog {
     return isConfirm ?? false;
   }
 
-  Future<void> alert(
+  static Future<void> alert(
     BuildContext context, {
     required String text,
     String? title,
@@ -85,7 +84,7 @@ mixin XboxDialog {
     );
   }
 
-  Future<String?> prompt(
+  static Future<String?> prompt(
     BuildContext context, {
     String? title,
     String? content,
@@ -125,7 +124,7 @@ mixin XboxDialog {
     return isConfirm == true ? controller.text : null;
   }
 
-  void notification(BuildContext context, {required String title, String? subtitle, IconData? icon}) {
+  static void notification(BuildContext context, {required String title, String? subtitle, IconData? icon}) {
     return XboxNotification(
       title: title,
       subTitle: subtitle,

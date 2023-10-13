@@ -1,7 +1,6 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
-import 'package:xbox_ui/xbox_colors.dart';
 import 'package:xbox_ui/xbox_ui.dart';
 
 enum AchievementState {
@@ -185,7 +184,7 @@ class _XboxNotificationState extends State<XboxNotification> with TickerProvider
             borderRadius: _buildBorderCard(),
           ),
           child: Ink(
-            color: widget.color ?? XboxColors.currentAccentColor,
+            color: widget.color ?? Xbox.currentAccentColor,
             child: InkWell(
               onTap: widget.onTap,
               child: IntrinsicHeight(
@@ -206,13 +205,13 @@ class _XboxNotificationState extends State<XboxNotification> with TickerProvider
 
   Widget _buildIcon() {
     return Container(
-      color: XboxColors.SlateGray.withOpacity(.5),
+      color: Xbox.SlateGray.withOpacity(.5),
       width: heightCard,
       alignment: Alignment.center,
       child: widget.icon ??
           Icon(
             Icons.diamond,
-            color: widget.color ?? XboxColors.currentAccentColor,
+            color: widget.color ?? Xbox.currentAccentColor,
           ),
     );
   }
@@ -279,7 +278,7 @@ class _XboxNotificationState extends State<XboxNotification> with TickerProvider
         child: Text(
           title,
           softWrap: true,
-          style: TextStyle(color: XboxColors.getReadableColor(widget.color ?? XboxColors.currentAccentColor), fontWeight: FontWeight.bold),
+          style: TextStyle(color: Xbox.getReadableColor(widget.color ?? Xbox.currentAccentColor), fontWeight: FontWeight.bold),
         ),
       ),
     );
@@ -301,13 +300,13 @@ class _XboxNotificationState extends State<XboxNotification> with TickerProvider
           padding: const EdgeInsets.only(left: 8.0),
           child: Text(
             subTitle,
-            style: TextStyle(color: XboxColors.getReadableColor(widget.color ?? XboxColors.currentAccentColor)),
+            style: TextStyle(color: Xbox.getReadableColor(widget.color ?? Xbox.currentAccentColor)),
           ),
         ));
   }
 
   BorderRadiusGeometry _buildBorderCard() {
-    return widget.isCircle ? const BorderRadius.all(Radius.circular(double.infinity)) : const BorderRadius.all(Radius.circular(xboxTileRadius));
+    return widget.isCircle ? const BorderRadius.all(Radius.circular(double.infinity)) : const BorderRadius.all(Radius.circular(Xbox.TileRadius));
   }
 
   EdgeInsets _buildPaddingContent() => const EdgeInsets.fromLTRB(0, 15, 15, 15);

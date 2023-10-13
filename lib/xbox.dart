@@ -9,7 +9,6 @@ typedef XboxMenuEntries = Map<String, void Function()?>;
 typedef XboxApp = MaterialApp;
 
 extension Xbox on MaterialApp {
-  
   static const double TileRadius = 7;
 
   static ThemeData get DarkTheme => Xbox.getTheme();
@@ -45,8 +44,7 @@ extension Xbox on MaterialApp {
 
   static RoundedRectangleBorder get defaultShape => RoundedRectangleBorder(borderRadius: BorderRadius.circular(Xbox.TileRadius));
 
-
-  static List<XboxTile> colorTiles(List<Color> colors, {double width = 50, double height = 50, void Function(Color)? onTap}) => colors
+  static List<XboxTile> colorTiles(List<Color> colors, {Size size = const Size.square(100), void Function(Color)? onTap}) => colors
       .map(
         (c) => XboxTile.flatColor(
           onTap: onTap != null
@@ -56,9 +54,22 @@ extension Xbox on MaterialApp {
               : null,
           backgroundColor: c,
           title: c.value.toRadixString(16).padLeft(8, '0'),
-          width: width,
-          height: height,
+          size: size,
         ),
       )
       .toList();
+
+  static Size calculateDimension(String aspectRatio, {double? width, double? height}) {
+    var ratio = aspectRatio.split(':').map((e) => double.parse(e)).toList();
+    if (width == null && height == null) {
+      width = ratio.first;
+      height = ratio.last;
+    } else if (width != null && height == null) {
+      height = (width * ratio.first) / ratio.last;
+    } else if (height != null && width == null) {
+      width = (height * ratio.first) / ratio.last;
+    }
+    return Size(width!, height!);
+    
+  }
 }

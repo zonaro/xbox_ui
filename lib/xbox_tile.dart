@@ -41,11 +41,7 @@ class XboxTile extends StatefulWidget {
   /// An icon to display on the tile. This is optional and can be null.
   final Widget? icon;
 
-  /// The width of the tile.
-  final double width;
-
-  /// The height of the tile.
-  final double height;
+  final Size size;
 
   /// a double thats indicate how mutch a tile grow when in focus.
   final double growOnFocus;
@@ -56,36 +52,34 @@ class XboxTile extends StatefulWidget {
 
   final XboxMenuEntries? menuItems;
 
-  const XboxTile({super.key, this.background, this.title = "", this.tileColor, this.growOnFocus = 0, this.icon, required this.width, this.description = "", this.onTap, required this.height, this.menuItems, required this.autoFocus});
+  const XboxTile({super.key, this.background, this.title = "", this.tileColor, this.growOnFocus = 0, this.icon, required this.size, this.description = "", this.onTap, this.menuItems, required this.autoFocus});
 
   @override
   State<XboxTile> createState() => _XboxTileState();
 
-  factory XboxTile.icon({required IconData icon, required String title, required double width, required double height, required double iconSize, double growOnFocus = 0, Color? color, void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false}) => XboxTile(
+  factory XboxTile.icon({required IconData icon, required String title, required Size size, required double iconSize, double growOnFocus = 0, Color? color, void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false}) => XboxTile(
         icon: Icon(icon, color: Colors.white, size: iconSize),
         autoFocus: autoFocus,
         title: title,
-        width: width,
-        height: height,
         tileColor: color ?? Xbox.currentAccentColor,
         onTap: onTap,
         growOnFocus: growOnFocus,
         menuItems: menuItems,
+        size: size,
       );
 
-  factory XboxTile.flatColor({required Color backgroundColor, required String title, required double width, required double height, double growOnFocus = 0, Color? color, void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false}) => XboxTile(
-        background: Container(width: width, height: height, color: backgroundColor),
+  factory XboxTile.flatColor({required Color backgroundColor, String title = "", required Size size, double growOnFocus = 0, Color? color, void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false}) => XboxTile(
+        background: Container(width: size.width, height: size.height, color: backgroundColor),
         onTap: onTap,
         autoFocus: autoFocus,
         menuItems: menuItems,
         title: title,
-        width: width,
-        height: height,
+        size: size,
         growOnFocus: growOnFocus,
-        tileColor: backgroundColor ?? color ?? Xbox.currentAccentColor,
+        tileColor: color ?? Xbox.currentAccentColor,
       );
 
-  factory XboxTile.iconBanner({required IconData icon, required String description, required double width, required double height, required double iconSize, double growOnFocus = 0, Color? color, Widget? image, void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false}) => XboxTile(
+  factory XboxTile.iconBanner({required IconData icon, required String description, String title = "", required Size size, required double iconSize, double growOnFocus = 0, Color? color, Widget? image, void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false}) => XboxTile(
         icon: Icon(
           icon,
           color: Colors.white,
@@ -102,15 +96,15 @@ class XboxTile extends StatefulWidget {
         autoFocus: autoFocus,
         growOnFocus: growOnFocus,
         description: description,
-        width: width,
-        height: height,
+        size: size,
         tileColor: color ?? Xbox.currentAccentColor,
         background: image,
         onTap: onTap,
+        title: title,
         menuItems: menuItems,
       );
 
-  factory XboxTile.iconGradient({required IconData icon, required String title, required double width, required double height, required double iconSize, required Gradient gradient, double growOnFocus = 0, Color? color, void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false}) => XboxTile(
+  factory XboxTile.iconGradient({required IconData icon, required String title, required Size size, required double iconSize, required Gradient gradient, double growOnFocus = 0, Color? color, void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false}) => XboxTile(
         icon: Icon(
           icon,
           color: Colors.white,
@@ -126,8 +120,7 @@ class XboxTile extends StatefulWidget {
         ),
         autoFocus: autoFocus,
         title: title,
-        width: width,
-        height: height,
+        size: size,
         tileColor: color ?? Xbox.currentAccentColor,
         onTap: onTap,
         menuItems: menuItems,
@@ -135,35 +128,32 @@ class XboxTile extends StatefulWidget {
         background: Container(decoration: BoxDecoration(gradient: gradient)),
       );
 
-  factory XboxTile.banner({required String description, String title = "", required double width, required double height, required Widget image, Color? color, double growOnFocus = 0, void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false, Widget? icon}) => XboxTile(
+  factory XboxTile.banner({required String description, String title = "", required Size size, required Widget image, Color? color, double growOnFocus = 0, void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false}) => XboxTile(
         autoFocus: autoFocus,
         background: image,
         description: description,
-        width: width,
-        height: height,
+        size: size,
         tileColor: color ?? Xbox.currentAccentColor,
         onTap: onTap,
         growOnFocus: growOnFocus,
         menuItems: menuItems,
         title: title,
-        icon: icon,
       );
 
-  factory XboxTile.game({required String title, required double width, required double height, required Widget image, Color? color, double growOnFocus = 0, void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false}) => XboxTile(
+  factory XboxTile.game({required String title, required Size size, required Widget image, Color? color, double growOnFocus = 0, void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false}) => XboxTile(
         autoFocus: autoFocus,
         background: image,
         title: title,
-        width: width,
-        height: height,
+        size: size,
         tileColor: color ?? Xbox.currentAccentColor,
         onTap: onTap,
         growOnFocus: growOnFocus,
         menuItems: menuItems,
       );
 
-  double getHeight(bool hasFocus) => growOnFocus > 0 && hasFocus ? height + (height * growOnFocus) : height;
+  double getHeight(bool hasFocus) => growOnFocus > 0 && hasFocus ? size.height + (size.height * growOnFocus) : size.height;
 
-  double getWidth(bool hasFocus) => growOnFocus > 0 && hasFocus ? width + (width * growOnFocus) : width;
+  double getWidth(bool hasFocus) => growOnFocus > 0 && hasFocus ? size.width + (size.width * growOnFocus) : size.width;
 }
 
 class _XboxTileState extends State<XboxTile> {
@@ -280,26 +270,29 @@ class _XboxTileState extends State<XboxTile> {
                                         alignment: Alignment.bottomLeft,
                                         child: Padding(
                                           padding: const EdgeInsets.all(10),
-                                          child: Column(
-                                            mainAxisAlignment: MainAxisAlignment.end,
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              if (widget.title.trim().isNotEmpty)
-                                                Text(
-                                                  widget.title,
-                                                  style: const TextStyle(
-                                                    color: Colors.white,
-                                                    fontWeight: FontWeight.bold,
+                                          child: SizedBox(
+                                            width: getWidth(),
+                                            child: Column(
+                                              mainAxisAlignment: MainAxisAlignment.end,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                if (widget.title.trim().isNotEmpty)
+                                                  Text(
+                                                    widget.title,
+                                                    style: const TextStyle(
+                                                      color: Colors.white,
+                                                      fontWeight: FontWeight.bold,
+                                                    ),
                                                   ),
-                                                ),
-                                              if (widget.description.trim().isNotEmpty)
-                                                Text(
-                                                  widget.description,
-                                                  style: const TextStyle(
-                                                    color: Colors.white,
+                                                if (widget.description.trim().isNotEmpty)
+                                                  Text(
+                                                    widget.description,
+                                                    style: const TextStyle(
+                                                      color: Colors.white,
+                                                    ),
                                                   ),
-                                                ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       )

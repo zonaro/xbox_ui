@@ -139,7 +139,7 @@ class _BasicXboxUiState extends State<BasicXboxUi> {
         ]),
         XboxTileList(
           title: "Colors",
-            tiles: Xbox.colorTiles(Colors.primaries, width: 50, height: 50, onTap: (x) => setState(() => Xbox.currentAccentColor = x)))
+            tiles: Xbox.colorTiles(Colors.primaries, width: 100, height: 100, onTap: (x) => setState(() => Xbox.currentAccentColor = x)))
       ]),
     );
   }

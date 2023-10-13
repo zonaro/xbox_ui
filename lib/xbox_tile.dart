@@ -174,126 +174,137 @@ class _XboxTileState extends State<XboxTile> {
     });
   }
 
+  _showMenu() async {
+    if (widget.menuItems != null && widget.menuItems!.isNotEmpty) {
+      await XboxPopupMenu.showMenu(context, title: widget.title, menuItems: widget.menuItems!);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final bool showTitleBox = hasFocus && widget.title.trim().isNotEmpty && widget.description.trim().isEmpty;
 
     final bool isBanner = widget.description.trim().isNotEmpty && !showTitleBox;
 
-    return GestureDetector(
-      onTap: widget.onTap,
-      onLongPress: () async {
-        if (widget.menuItems != null && widget.menuItems!.isNotEmpty) {
-          await XboxPopupMenu.showMenu(context, title: widget.title, menuItems: widget.menuItems!);
+    return KeyboardListener(
+      focusNode: FocusNode(),
+      autofocus: true,
+      onKeyEvent: (k) {
+        if (k.logicalKey == LogicalKeyboardKey.gameButtonX) {
+          _showMenu();
         }
       },
-      child: FocusableActionDetector(
-        descendantsAreFocusable: false,
-        descendantsAreTraversable: false,
-        onShowHoverHighlight: onFocus,
-        onShowFocusHighlight: onFocus,
-        autofocus: widget.autoFocus,
-        child: Padding(
-          padding: const EdgeInsets.all(8),
-          child: Container(
-            padding: const EdgeInsets.all(2.5),
-            width: getWidth(),
-            height: getHeight(),
-            decoration: hasFocus
-                ? BoxDecoration(
-                    color: Theme.of(context).colorScheme.background,
-                    boxShadow: [
-                      BoxShadow(
-                        color: XboxColors.currentAccentColor,
-                        spreadRadius: 2.0,
-                      ),
-                    ],
+      child: GestureDetector(
+        onTap: widget.onTap,
+        onLongPress: _showMenu,
+        child: FocusableActionDetector(
+          descendantsAreFocusable: false,
+          descendantsAreTraversable: false,
+          onShowHoverHighlight: onFocus,
+          onShowFocusHighlight: onFocus,
+          autofocus: widget.autoFocus,
+          child: Padding(
+            padding: const EdgeInsets.all(8),
+            child: Container(
+              padding: const EdgeInsets.all(2.5),
+              width: getWidth(),
+              height: getHeight(),
+              decoration: hasFocus
+                  ? BoxDecoration(
+                      color: Theme.of(context).colorScheme.background,
+                      boxShadow: [
+                        BoxShadow(
+                          color: XboxColors.currentAccentColor,
+                          spreadRadius: 2.0,
+                        ),
+                      ],
+                      borderRadius: BorderRadius.circular(xboxTileRadius),
+                    )
+                  : null,
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  ClipRRect(
                     borderRadius: BorderRadius.circular(xboxTileRadius),
-                  )
-                : null,
-            child: Stack(
-              fit: StackFit.expand,
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(xboxTileRadius),
-                  child: GridTile(
-                    footer: !showTitleBox
-                        ? null
-                        : _SlideUpAnimationWrapper(
-                            child: ClipRRect(
-                              borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(xboxTileRadius), bottomRight: Radius.circular(xboxTileRadius)),
-                              child: Container(
-                                color: Colors.black.withOpacity(.8),
-                                child: Align(
-                                  alignment: Alignment.bottomLeft,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: Text(
-                                      widget.title,
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 16,
-                                        shadows: <Shadow>[
-                                          Shadow(
-                                            offset: const Offset(1.0, 1.0),
-                                            blurRadius: 3.0,
-                                            color: Colors.black.withOpacity(.8),
-                                          ),
-                                        ],
+                    child: GridTile(
+                      footer: !showTitleBox
+                          ? null
+                          : _SlideUpAnimationWrapper(
+                              child: ClipRRect(
+                                borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(xboxTileRadius), bottomRight: Radius.circular(xboxTileRadius)),
+                                child: Container(
+                                  color: Colors.black.withOpacity(.8),
+                                  child: Align(
+                                    alignment: Alignment.bottomLeft,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(10.0),
+                                      child: Text(
+                                        widget.title,
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                          shadows: <Shadow>[
+                                            Shadow(
+                                              offset: const Offset(1.0, 1.0),
+                                              blurRadius: 3.0,
+                                              color: Colors.black.withOpacity(.8),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                    child: Stack(
-                      fit: StackFit.expand,
-                      alignment: Alignment.center,
-                      children: [
-                        Container(color: widget.tileColor ?? XboxColors.currentAccentColor),
-                        if (widget.background != null)
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(xboxTileRadius),
-                            child: widget.background,
-                          ),
-                        Container(
-                          decoration: isBanner ? const BoxDecoration(gradient: LinearGradient(colors: [Colors.transparent, Colors.transparent, Colors.black], begin: Alignment.topCenter, end: Alignment.bottomCenter)) : null,
-                          child: GridTile(
-                              footer: isBanner
-                                  ? Align(
-                                      alignment: Alignment.bottomLeft,
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(10),
-                                        child: Column(
-                                          children: [
-                                            if (widget.title.trim().isNotEmpty)
-                                              Text(
-                                                widget.title,
-                                                style: const TextStyle(
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.bold,
+                      child: Stack(
+                        fit: StackFit.expand,
+                        alignment: Alignment.center,
+                        children: [
+                          Container(color: widget.tileColor ?? XboxColors.currentAccentColor),
+                          if (widget.background != null)
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(xboxTileRadius),
+                              child: widget.background,
+                            ),
+                          Container(
+                            decoration: isBanner ? const BoxDecoration(gradient: LinearGradient(colors: [Colors.transparent, Colors.transparent, Colors.black], begin: Alignment.topCenter, end: Alignment.bottomCenter)) : null,
+                            child: GridTile(
+                                footer: isBanner
+                                    ? Align(
+                                        alignment: Alignment.bottomLeft,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(10),
+                                          child: Column(
+                                            children: [
+                                              if (widget.title.trim().isNotEmpty)
+                                                Text(
+                                                  widget.title,
+                                                  style: const TextStyle(
+                                                    color: Colors.white,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
                                                 ),
-                                              ),
-                                            if (widget.description.trim().isNotEmpty)
-                                              Text(
-                                                widget.description,
-                                                style: const TextStyle(
-                                                  color: Colors.white,
+                                              if (widget.description.trim().isNotEmpty)
+                                                Text(
+                                                  widget.description,
+                                                  style: const TextStyle(
+                                                    color: Colors.white,
+                                                  ),
                                                 ),
-                                              ),
-                                          ],
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                    )
-                                  : null,
-                              child: Center(child: widget.icon)),
-                        ),
-                      ],
+                                      )
+                                    : null,
+                                child: Center(child: widget.icon)),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

@@ -4,18 +4,18 @@ import 'package:xbox_ui/xbox_ui.dart';
 class XboxPopupMenu extends StatelessWidget {
   const XboxPopupMenu({
     super.key,
-    required this.title,
+    this.title,
     required this.menuItems,
   });
 
-  final String title;
+  final String title = '';
   final XboxMenuEntries menuItems;
 
   @override
   Widget build(BuildContext context) => SimpleDialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(xboxTileRadius)),
       backgroundColor: Theme.of(context).colorScheme.background,
-      title: Text(title),
+      title: title.trim().isNotEmpty ? const Text(title) : null,
       children: menuItems.entries
           .map(
             (e) => SimpleDialogOption(

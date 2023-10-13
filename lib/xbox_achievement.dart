@@ -177,6 +177,7 @@ class _XboxAchievementBaseState extends State<_XboxAchievementBase> with TickerP
 
   Widget _buildIcon() {
     return Container(
+      color: XboxColors.SlateGray.withOpacity(.5),
       width: heightCard,
       alignment: Alignment.center,
       child: widget.icon ??

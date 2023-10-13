@@ -178,6 +178,8 @@ class _XboxTileState extends State<XboxTile> {
   Widget build(BuildContext context) {
     final bool showTitleBox = hasFocus && widget.title.trim().isNotEmpty && widget.description.trim().isEmpty;
 
+    final bool isBanner = widget.description.trim().isNotEmpty && !showTitleBox;
+
     return GestureDetector(
       onTap: widget.onTap,
       onLongPress: () async {
@@ -256,9 +258,9 @@ class _XboxTileState extends State<XboxTile> {
                             child: widget.background,
                           ),
                         Container(
-                          decoration: !showTitleBox ? const BoxDecoration(gradient: LinearGradient(colors: [Colors.transparent, Colors.transparent, Colors.black], begin: Alignment.topCenter, end: Alignment.bottomCenter)) : null,
+                          decoration: isBanner ? const BoxDecoration(gradient: LinearGradient(colors: [Colors.transparent, Colors.transparent, Colors.black], begin: Alignment.topCenter, end: Alignment.bottomCenter)) : null,
                           child: GridTile(
-                              footer: !showTitleBox
+                              footer: isBanner
                                   ? Align(
                                       alignment: Alignment.bottomLeft,
                                       child: Padding(

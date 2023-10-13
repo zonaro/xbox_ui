@@ -11,12 +11,11 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages).
 -->
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+`xbox_ui` is an interface kit designed to help developers build interfaces with the Xbox Dashboard Appearance. This kit provides a set of tools and components that mimic the look and feel of the Xbox user interface, making it easier for developers to create applications that are visually consistent with the Xbox ecosystem.
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+
 
 ## Getting started
 

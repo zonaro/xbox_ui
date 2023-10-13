@@ -18,7 +18,6 @@ enum AnimationTypeAchievement {
 }
 
 class XboxAchievement extends StatefulWidget {
-  
   final AlignmentGeometry alignment;
   final Duration duration;
   final GestureTapCallback? onTap;
@@ -64,12 +63,15 @@ class XboxAchievement extends StatefulWidget {
     });
   }
 
+
   void show(BuildContext context) {
     if (_overlayEntry == null) {
       _overlayEntry = _buildOverlay();
       (overlay ?? Overlay.of(context)).insert(_overlayEntry!);
     }
   }
+
+ 
 
   @override
   createState() => _XboxAchievementState();

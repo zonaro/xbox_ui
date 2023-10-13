@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:xbox_ui/xbox_achievement.dart';
-import 'package:xbox_ui/xbox_colors.dart';
 import 'package:xbox_ui/xbox_dashboard.dart';
 import 'package:xbox_ui/xbox_icon_button.dart';
 import 'package:xbox_ui/xbox_menu.dart';

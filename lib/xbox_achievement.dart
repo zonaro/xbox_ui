@@ -25,8 +25,8 @@ class _XboxAchievementBase extends StatefulWidget {
   final AnimationTypeAchievement typeAnimationContent;
 
   final double elevation;
-  final Color color;
-  final Color iconBackgroundColor;
+  final Color? color;
+  final Color? iconBackgroundColor;
 
   final String? title;
   final String? subTitle;
@@ -43,8 +43,8 @@ class _XboxAchievementBase extends StatefulWidget {
     this.icon,
     this.onTap,
     this.typeAnimationContent = AnimationTypeAchievement.fadeSlideToUp,
-    this.color = XboxColors.XboxGreen,
-    this.iconBackgroundColor = XboxColors.SlateGray,
+    this.color,
+    this.iconBackgroundColor,
     this.title,
     this.subTitle,
     this.content,
@@ -160,10 +160,10 @@ class _XboxAchievementBaseState extends State<_XboxAchievementBase> with TickerP
       type: MaterialType.transparency,
       elevation: widget.elevation,
       borderRadius: _buildBorderCard(),
-      color: widget.color,
+      color: widget.color ?? XboxColors.currentAccentColor,
       child: Container(
-        color:  XboxColors.currentAccentColor,
-        child: InkWell(         
+        color: XboxColors.currentAccentColor,
+        child: InkWell(
           onTap: () => widget.onTap?.call(),
           child: IntrinsicHeight(
             child: Row(
@@ -182,7 +182,7 @@ class _XboxAchievementBaseState extends State<_XboxAchievementBase> with TickerP
   Widget _buildIcon() {
     return Container(
       decoration: BoxDecoration(
-        color: widget.iconBackgroundColor,
+        color: widget.iconBackgroundColor ?? XboxColors.SlateGray.withOpacity(.8),
       ),
       width: heightCard,
       alignment: Alignment.center,
@@ -388,8 +388,8 @@ class XboxAchievement {
                 color: XboxColors.currentAccentColor,
               ),
           typeAnimationContent: typeAnimationContent,
-          color: color ?? XboxColors.currentAccentColor,
-          iconBackgroundColor: iconBackgroundColor ?? (color ?? XboxColors.SlateGray.withOpacity(.8)),
+          color: color,
+          iconBackgroundColor: iconBackgroundColor ?? color,
           finish: _hide,
         ),
       );

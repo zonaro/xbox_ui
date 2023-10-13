@@ -41,7 +41,7 @@ class _XboxDashboardState extends State<XboxDashboard> {
       onKey: (event) {
         if (event is RawKeyDownEvent) {
           if (event.isKeyPressed(LogicalKeyboardKey.gameButtonMode) || event.isKeyPressed(LogicalKeyboardKey.escape)) {
-            _showHomeMenu()
+            _showHomeMenu();
           }
         }
       },
@@ -65,7 +65,7 @@ class _XboxDashboardState extends State<XboxDashboard> {
                   spacing: 10,
                   children: [
                     XboxCircleButton(
-                      onPressed: () =>_showHomeMenu(),
+                      onPressed: () => _showHomeMenu(),
                       size: 50,
                       backgroundColor: XboxColors.currentAccentColor,
                       child: widget.avatar ?? const Icon(Icons.person),

@@ -21,9 +21,8 @@ class _XboxIconButtonState extends State<XboxIconButton> {
     return Material(
       type: MaterialType.transparency,
       child: Ink(
-        
         decoration: BoxDecoration(
-          border: Border.all(color: XboxColors.currentAccentColor, width: 4.0),
+          border: Border.all(color: hasFocus ? XboxColors.currentAccentColor : Colors.transparent, width: 4.0),
           color: Theme.of(context).colorScheme.background,
           shape: BoxShape.circle,
         ),

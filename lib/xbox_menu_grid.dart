@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 class XboxMenuGrid extends StatefulWidget {
   const XboxMenuGrid({super.key, required this.views, this.startView});
+
   final Map<String, List<Widget>> views;
+
   final String? startView;
 
   @override
@@ -15,19 +17,24 @@ class _XboxMenuGridState extends State<XboxMenuGrid> {
   @override
   void initState() {
     if (widget.startView != null) {
-      currentKey = widget.startView!;
+      currentKey = widget.startView;
     }
 
     super.initState();
   }
 
+  List<String> get menus => widget.views.keys.toList();
+
   @override
   Widget build(BuildContext context) {
+    
     if (widget.views.isNotEmpty) {
-      currentKey ??= widget.views.keys.firstOrNull;
-      if (!widget.views.keys.contains(currentKey)) {
-        currentKey ??= widget.views.keys.first;
+
+      if (!menus.contains(currentKey)) {
+        currentKey = null;
       }
+
+      currentKey = currentKey ?? widget.views.keys.first;
 
       return Row(
         children: [
@@ -56,6 +63,7 @@ class _XboxMenuGridState extends State<XboxMenuGrid> {
         ],
       );
     }
+
     return Container(
       color: Theme.of(context).colorScheme.background,
       width: MediaQuery.of(context).size.width,

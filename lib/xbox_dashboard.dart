@@ -1,9 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:xbox_ui/xbox_utils.dart';
 
 import 'xbox_colors.dart';
 
-GlobalKey<ScaffoldState> globalkey = GlobalKey();
 
 class XboxDashboard extends StatefulWidget {
   const XboxDashboard({super.key, required this.body, required this.topBarItens, this.wallpaper, this.avatar, this.menu, required this.username, required this.userdetail});
@@ -29,19 +29,16 @@ class _XboxDashboardState extends State<XboxDashboard> {
       children: [
         if (widget.wallpaper != null) SizedBox(width: MediaQuery.of(context).size.width, child: widget.wallpaper),
         Scaffold(
-          key: globalkey,
+          key: Xbox.globalkey,
           backgroundColor: Theme.of(context).colorScheme.background.withOpacity(.7),
-          drawer: Padding(
-            padding: const EdgeInsets.all(25),
-            child: widget.menu,
-          ),
+          drawer: widget.menu, 
           extendBody: true,
           appBar: AppBar(
             centerTitle: true,
             surfaceTintColor: Colors.transparent,
             leadingWidth: MediaQuery.of(context).size.width * 0.3,
             leading: GestureDetector(
-              onTap: () => globalkey.currentState?.openDrawer(),
+              onTap: () => Xbox,
               child: Padding(
                 padding: const EdgeInsets.only(left: 20, top: 20),
                 child: Wrap(

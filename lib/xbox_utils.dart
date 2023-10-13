@@ -1,36 +1,10 @@
 import 'package:flutter/material.dart';
 
-class XboxPopupMenu extends StatelessWidget {
-  const XboxPopupMenu({
-    super.key,
-    required this.title,
-    required this.onPress,
-  });
+mixin Xbox {
 
-  final String title;
-  final Map<Widget, void Function()?> onPress;
+  static GlobalKey<ScaffoldState> globalkey = GlobalKey(debugLabel: "Xbox global key");
 
-  @override
-  Widget build(BuildContext context) {
-    return SimpleDialog(
-        backgroundColor: Theme.of(context).colorScheme.background,
-        title: Text(title),
-        children: onPress.entries
-            .map(
-              (e) => SimpleDialogOption(
-                onPressed: e.value,
-                child: e.key,
-              ),
-            )
-            .toList());
+ static showMenu() {
+    globalkey.currentState?.openDrawer();
   }
-
-  Future<void> show(BuildContext context) => showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return this;
-      },
-    );
-
-  static Future<void> showMenu(BuildContext context, String title, Map<Widget, void Function()?> onPress) => XboxPopupMenu(title: title, onPress: onPress).show(context);
 }

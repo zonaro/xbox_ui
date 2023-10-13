@@ -4,11 +4,11 @@ import 'package:xbox_ui/xbox_ui.dart';
 class XboxPopupMenu extends StatelessWidget {
   const XboxPopupMenu({
     super.key,
-    this.title,
+    this.title = '',
     required this.menuItems,
   });
 
-  final String title = '';
+  final String title;
   final XboxMenuEntries menuItems;
 
   @override

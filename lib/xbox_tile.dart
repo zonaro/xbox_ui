@@ -82,7 +82,7 @@ class XboxTile extends StatefulWidget {
         width: width,
         height: height,
         growOnFocus: growOnFocus,
-        tileColor: color ?? Xbox.currentAccentColor,
+        tileColor: backgroundColor ?? color ?? Xbox.currentAccentColor,
       );
 
   factory XboxTile.iconBanner({required IconData icon, required String description, required double width, required double height, required double iconSize, double growOnFocus = 0, Color? color, Widget? image, void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false}) => XboxTile(

@@ -57,14 +57,14 @@ class _XboxDashboardState extends State<XboxDashboard> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         AutoSizeText(
-                          widget.username,
+                          widget.userdetail,
                           maxLines: 1,
                           minFontSize: 4,
                           maxFontSize: 20,
                           style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
                         AutoSizeText(
-                          widget.userdetail,
+                          widget.username,
                           maxLines: 1,
                           minFontSize: 2,
                           maxFontSize: 15,

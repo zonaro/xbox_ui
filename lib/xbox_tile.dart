@@ -1,7 +1,7 @@
 // ignore_for_file: constant_identifier_names, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
+
 import 'xbox_colors.dart';
 import 'xbox_popup_menu.dart';
 
@@ -175,7 +175,6 @@ class _XboxTileState extends State<XboxTile> {
 
   @override
   Widget build(BuildContext context) {
-
     const double radius = 7;
 
     final bool showTitleBox = hasFocus && widget.title.trim().isNotEmpty && widget.description.trim().isEmpty;
@@ -219,29 +218,26 @@ class _XboxTileState extends State<XboxTile> {
                   child: GridTile(
                     footer: !showTitleBox
                         ? null
-                        : Animate(
-                            effects: const [SlideEffect(begin: Offset(0, 1), duration: Duration(milliseconds: 50))],
-                            child: ClipRRect(
-                              borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(radius), bottomRight: Radius.circular(radius)),
-                              child: Container(
-                                color: Colors.black.withOpacity(.8),
-                                child: Align(
-                                  alignment: Alignment.bottomLeft,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: Text(
-                                      widget.title,
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 16,
-                                        shadows: <Shadow>[
-                                          Shadow(
-                                            offset: const Offset(1.0, 1.0),
-                                            blurRadius: 3.0,
-                                            color: Colors.black.withOpacity(.8),
-                                          ),
-                                        ],
-                                      ),
+                        : ClipRRect(
+                            borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(radius), bottomRight: Radius.circular(radius)),
+                            child: Container(
+                              color: Colors.black.withOpacity(.8),
+                              child: Align(
+                                alignment: Alignment.bottomLeft,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Text(
+                                    widget.title,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 16,
+                                      shadows: <Shadow>[
+                                        Shadow(
+                                          offset: const Offset(1.0, 1.0),
+                                          blurRadius: 3.0,
+                                          color: Colors.black.withOpacity(.8),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ),
@@ -300,4 +296,54 @@ class _XboxTileState extends State<XboxTile> {
 
   double getWidth() => widget.getWidth(hasFocus);
   double getHeight() => widget.getHeight(hasFocus);
+}
+
+class _SlideUpAnimationWrapper extends StatefulWidget {
+  final Widget child;
+
+  const _SlideUpAnimationWrapper({
+    required this.child,
+  });
+
+  @override
+  _SlideUpAnimationWrapperState createState() => _SlideUpAnimationWrapperState();
+}
+
+class _SlideUpAnimationWrapperState extends State<_SlideUpAnimationWrapper> with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<Offset> _offset;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 500),
+      vsync: this,
+    );
+
+    _offset = Tween<Offset>(
+      begin: const Offset(0.0, 1.0),
+      end: Offset.zero,
+    ).animate(CurvedAnimation(
+      parent: _controller,
+      curve: Curves.easeOut,
+    ));
+
+    _controller.forward();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SlideTransition(
+      position: _offset,
+      child: widget.child,
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 }

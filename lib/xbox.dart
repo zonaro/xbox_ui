@@ -62,8 +62,8 @@ extension Xbox on MaterialApp {
   /// Help calculate and create [XboxTile] based on aspect ratio
   static Size getSizeFromAspectRatio(double aspectRatio, {double? width, double? height}) {
     if (width == null && height == null) {
-      width = aspectRatio;
-      height = 1.0;
+      width = aspectRatio * 100;
+      height = 100;
     } else if (width != null && height == null) {
       height = width / aspectRatio;
     } else if (height != null && width == null) {

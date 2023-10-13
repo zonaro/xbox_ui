@@ -46,7 +46,7 @@ class XboxMock extends StatelessWidget {
                   title: "Book Menu",
                   menuItems: {
                     "Book 1": () {
-                      XboxAchievement(title: "Got book 1").show(context);
+                      XboxAchievement(title: "Got book 1",color: Colors.yellow).show(context);
                     },
                     "Book 2": () {
                       XboxAchievement(title: "Got book 2").show(context);

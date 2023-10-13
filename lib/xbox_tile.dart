@@ -74,7 +74,7 @@ class XboxTile extends StatefulWidget {
       );
 
   factory XboxTile.flatColor({required Color backgroundColor, required String title, required double width, required double height, double growOnFocus = 0, Color? color, void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false}) => XboxTile(
-        background: Container(color: backgroundColor),
+        background: Container(width: width, height: height, color: backgroundColor),
         onTap: onTap,
         autoFocus: autoFocus,
         menuItems: menuItems,
@@ -273,7 +273,7 @@ class _XboxTileState extends State<XboxTile> {
                               child: widget.background,
                             ),
                           Container(
-                            decoration: isBanner ? const BoxDecoration(gradient: LinearGradient(colors: [Colors.transparent,   Colors.black], begin: Alignment.topCenter, end: Alignment.bottomCenter)) : null,
+                            decoration: isBanner ? const BoxDecoration(gradient: LinearGradient(colors: [Colors.transparent, Colors.black], begin: Alignment.topCenter, end: Alignment.bottomCenter)) : null,
                             child: GridTile(
                                 footer: isBanner
                                     ? Align(

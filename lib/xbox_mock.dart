@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:xbox_ui/xbox_achievement.dart';
 import 'package:xbox_ui/xbox_colors.dart';
 import 'package:xbox_ui/xbox_dashboard.dart';
 import 'package:xbox_ui/xbox_icon_button.dart';
 import 'package:xbox_ui/xbox_menu.dart';
+import 'package:xbox_ui/xbox_popup_menu.dart';
 import 'package:xbox_ui/xbox_tile.dart';
 import 'package:xbox_ui/xbox_tile_list.dart';
 import 'package:xbox_ui/xbox_tile_view.dart';
@@ -27,11 +29,33 @@ class XboxMock extends StatelessWidget {
               ListTile(title: Text("Third")),
             ],
           ),
-          topBarItens: const [
-            XboxIconButton(icon: Icon(Icons.music_note)),
-            XboxIconButton(icon: Icon(Icons.book)),
-            XboxIconButton(icon: Icon(Icons.access_time_filled_outlined)),
-            XboxIconButton(icon: Icon(Icons.settings)),
+          topBarItens: [
+            XboxIconButton(
+              icon: const Icon(Icons.music_note),
+              onPressed: () {
+                XboxAchievement(title: "Got a Song").show(context);
+              },
+            ),
+            XboxIconButton(
+              icon: const Icon(Icons.book),
+              onPressed: () {
+                XboxPopupMenu.showMenu(
+                  context,
+                 title: "Book Menu",
+                 menuItems: {
+                    "Book 1" : () {},
+                  },
+                );
+              },
+            ),
+            XboxIconButton(
+              icon: const Icon(Icons.access_time_filled_outlined),
+              onPressed: () {},
+            ),
+            XboxIconButton(
+              icon: const Icon(Icons.settings),
+              onPressed: () {},
+            ),
           ],
           child: XboxTileView(items: [
             XboxTileList(tiles: [

@@ -251,12 +251,10 @@ class _XboxAchievementBaseState extends State<_XboxAchievementBase> with TickerP
           ),
         );
       },
-      child: Center(
-        child: Text(
-          title,
-          softWrap: true,
-          style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold).merge(widget.textStyleTitle),
-        ),
+      child: Text(
+        title,
+        softWrap: true,
+        style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold).merge(widget.textStyleTitle),
       ),
     );
   }
@@ -273,11 +271,9 @@ class _XboxAchievementBaseState extends State<_XboxAchievementBase> with TickerP
             ),
           );
         },
-        child: Center(
-          child: Text(
-            subTitle,
-            style: const TextStyle(color: Colors.white).merge(widget.textStyleSubTitle),
-          ),
+        child: Text(
+          subTitle,
+          style: const TextStyle(color: Colors.white).merge(widget.textStyleSubTitle),
         ));
   }
 

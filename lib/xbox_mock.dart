@@ -35,8 +35,22 @@ class XboxMock extends StatelessWidget {
           ],
           child: XboxTileView(items: [
             XboxTileList(tiles: [
-              XboxTile.icon(icon: Icons.settings, title: "Settings", width: 100, height: 100, iconSize: 30),
-              XboxTile.icon(icon: Icons.usb_rounded, title: "Devices", width: 100, height: 100, iconSize: 30),
+              XboxTile.icon(
+                icon: Icons.settings,
+                title: "Settings",
+                width: 100,
+                height: 100,
+                iconSize: 30,
+                growOnFocus: .5,
+              ),
+              XboxTile.icon(
+                icon: Icons.usb_rounded,
+                title: "Devices",
+                width: 100,
+                height: 100,
+                iconSize: 30,
+                growOnFocus: .5,
+              ),
             ]),
             // XboxTileList(tiles: [
             //   XboxTile.game(title: "Game Name", width: 100, height: 100, image: Image.network('https://picsum.photos/id/1/200/300')),

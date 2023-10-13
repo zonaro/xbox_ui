@@ -37,39 +37,37 @@ class _XboxDashboardState extends State<XboxDashboard> {
             surfaceTintColor: Colors.transparent,
             leadingWidth: MediaQuery.of(context).size.width * 0.3,
             automaticallyImplyLeading: true,
-            leading: GestureDetector(
-              onTap: () => scaffoldKey.currentState?.openDrawer(),
-              child: Padding(
-                padding: const EdgeInsets.only(left: 20, top: 20),
-                child: Wrap(
-                  spacing: 10,
-                  children: [
-                    XboxCircleButton(
-                      size: 30,
-                      backgroundColor: XboxColors.currentAccentColor,
-                      child: widget.avatar ?? const Icon(Icons.person),
+            leading: Padding(
+              padding: const EdgeInsets.only(left: 20, top: 20),
+              child: Wrap(
+                spacing: 10,
+                children: [
+                  XboxCircleButton(
+                    onPressed: () => scaffoldKey.currentState?.openDrawer(),
+                    size: 30,
+                    backgroundColor: XboxColors.currentAccentColor,
+                    child: widget.avatar ?? const Icon(Icons.person),
+                  ),
+                  FittedBox(
+                    fit: BoxFit.contain,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          widget.userdetail,
+                          maxLines: 1,
+                          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                        ),
+                        Text(
+                          widget.username,
+                          maxLines: 1,
+                          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                        )
+                      ],
                     ),
-                    FittedBox(
-                      fit: BoxFit.contain,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            widget.userdetail,
-                            maxLines: 1,
-                            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                          ),
-                          Text(
-                            widget.username,
-                            maxLines: 1,
-                            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                          )
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
             toolbarHeight: 85,

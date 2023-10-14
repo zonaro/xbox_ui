@@ -1,6 +1,5 @@
 // ignore_for_file: constant_identifier_names, use_build_context_synchronously
 
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -29,7 +28,7 @@ import 'package:xbox_ui/xbox_ui.dart';
 ///
 class XboxTile extends StatefulWidget {
   /// an image that show up on dashboard background when this tile widget is in focus
-  final Widget? dashboardWallpaper;
+  final ImageProvider? dashboardWallpaper;
 
   /// The color of the tile.
   final Color? tileColor;
@@ -62,7 +61,7 @@ class XboxTile extends StatefulWidget {
   @override
   State<XboxTile> createState() => _XboxTileState();
 
-  factory XboxTile.icon({required IconData icon, required String title, required Size size, required double iconSize, double growOnFocus = 0, Color? color, void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false, Widget? dashboardWallpaper}) => XboxTile(
+  factory XboxTile.icon({required IconData icon, required String title, required Size size, required double iconSize, double growOnFocus = 0, Color? color, void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false, ImageProvider? dashboardWallpaper}) => XboxTile(
         icon: Icon(icon, color: Colors.white, size: iconSize),
         autoFocus: autoFocus,
         title: title,
@@ -74,7 +73,7 @@ class XboxTile extends StatefulWidget {
         size: size,
       );
 
-  factory XboxTile.flatColor({required Color backgroundColor, String title = "", required Size size, double growOnFocus = 0, Color? color, void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false, Widget? dashboardWallpaper}) => XboxTile(
+  factory XboxTile.flatColor({required Color backgroundColor, String title = "", required Size size, double growOnFocus = 0, Color? color, void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false, ImageProvider? dashboardWallpaper}) => XboxTile(
         background: Container(width: size.width, height: size.height, color: backgroundColor),
         onTap: onTap,
         autoFocus: autoFocus,
@@ -86,7 +85,7 @@ class XboxTile extends StatefulWidget {
         tileColor: color ?? Xbox.currentAccentColor,
       );
 
-  factory XboxTile.iconBanner({required IconData icon, required String description, String title = "", required Size size, required double iconSize, double growOnFocus = 0, Color? color, Widget? image, void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false, Widget? dashboardWallpaper}) => XboxTile(
+  factory XboxTile.iconBanner({required IconData icon, required String description, String title = "", required Size size, required double iconSize, double growOnFocus = 0, Color? color, Widget? image, void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false, ImageProvider? dashboardWallpaper}) => XboxTile(
         icon: Icon(
           icon,
           color: Colors.white,
@@ -112,7 +111,7 @@ class XboxTile extends StatefulWidget {
         menuItems: menuItems,
       );
 
-  factory XboxTile.iconGradient({required IconData icon, required String title, required Size size, required double iconSize, required Gradient gradient, double growOnFocus = 0, Color? color, void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false, Widget? dashboardWallpaper}) => XboxTile(
+  factory XboxTile.iconGradient({required IconData icon, required String title, required Size size, required double iconSize, required Gradient gradient, double growOnFocus = 0, Color? color, void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false, ImageProvider? dashboardWallpaper}) => XboxTile(
         icon: Icon(
           icon,
           color: Colors.white,
@@ -137,7 +136,7 @@ class XboxTile extends StatefulWidget {
         background: Container(decoration: BoxDecoration(gradient: gradient)),
       );
 
-  factory XboxTile.banner({required String description, String title = "", required Size size, required Widget image, Color? color, double growOnFocus = 0, void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false, Widget? dashboardWallpaper}) => XboxTile(
+  factory XboxTile.banner({required String description, String title = "", required Size size, required Widget image, Color? color, double growOnFocus = 0, void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false, ImageProvider? dashboardWallpaper}) => XboxTile(
         autoFocus: autoFocus,
         background: image,
         description: description,
@@ -150,7 +149,7 @@ class XboxTile extends StatefulWidget {
         title: title,
       );
 
-  factory XboxTile.game({required String title, required Size size, required Widget image, Color? color, double growOnFocus = 0, void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false, Widget? dashboardWallpaper}) => XboxTile(
+  factory XboxTile.game({required String title, required Size size, required Widget image, Color? color, double growOnFocus = 0, void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false, ImageProvider? dashboardWallpaper}) => XboxTile(
         autoFocus: autoFocus,
         background: image,
         title: title,
@@ -172,7 +171,7 @@ class _XboxTileState extends State<XboxTile> {
 
   void _onFocus(bool value) {
     setState(() {
-      Xbox.tileWallpaper.value = widget.dashboardWallpaper != null ? Container(key: ValueKey(Random().nextInt(9999)), child: widget.dashboardWallpaper) : null;
+      Xbox.tileWallpaper.value = widget.dashboardWallpaper;
       hasFocus = value;
     });
   }

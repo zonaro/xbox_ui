@@ -13,7 +13,7 @@ class XboxDashboard extends StatefulWidget {
   final List<Widget> topBarItens;
 
   final Widget child;
-  final Image? wallpaper;
+  final ImageProvider<Object>? wallpaper;
   final Widget? avatar;
   final XboxMenu? menu;
   final String username;
@@ -48,7 +48,7 @@ class _XboxDashboardState extends State<XboxDashboard> {
   }
 
   ImageProvider<Object>? getWall() {
-    return Xbox.tileWallpaper.value?.image ?? widget.wallpaper?.image;
+    return Xbox.tileWallpaper.value ?? widget.wallpaper;
   }
 
   @override
@@ -73,7 +73,7 @@ class _XboxDashboardState extends State<XboxDashboard> {
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height,
                 decoration: BoxDecoration(
-                  image: DecorationImage(image: getWall()!),
+                  image: DecorationImage(image: getWall()!, fit: BoxFit.cover),
                   gradient: RadialGradient(
                     center: Alignment.center,
                     radius: 1.0,

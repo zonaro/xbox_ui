@@ -14,7 +14,7 @@ extension Xbox on MaterialApp {
   static ThemeData get DarkTheme => Xbox.getTheme();
   static ThemeData get LightTheme => Xbox.getTheme(brightness: Brightness.light);
 
-  static ValueNotifier<Image?> tileWallpaper = ValueNotifier(null);
+  static ValueNotifier<ImageProvider?> tileWallpaper = ValueNotifier(null);
 
   static ThemeData getTheme({Brightness brightness = Brightness.dark}) => ThemeData.from(
         useMaterial3: true,

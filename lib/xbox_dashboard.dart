@@ -39,7 +39,7 @@ class _XboxDashboardState extends State<XboxDashboard> {
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
       valueListenable: Xbox.tileWallpaper,
-      builder: (context, Widget? value, _) {
+      builder: (context, Widget? newWallpaper, oldWallpaper) {
         return RawKeyboardListener(
           focusNode: FocusNode(descendantsAreFocusable: true),
           onKey: (event) {
@@ -52,7 +52,11 @@ class _XboxDashboardState extends State<XboxDashboard> {
           child: Stack(
             fit: StackFit.expand,
             children: [
-              if (value != null) XboxFadeInRadialWallpaper(wallpaper: value) else if (widget.wallpaper != null) SizedBox(width: MediaQuery.of(context).size.width, child: widget.wallpaper),
+              XboxFadeInRadialWallpaper(
+                newTileWallpaper: newWallpaper,
+                oldTileWallpaper: oldWallpaper,
+                dashboardWallpaper: widget.wallpaper,
+              ),
               Scaffold(
                 key: scaffoldKey,
                 backgroundColor: Theme.of(context).colorScheme.background.withOpacity(.7),

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 class XboxFadeInRadialWallpaper extends StatefulWidget {
-  final Widget wallpaper;
+  final Widget? newTileWallpaper;
+  final Widget? oldTileWallpaper;
+  final Widget? dashboardWallpaper;
 
-  const XboxFadeInRadialWallpaper({super.key, required this.wallpaper});
+  const XboxFadeInRadialWallpaper({super.key, required this.newTileWallpaper, required this.dashboardWallpaper, this.oldTileWallpaper});
 
   @override
   createState() => _XboxFadeInRadialWallpaperState();
@@ -15,15 +17,6 @@ class _XboxFadeInRadialWallpaperState extends State<XboxFadeInRadialWallpaper> {
   @override
   void initState() {
     super.initState();
-    fadeIn();
-  }
-
-  void fadeIn() {
-    Future.delayed(const Duration(seconds: 1), () {
-      setState(() {
-        opacityLevel = 1.0;
-      });
-    });
   }
 
   @override
@@ -32,21 +25,26 @@ class _XboxFadeInRadialWallpaperState extends State<XboxFadeInRadialWallpaper> {
       child: Stack(
         fit: StackFit.expand,
         children: [
-          AnimatedOpacity(
-            opacity: opacityLevel,
-            duration: const Duration(seconds: 1),
-            child: SizedBox(width: MediaQuery.of(context).size.width, child: widget.wallpaper),
-          ),
-          Container(
-            decoration: BoxDecoration(
-              gradient: RadialGradient(
-                center: Alignment.center,
-                radius: 1.0,
-                colors: [Colors.transparent, Theme.of(context).colorScheme.background],
-                stops: const [0.5, 1.0],
-              ),
+          SizedBox(
+            width: MediaQuery.of(context).size.width,
+            child: AnimatedCrossFade(
+              firstChild: widget.oldTileWallpaper ?? widget.dashboardWallpaper ?? const SizedBox.shrink(),
+              secondChild: widget.newTileWallpaper ?? widget.dashboardWallpaper ?? const SizedBox.shrink(),
+              crossFadeState: widget.newTileWallpaper == null ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+              duration: const Duration(seconds: 1),
             ),
           ),
+          if (widget.newTileWallpaper != null)
+            Container(
+              decoration: BoxDecoration(
+                gradient: RadialGradient(
+                  center: Alignment.center,
+                  radius: 1.0,
+                  colors: [Colors.transparent, Theme.of(context).colorScheme.background],
+                  stops: const [0.5, 1.0],
+                ),
+              ),
+            ),
         ],
       ),
     );

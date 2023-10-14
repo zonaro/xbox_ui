@@ -21,21 +21,26 @@ class _XboxFadeInRadialWallpaperState extends State<XboxFadeInRadialWallpaper> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Stack(
-        fit: StackFit.expand,
-        children: [
-          SizedBox(
-            width: MediaQuery.of(context).size.width,
-            child: AnimatedCrossFade(
-              firstChild: widget.oldTileWallpaper ?? widget.dashboardWallpaper ?? const SizedBox.shrink(),
-              secondChild: widget.newTileWallpaper ?? widget.dashboardWallpaper ?? const SizedBox.shrink(),
-              crossFadeState: widget.newTileWallpaper != null ? CrossFadeState.showSecond : CrossFadeState.showFirst,
-              duration: const Duration(seconds: 1),
-            ),
+    var duration = const Duration(seconds: 1);
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        SizedBox(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          child: AnimatedCrossFade(
+            firstChild: widget.oldTileWallpaper ?? widget.dashboardWallpaper ?? const SizedBox.shrink(),
+            secondChild: widget.newTileWallpaper ?? widget.dashboardWallpaper ?? const SizedBox.shrink(),
+            crossFadeState: widget.newTileWallpaper != null ? CrossFadeState.showSecond : CrossFadeState.showFirst,
+            duration: duration,
           ),
-          if (widget.newTileWallpaper != null)
-            Container(
+        ),
+        if (widget.newTileWallpaper != null)
+          AnimatedCrossFade(
+            duration: duration,
+            crossFadeState: widget.newTileWallpaper == null && widget.oldTileWallpaper == null ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+            firstChild: const SizedBox.shrink(),
+            secondChild: Container(
               decoration: BoxDecoration(
                 gradient: RadialGradient(
                   center: Alignment.center,
@@ -45,8 +50,8 @@ class _XboxFadeInRadialWallpaperState extends State<XboxFadeInRadialWallpaper> {
                 ),
               ),
             ),
-        ],
-      ),
+          ),
+      ],
     );
   }
 }

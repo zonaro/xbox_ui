@@ -26,6 +26,17 @@ class XboxDashboard extends StatefulWidget {
 class _XboxDashboardState extends State<XboxDashboard> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
+  @override
+  initState() {
+    Xbox.tileWallpaper.addListener(() {
+      setState(() {
+        debugPrint("wallpaper changed");
+      });
+    });
+
+    super.initState();
+  }
+
   _showHomeMenu() {
     if (scaffoldKey.currentState != null) {
       if (scaffoldKey.currentState!.isDrawerOpen) {
@@ -51,15 +62,11 @@ class _XboxDashboardState extends State<XboxDashboard> {
         fit: StackFit.expand,
         children: [
           SizedBox.expand(
-              child: AnimatedSwitcher(
-                  duration: const Duration(seconds: 2),
-                  child: Container(
-                    key: ValueKey(Random().nextInt(9999)),
-                    alignment: Alignment.center,
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height,
-                    child: Xbox.tileWallpaper.value ?? widget.wallpaper,
-                  ))),
+            child: AnimatedSwitcher(
+              duration: const Duration(seconds: 2),
+              child: Xbox.tileWallpaper.value ?? widget.wallpaper,
+            ),
+          ),
           if (Xbox.tileWallpaper.value != null)
             Container(
               decoration: BoxDecoration(

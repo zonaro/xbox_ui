@@ -179,14 +179,11 @@ class _XboxNotificationState extends State<XboxNotification> with TickerProvider
       child: Material(
         type: MaterialType.transparency,
         elevation: widget.elevation,
-        child: Dialog(
-          backgroundColor: widget.color ?? Xbox.currentAccentColor,
-          shape: Xbox.defaultBorderShape,
-          // decoration:
-          //  BoxDecoration(
-
-          //   borderRadius: _buildBorderCard(),
-          //),
+        child: Container(
+          color: widget.color ?? Xbox.currentAccentColor,
+          decoration: BoxDecoration(
+            borderRadius: _buildBorderCard(),
+          ),
           child: Ink(
             child: InkWell(
               onTap: widget.onTap,

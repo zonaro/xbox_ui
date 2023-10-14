@@ -27,6 +27,10 @@ class _BasicXboxUiState extends State<BasicXboxUi> {
     return XboxDashboard(
       username: 'XboxUser',
       userdetail: '1234 points',
+      wallpaper: Image.network(
+        'https://picsum.photos/100/100?a=999',
+        fit: BoxFit.cover,
+      ),
       menu: const XboxMenu(
         items: [
           ListTile(title: Text("First")),

@@ -14,11 +14,9 @@ extension Xbox on MaterialApp {
   static ThemeData get DarkTheme => Xbox.getTheme();
   static ThemeData get LightTheme => Xbox.getTheme(brightness: Brightness.light);
 
-  Color get xboxAccentColor => Xbox.currentAccentColor;
-
   static Widget? tileWallpaper;
 
-  set xboxAccentColor(Color? color) => Xbox.currentAccentColor = color ?? Xbox.Green;
+ 
 
   static ThemeData getTheme({Brightness brightness = Brightness.dark}) => ThemeData.from(
         useMaterial3: true,

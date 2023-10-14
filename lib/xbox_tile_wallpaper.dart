@@ -43,7 +43,7 @@ class _XboxFadeInRadialWallpaperState extends State<XboxFadeInRadialWallpaper> {
                 center: Alignment.center,
                 radius: 1.0,
                 colors: [Colors.transparent, Theme.of(context).colorScheme.background],
-                stops: [0.5, 1.0],
+                stops: const [0.5, 1.0],
               ),
             ),
           ),

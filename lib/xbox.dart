@@ -1,12 +1,11 @@
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:xbox_ui/xbox_tile.dart';
 
 typedef XboxMenuEntries = Map<String, void Function()?>;
-
-typedef XboxApp = MaterialApp;
 
 extension Xbox on MaterialApp {
   static const double TileRadius = 7;
@@ -14,9 +13,7 @@ extension Xbox on MaterialApp {
   static ThemeData get DarkTheme => Xbox.getTheme();
   static ThemeData get LightTheme => Xbox.getTheme(brightness: Brightness.light);
 
-  static Widget? tileWallpaper;
-
- 
+  static ValueListenable<Widget?> tileWallpaper = ValueNotifier(null);
 
   static ThemeData getTheme({Brightness brightness = Brightness.dark}) => ThemeData.from(
         useMaterial3: true,

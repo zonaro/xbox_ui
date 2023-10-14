@@ -180,14 +180,14 @@ class _XboxNotificationState extends State<XboxNotification> with TickerProvider
         type: MaterialType.transparency,
         elevation: widget.elevation,
         child: Dialog(
+          backgroundColor: widget.color ?? Xbox.currentAccentColor,
           shape: Xbox.defaultBorderShape,
           // decoration:
           //  BoxDecoration(
-        
+
           //   borderRadius: _buildBorderCard(),
           //),
           child: Ink(
-            color: widget.color ?? Xbox.currentAccentColor,
             child: InkWell(
               onTap: widget.onTap,
               child: IntrinsicHeight(
@@ -309,8 +309,7 @@ class _XboxNotificationState extends State<XboxNotification> with TickerProvider
   }
 
   BorderRadiusGeometry _buildBorderCard() {
-         
-    return widget.isCircle ? const BorderRadius.all(Radius.circular(double.infinity)) :  const BorderRadius.all(Radius.circular(Xbox.TileRadius));
+    return widget.isCircle ? const BorderRadius.all(Radius.circular(double.infinity)) : const BorderRadius.all(Radius.circular(Xbox.TileRadius));
   }
 
   EdgeInsets _buildPaddingContent() => const EdgeInsets.fromLTRB(0, 15, 15, 15);

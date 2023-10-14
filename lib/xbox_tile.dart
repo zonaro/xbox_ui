@@ -1,6 +1,6 @@
 // ignore_for_file: constant_identifier_names, use_build_context_synchronously
 
- 
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -171,8 +171,8 @@ class _XboxTileState extends State<XboxTile> {
   bool hasFocus = false;
 
   void _onFocus(bool value) {
-      Xbox.tileWallpaper.value = widget.dashboardWallpaper;
     setState(() {
+      Xbox.tileWallpaper.value = Container(key: ValueKey(Random().nextInt(9999)), child: widget.dashboardWallpaper);
       hasFocus = value;
     });
   }

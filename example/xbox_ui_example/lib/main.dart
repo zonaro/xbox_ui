@@ -135,6 +135,14 @@ class _BasicXboxUiState extends State<BasicXboxUi> {
             dashboardWallpaper: Container(decoration: BoxDecoration(gradient: LinearGradient(colors: [Colors.purple[700]!, Colors.blue[800]!]))),
             iconSize: 60,
           ),
+          XboxTile.iconGradient(
+            title: "Food",
+            size: Xbox.getSizeFromAspectRatio(8 / 12, height: 120),
+            icon: Icons.fastfood,
+            gradient: LinearGradient(colors: [Colors.red[700]!, Colors.yellow[800]!]),
+            dashboardWallpaper: Container(decoration: BoxDecoration(gradient: LinearGradient(colors: [Colors.yellow[700]!, Colors.red[800]!]))),
+            iconSize: 60,
+          ),
         ]),
         XboxTileList(title: "Colors", tiles: Xbox.colorTiles(Colors.primaries, onTap: (x) => setState(() => Xbox.currentAccentColor = x)))
       ]),

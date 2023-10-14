@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:xbox_ui/xbox_icon_button.dart';
 import 'package:xbox_ui/xbox_menu.dart';
-import 'package:xbox_ui/xbox_tile_wallpaper.dart';
 
 import 'xbox.dart';
 
@@ -52,15 +51,28 @@ class _XboxDashboardState extends State<XboxDashboard> {
           child: Stack(
             fit: StackFit.expand,
             children: [
-              SizedBox(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
-                child: XboxFadeInRadialWallpaper(
-                  newTileWallpaper: newWallpaper,
-                  oldTileWallpaper: oldWallpaper,
-                  dashboardWallpaper: widget.wallpaper,
+              if (widget.wallpaper != null) SizedBox.expand(child: widget.wallpaper),
+              if (newWallpaper != null)
+                SizedBox.expand(
+                  child: AnimatedSwitcher(
+                    duration: const Duration(seconds: 2),
+                    child: Stack(
+                      children: [
+                        newWallpaper,
+                        Container(
+                          decoration: BoxDecoration(
+                            gradient: RadialGradient(
+                              center: Alignment.center,
+                              radius: 1.0,
+                              colors: [Colors.transparent, Theme.of(context).colorScheme.background],
+                              stops: const [0.5, 1.0],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
-              ),
               Scaffold(
                 key: scaffoldKey,
                 backgroundColor: Theme.of(context).colorScheme.background.withOpacity(.7),

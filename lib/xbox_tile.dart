@@ -1,5 +1,7 @@
 // ignore_for_file: constant_identifier_names, use_build_context_synchronously
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:xbox_ui/xbox_ui.dart';

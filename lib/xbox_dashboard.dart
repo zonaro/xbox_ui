@@ -36,98 +36,101 @@ class _XboxDashboardState extends State<XboxDashboard> {
 
   @override
   Widget build(BuildContext context) {
- 
-        return RawKeyboardListener(
-          focusNode: FocusNode(descendantsAreFocusable: true),
-          onKey: (event) {
-            if (event is RawKeyDownEvent) {
-              if (event.isKeyPressed(LogicalKeyboardKey.gameButtonMode) || event.isKeyPressed(LogicalKeyboardKey.escape)) {
-                _showHomeMenu();
-              }
-            }
-          },
-          child: Stack(
-            fit: StackFit.expand,
-            children: [
-              SizedBox.expand(child: AnimatedSwitcher(duration: const Duration(seconds: 2), child: Xbox.tileWallpaper ?? widget.wallpaper)),
-              if (Xbox.tileWallpaper  != null)
-                Container(
-                  decoration: BoxDecoration(
-                    gradient: RadialGradient(
-                      center: Alignment.center,
-                      radius: 1.0,
-                      colors: [Colors.transparent, Theme.of(context).colorScheme.background],
-                      stops: const [0.5, 1.0],
-                    ),
-                  ),
+    return RawKeyboardListener(
+      focusNode: FocusNode(descendantsAreFocusable: true),
+      onKey: (event) {
+        if (event is RawKeyDownEvent) {
+          if (event.isKeyPressed(LogicalKeyboardKey.gameButtonMode) || event.isKeyPressed(LogicalKeyboardKey.escape)) {
+            _showHomeMenu();
+          }
+        }
+      },
+      child: Stack(
+        fit: StackFit.expand,
+        children: [
+          SizedBox.expand(
+              child: AnimatedSwitcher(
+                  duration: const Duration(seconds: 2),
+                  child: Container(
+                    key: ValueKey(Xbox.tileWallpaper.hashCode),
+                    child: Xbox.tileWallpaper ?? widget.wallpaper,
+                  ))),
+          if (Xbox.tileWallpaper != null)
+            Container(
+              decoration: BoxDecoration(
+                gradient: RadialGradient(
+                  center: Alignment.center,
+                  radius: 1.0,
+                  colors: [Colors.transparent, Theme.of(context).colorScheme.background],
+                  stops: const [0.5, 1.0],
                 ),
-              Scaffold(
-                key: scaffoldKey,
-                backgroundColor: Theme.of(context).colorScheme.background.withOpacity(.7),
-                drawer: widget.menu,
-                extendBody: true,
-                appBar: AppBar(
-                  centerTitle: true,
-                  surfaceTintColor: Colors.transparent,
-                  leadingWidth: MediaQuery.of(context).size.width * 0.3,
-                  automaticallyImplyLeading: true,
-                  leading: Padding(
-                    padding: const EdgeInsets.only(left: 20, top: 20),
-                    child: Wrap(
-                      spacing: 10,
-                      children: [
-                        XboxCircleButton(
-                          onPressed: () => _showHomeMenu(),
-                          size: 50,
-                          backgroundColor: Xbox.currentAccentColor,
-                          child: widget.avatar ?? const Icon(Icons.person),
-                        ),
-                        FittedBox(
-                          fit: BoxFit.contain,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                widget.username,
-                                maxLines: 1,
-                                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                              ),
-                              Text(
-                                widget.userdetail,
-                                maxLines: 1,
-                                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                              )
-                            ],
+              ),
+            ),
+          Scaffold(
+            key: scaffoldKey,
+            backgroundColor: Theme.of(context).colorScheme.background.withOpacity(.7),
+            drawer: widget.menu,
+            extendBody: true,
+            appBar: AppBar(
+              centerTitle: true,
+              surfaceTintColor: Colors.transparent,
+              leadingWidth: MediaQuery.of(context).size.width * 0.3,
+              automaticallyImplyLeading: true,
+              leading: Padding(
+                padding: const EdgeInsets.only(left: 20, top: 20),
+                child: Wrap(
+                  spacing: 10,
+                  children: [
+                    XboxCircleButton(
+                      onPressed: () => _showHomeMenu(),
+                      size: 50,
+                      backgroundColor: Xbox.currentAccentColor,
+                      child: widget.avatar ?? const Icon(Icons.person),
+                    ),
+                    FittedBox(
+                      fit: BoxFit.contain,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            widget.username,
+                            maxLines: 1,
+                            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                           ),
-                        ),
-                      ],
+                          Text(
+                            widget.userdetail,
+                            maxLines: 1,
+                            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                  toolbarHeight: 85,
-                  backgroundColor: Colors.transparent,
-                  shadowColor: Colors.transparent,
-                  elevation: 0,
-                  title: SizedBox(
-                    width: MediaQuery.of(context).size.width * .3,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: widget.topBarItens,
-                    ),
-                  ),
-                  actions: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * .3,
-                    )
                   ],
                 ),
-                body: widget.child,
               ),
-            ],
+              toolbarHeight: 85,
+              backgroundColor: Colors.transparent,
+              shadowColor: Colors.transparent,
+              elevation: 0,
+              title: SizedBox(
+                width: MediaQuery.of(context).size.width * .3,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: widget.topBarItens,
+                ),
+              ),
+              actions: [
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * .3,
+                )
+              ],
+            ),
+            body: widget.child,
           ),
-        );
-      
-    
+        ],
+      ),
+    );
   }
 }

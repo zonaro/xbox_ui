@@ -48,7 +48,20 @@ class _XboxDashboardState extends State<XboxDashboard> {
       child: Stack(
         fit: StackFit.expand,
         children: [
-          if (widget.wallpaper != null) SizedBox(width: MediaQuery.of(context).size.width, child: widget.wallpaper),
+          if (Xbox.tileWallpaper != null) SizedBox(width: MediaQuery.of(context).size.width, child: widget.wallpaper),
+          if (Xbox.tileWallpaper != null)
+            Container(
+              decoration: const BoxDecoration(
+                gradient: RadialGradient(
+                  center: Alignment.center,
+                  radius: 1.0,
+                  colors: [Colors.transparent, Colors.grey],
+                  stops: [0.5, 1.0],
+                ),
+              ),
+            )
+          else if (widget.wallpaper != null)
+            SizedBox(width: MediaQuery.of(context).size.width, child: widget.wallpaper),
           Scaffold(
             key: scaffoldKey,
             backgroundColor: Theme.of(context).colorScheme.background.withOpacity(.7),

@@ -15,6 +15,9 @@ extension Xbox on MaterialApp {
   static ThemeData get LightTheme => Xbox.getTheme(brightness: Brightness.light);
 
   Color get xboxAccentColor => Xbox.currentAccentColor;
+
+  static Widget? tileWallpaper;
+
   set xboxAccentColor(Color? color) => Xbox.currentAccentColor = color ?? Xbox.Green;
 
   static ThemeData getTheme({Brightness brightness = Brightness.dark}) => ThemeData.from(
@@ -58,6 +61,17 @@ extension Xbox on MaterialApp {
         ),
       )
       .toList();
+
+  static BoxDecoration tileInFocus(BuildContext context) => BoxDecoration(
+        color: Theme.of(context).colorScheme.background,
+        boxShadow: [
+          BoxShadow(
+            color: Xbox.currentAccentColor,
+            spreadRadius: 2.0,
+          ),
+        ],
+        borderRadius: BorderRadius.circular(Xbox.TileRadius),
+      );
 
   /// Help calculate and create [XboxTile] based on aspect ratio
   static Size getSizeFromAspectRatio(double aspectRatio, {double? width, double? height}) {

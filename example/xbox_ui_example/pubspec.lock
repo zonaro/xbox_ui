@@ -181,7 +181,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "5556e0fa87c8e33f78bcfa6103fe85cea65c4bfe"
+      resolved-ref: "02e86da8025b60465ed9c79b3f970c4e313f70ff"
       url: "https://github.com/zonaro/xbox_ui"
     source: git
     version: "0.0.1"

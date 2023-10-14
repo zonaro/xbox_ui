@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:xbox_ui/xbox_tile.dart';
 
 typedef XboxMenuEntries = Map<String, void Function()?>;
+typedef XboxApp = MaterialApp;
 
 extension Xbox on MaterialApp {
   static const double TileRadius = 7;

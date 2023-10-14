@@ -1,3 +1,4 @@
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,7 +13,7 @@ class XboxDashboard extends StatefulWidget {
   final List<Widget> topBarItens;
 
   final Widget child;
-  final Widget? wallpaper;
+  final Image? wallpaper;
   final Widget? avatar;
   final XboxMenu? menu;
   final String username;
@@ -46,6 +47,10 @@ class _XboxDashboardState extends State<XboxDashboard> {
     }
   }
 
+  ImageProvider<Object>? getWall() {
+    return Xbox.tileWallpaper.value?.image ?? widget.wallpaper?.image;
+  }
+
   @override
   Widget build(BuildContext context) {
     return RawKeyboardListener(
@@ -60,20 +65,21 @@ class _XboxDashboardState extends State<XboxDashboard> {
       child: Stack(
         fit: StackFit.expand,
         children: [
-          SizedBox.expand(
-            child: AnimatedSwitcher(
+          if (getWall() != null)
+            AnimatedSwitcher(
               duration: const Duration(seconds: 1),
-              child: Xbox.tileWallpaper.value ?? widget.wallpaper,
-            ),
-          ),
-          if (Xbox.tileWallpaper.value != null)
-            Container(
-              decoration: BoxDecoration(
-                gradient: RadialGradient(
-                  center: Alignment.center,
-                  radius: 1.0,
-                  colors: [Colors.transparent, Theme.of(context).colorScheme.background],
-                  stops: const [0.5, 1.0],
+              child: Container(
+                key: ValueKey(Random().nextInt(9999)),
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                decoration: BoxDecoration(
+                  image: DecorationImage(image: getWall()!),
+                  gradient: RadialGradient(
+                    center: Alignment.center,
+                    radius: 1.0,
+                    colors: [Colors.transparent, Theme.of(context).colorScheme.background],
+                    stops: const [0.5, 1.0],
+                  ),
                 ),
               ),
             ),

@@ -14,13 +14,13 @@ class XboxFadeInRadialWallpaper extends StatefulWidget {
 class _XboxFadeInRadialWallpaperState extends State<XboxFadeInRadialWallpaper> {
   @override
   Widget build(BuildContext context) {
-    var duration = const Duration(milliseconds: 3);
+    var duration = const Duration(seconds: 3);
     return Stack(
       fit: StackFit.expand,
       children: [
         AnimatedCrossFade(
-          firstChild: widget.oldTileWallpaper ?? widget.dashboardWallpaper ?? const SizedBox.expand(),
-          secondChild: widget.newTileWallpaper ?? widget.dashboardWallpaper ?? const SizedBox.expand(),
+          firstChild: ((widget.oldTileWallpaper ?? widget.dashboardWallpaper) == null) ? const SizedBox.shrink() : SizedBox.expand(child: widget.oldTileWallpaper ?? widget.dashboardWallpaper),
+          secondChild: ((widget.newTileWallpaper ?? widget.dashboardWallpaper) == null) ? const SizedBox.shrink() : SizedBox.expand(child: widget.oldTileWallpaper ?? widget.dashboardWallpaper),
           crossFadeState: widget.newTileWallpaper != null ? CrossFadeState.showSecond : CrossFadeState.showFirst,
           duration: duration,
         ),

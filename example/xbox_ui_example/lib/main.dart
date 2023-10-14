@@ -92,7 +92,7 @@ class _BasicXboxUiState extends State<BasicXboxUi> {
             title: "Game Name",
             size: const Size.square(200),
             dashboardWallpaper: Image.network(
-              'https://picsum.photos/100/100?a=1',
+              'https://picsum.photos/200/100?a=11',
               fit: BoxFit.cover,
             ),
             image: Image.network(

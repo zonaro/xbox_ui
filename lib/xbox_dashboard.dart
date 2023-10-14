@@ -52,10 +52,14 @@ class _XboxDashboardState extends State<XboxDashboard> {
           child: Stack(
             fit: StackFit.expand,
             children: [
-              XboxFadeInRadialWallpaper(
-                newTileWallpaper: newWallpaper,
-                oldTileWallpaper: oldWallpaper,
-                dashboardWallpaper: widget.wallpaper,
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                child: XboxFadeInRadialWallpaper(
+                  newTileWallpaper: newWallpaper,
+                  oldTileWallpaper: oldWallpaper,
+                  dashboardWallpaper: widget.wallpaper,
+                ),
               ),
               Scaffold(
                 key: scaffoldKey,

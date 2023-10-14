@@ -36,9 +36,7 @@ class _XboxDashboardState extends State<XboxDashboard> {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: Xbox.tileWallpaper,
-      builder: (context, Widget? newWallpaper, oldWallpaper) {
+ 
         return RawKeyboardListener(
           focusNode: FocusNode(descendantsAreFocusable: true),
           onKey: (event) {
@@ -51,8 +49,8 @@ class _XboxDashboardState extends State<XboxDashboard> {
           child: Stack(
             fit: StackFit.expand,
             children: [
-              SizedBox.expand(child: AnimatedSwitcher(duration: const Duration(seconds: 2), child: newWallpaper ?? widget.wallpaper)),
-              if (newWallpaper != null)
+              SizedBox.expand(child: AnimatedSwitcher(duration: const Duration(seconds: 2), child: Xbox.tileWallpaper ?? widget.wallpaper)),
+              if (Xbox.tileWallpaper  != null)
                 Container(
                   decoration: BoxDecoration(
                     gradient: RadialGradient(
@@ -129,7 +127,7 @@ class _XboxDashboardState extends State<XboxDashboard> {
             ],
           ),
         );
-      },
-    );
+      
+    
   }
 }

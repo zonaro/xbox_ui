@@ -51,7 +51,7 @@ class _XboxDashboardState extends State<XboxDashboard> {
           child: Stack(
             fit: StackFit.expand,
             children: [
-              AnimatedSwitcher(duration: const Duration(seconds: 2), child: newWallpaper ?? widget.wallpaper),
+              SizedBox.expand(child: AnimatedSwitcher(duration: const Duration(seconds: 2), child: newWallpaper ?? widget.wallpaper)),
               if (newWallpaper != null)
                 Container(
                   decoration: BoxDecoration(

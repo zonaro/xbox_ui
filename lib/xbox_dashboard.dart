@@ -62,7 +62,7 @@ class _XboxDashboardState extends State<XboxDashboard> {
         children: [
           SizedBox.expand(
             child: AnimatedSwitcher(
-              duration: const Duration(seconds: 2),
+              duration: const Duration(seconds: 1),
               child: Xbox.tileWallpaper.value ?? widget.wallpaper,
             ),
           ),

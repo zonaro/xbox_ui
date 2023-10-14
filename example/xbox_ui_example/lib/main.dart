@@ -27,10 +27,7 @@ class _BasicXboxUiState extends State<BasicXboxUi> {
     return XboxDashboard(
       username: 'XboxUser',
       userdetail: '1234 points',
-      wallpaper: Image.network(
-        'https://picsum.photos/1000?a=888',
-        fit: BoxFit.cover,
-      ),
+      wallpaper: const NetworkImage('https://picsum.photos/1000?a=888'),
       menu: const XboxMenu(
         items: [
           ListTile(title: Text("First")),
@@ -95,14 +92,10 @@ class _BasicXboxUiState extends State<BasicXboxUi> {
           XboxTile.game(
             title: "Game Name",
             size: const Size.square(200),
-            dashboardWallpaper: Image.network(
+            dashboardWallpaper: const NetworkImage(
               'https://picsum.photos/200/100?a=11',
-              fit: BoxFit.cover,
             ),
-            image: Image.network(
-              'https://picsum.photos/100/100?a=1',
-              fit: BoxFit.cover,
-            ),
+            image: Image.network('https://picsum.photos/100/100?a=1'),
           ),
         ]),
         XboxTileList(title: "Banner", tiles: [
@@ -132,7 +125,6 @@ class _BasicXboxUiState extends State<BasicXboxUi> {
             size: Xbox.getSizeFromAspectRatio(16 / 9, height: 120),
             icon: Icons.color_lens,
             gradient: LinearGradient(colors: [Colors.purple[700]!, Colors.blue[800]!]),
-            dashboardWallpaper: Container(decoration: BoxDecoration(gradient: LinearGradient(colors: [Colors.purple[700]!, Colors.blue[800]!]))),
             iconSize: 60,
           ),
           XboxTile.iconGradient(
@@ -140,7 +132,6 @@ class _BasicXboxUiState extends State<BasicXboxUi> {
             size: Xbox.getSizeFromAspectRatio(8 / 12, height: 120),
             icon: Icons.fastfood,
             gradient: LinearGradient(colors: [Colors.red[700]!, Colors.yellow[800]!]),
-            dashboardWallpaper: Container(decoration: BoxDecoration(gradient: LinearGradient(colors: [Colors.yellow[700]!, Colors.red[800]!]))),
             iconSize: 60,
           ),
         ]),

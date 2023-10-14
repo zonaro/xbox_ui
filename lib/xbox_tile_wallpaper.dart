@@ -30,7 +30,7 @@ class _XboxFadeInRadialWallpaperState extends State<XboxFadeInRadialWallpaper> {
             child: AnimatedCrossFade(
               firstChild: widget.oldTileWallpaper ?? widget.dashboardWallpaper ?? const SizedBox.shrink(),
               secondChild: widget.newTileWallpaper ?? widget.dashboardWallpaper ?? const SizedBox.shrink(),
-              crossFadeState: widget.newTileWallpaper == null ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+              crossFadeState: widget.newTileWallpaper != null ? CrossFadeState.showSecond : CrossFadeState.showFirst,
               duration: const Duration(seconds: 1),
             ),
           ),

@@ -21,7 +21,7 @@ class _XboxFadeInRadialWallpaperState extends State<XboxFadeInRadialWallpaper> {
 
   @override
   Widget build(BuildContext context) {
-    var duration = const Duration(seconds: 1);
+    var duration = const Duration(milliseconds: 1500);
     return Stack(
       fit: StackFit.expand,
       children: [

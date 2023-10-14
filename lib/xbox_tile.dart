@@ -1,5 +1,7 @@
 // ignore_for_file: constant_identifier_names, use_build_context_synchronously
 
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:xbox_ui/xbox_ui.dart';
@@ -178,12 +180,14 @@ class _XboxTileState extends State<XboxTile> {
 
     final bool isBanner = widget.description.trim().isNotEmpty && !showTitleBox;
 
-    return KeyboardListener(
+    return RawKeyboardListener(
       focusNode: FocusNode(),
       autofocus: hasFocus,
-      onKeyEvent: (k) {
-        if (k.logicalKey == LogicalKeyboardKey.gameButtonX) {
-          _showMenu();
+      onKey: (event) {
+        if (event is RawKeyDownEvent) {
+          if (event.isKeyPressed(LogicalKeyboardKey.gameButtonStart) || event.isKeyPressed(LogicalKeyboardKey.gameButtonX) || event.isKeyPressed(LogicalKeyboardKey.contextMenu)) {
+            _showMenu();
+          }
         }
       },
       child: GestureDetector(

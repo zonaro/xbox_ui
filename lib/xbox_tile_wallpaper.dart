@@ -13,11 +13,6 @@ class XboxFadeInRadialWallpaper extends StatefulWidget {
 
 class _XboxFadeInRadialWallpaperState extends State<XboxFadeInRadialWallpaper> {
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     var duration = const Duration(milliseconds: 3);
     return Stack(

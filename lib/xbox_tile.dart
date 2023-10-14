@@ -1,6 +1,5 @@
 // ignore_for_file: constant_identifier_names, use_build_context_synchronously
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:xbox_ui/xbox_ui.dart';
@@ -136,9 +135,9 @@ class XboxTile extends StatefulWidget {
         background: Container(decoration: BoxDecoration(gradient: gradient)),
       );
 
-  factory XboxTile.banner({required String description, String title = "", required Size size, required Widget image, Color? color, double growOnFocus = 0, void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false, ImageProvider? dashboardWallpaper}) => XboxTile(
+  factory XboxTile.banner({required String description, String title = "", required Size size, required ImageProvider image, Color? color, double growOnFocus = 0, void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false, ImageProvider? dashboardWallpaper}) => XboxTile(
         autoFocus: autoFocus,
-        background: image,
+        background: Image(image: image, fit: BoxFit.cover, alignment: Alignment.center),
         description: description,
         size: size,
         tileColor: color ?? Xbox.currentAccentColor,
@@ -149,9 +148,9 @@ class XboxTile extends StatefulWidget {
         title: title,
       );
 
-  factory XboxTile.game({required String title, required Size size, required Widget image, Color? color, double growOnFocus = 0, void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false, ImageProvider? dashboardWallpaper}) => XboxTile(
+  factory XboxTile.game({required String title, required Size size, required ImageProvider image, Color? color, double growOnFocus = 0, void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false, ImageProvider? dashboardWallpaper}) => XboxTile(
         autoFocus: autoFocus,
-        background: image,
+        background: Image(image: image, fit: BoxFit.cover, alignment: Alignment.topCenter),
         title: title,
         size: size,
         tileColor: color ?? Xbox.currentAccentColor,

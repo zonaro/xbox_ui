@@ -14,28 +14,26 @@ class XboxFadeInRadialWallpaper extends StatefulWidget {
 class _XboxFadeInRadialWallpaperState extends State<XboxFadeInRadialWallpaper> {
   @override
   Widget build(BuildContext context) {
+    var first = widget.oldTileWallpaper ?? widget.dashboardWallpaper ?? Placeholder();
+    var second = widget.newTileWallpaper ?? widget.dashboardWallpaper ?? Placeholder();
+
     var duration = const Duration(seconds: 3);
     return Stack(
       fit: StackFit.expand,
       children: [
         AnimatedCrossFade(
-          firstChild: ((widget.oldTileWallpaper ?? widget.dashboardWallpaper) == null) ? const SizedBox.shrink() : SizedBox.expand(child: widget.oldTileWallpaper ?? widget.dashboardWallpaper),
-          secondChild: ((widget.newTileWallpaper ?? widget.dashboardWallpaper) == null) ? const SizedBox.shrink() : SizedBox.expand(child: widget.oldTileWallpaper ?? widget.dashboardWallpaper),
-          crossFadeState: widget.newTileWallpaper != null ? CrossFadeState.showSecond : CrossFadeState.showFirst,
+          firstChild: first,
+          secondChild: second,
+          crossFadeState: CrossFadeState.showSecond,
           duration: duration,
         ),
-        AnimatedCrossFade(
-          duration: duration,
-          crossFadeState: widget.newTileWallpaper == null && widget.oldTileWallpaper == null ? CrossFadeState.showFirst : CrossFadeState.showSecond,
-          firstChild: const SizedBox.shrink(),
-          secondChild: Container(
-            decoration: BoxDecoration(
-              gradient: RadialGradient(
-                center: Alignment.center,
-                radius: 1.0,
-                colors: [Colors.transparent, Theme.of(context).colorScheme.background],
-                stops: const [0.5, 1.0],
-              ),
+        Container(
+          decoration: BoxDecoration(
+            gradient: RadialGradient(
+              center: Alignment.center,
+              radius: 1.0,
+              colors: [Colors.transparent, Theme.of(context).colorScheme.background],
+              stops: const [0.5, 1.0],
             ),
           ),
         ),

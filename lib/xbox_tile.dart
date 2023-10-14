@@ -1,7 +1,5 @@
 // ignore_for_file: constant_identifier_names, use_build_context_synchronously
 
- 
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:xbox_ui/xbox_ui.dart';
@@ -28,7 +26,6 @@ import 'package:xbox_ui/xbox_ui.dart';
 /// {@end-tool}
 ///
 class XboxTile extends StatefulWidget {
-
   /// an image that show up on dashboard background when this tile widget is in focus
   final Widget? dashboardWallpaper;
 
@@ -174,6 +171,9 @@ class _XboxTileState extends State<XboxTile> {
   void _onFocus(bool value) {
     setState(() {
       hasFocus = value;
+      if (hasFocus) {
+        Xbox.tileWallpaper = widget.dashboardWallpaper;
+      }
     });
   }
 

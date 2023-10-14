@@ -11,7 +11,7 @@ class XboxMenu extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.all(25),
       child: Drawer(
-        shape: Xbox.defaultShape,
+        shape: Xbox.defaultBorderShape,
         backgroundColor: Theme.of(context).colorScheme.background,
         child: ListView(shrinkWrap: true, children: items),
       ),

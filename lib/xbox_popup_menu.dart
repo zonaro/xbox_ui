@@ -5,7 +5,7 @@ mixin XboxDialog {
   static Future<void> menu(BuildContext context, {required String title, required XboxMenuEntries menuEntries}) => showDialog(
         context: context,
         builder: (BuildContext context) => SimpleDialog(
-            shape: Xbox.defaultShape,
+            shape: Xbox.defaultBorderShape,
             backgroundColor: Theme.of(context).colorScheme.background,
             title: title.trim().isNotEmpty ? Text(title) : null,
             children: menuEntries.entries
@@ -28,7 +28,7 @@ mixin XboxDialog {
     final bool? isConfirm = await showDialog<bool>(
       context: context,
       builder: (_) => AlertDialog(
-        shape: Xbox.defaultShape,
+        shape: Xbox.defaultBorderShape,
         backgroundColor: Theme.of(context).colorScheme.background,
         title: Text(title ?? ""),
         content: SingleChildScrollView(
@@ -60,7 +60,7 @@ mixin XboxDialog {
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
-        shape: Xbox.defaultShape,
+        shape: Xbox.defaultBorderShape,
         backgroundColor: Theme.of(context).colorScheme.background,
         title: Text(title ?? ""),
         content: SingleChildScrollView(
@@ -93,7 +93,7 @@ mixin XboxDialog {
     final bool? isConfirm = await showDialog<bool>(
       context: context,
       builder: (_) => AlertDialog(
-        shape: Xbox.defaultShape,
+        shape: Xbox.defaultBorderShape,
         backgroundColor: Theme.of(context).colorScheme.background,
         title: Text(title ?? ""),
         content: SingleChildScrollView(

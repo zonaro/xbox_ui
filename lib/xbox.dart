@@ -43,7 +43,7 @@ extension Xbox on MaterialApp {
     return Theme.of(context).brightness == Brightness.dark ? SlateGray : White;
   }
 
-  static RoundedRectangleBorder get defaultShape => RoundedRectangleBorder(borderRadius: BorderRadius.circular(Xbox.TileRadius));
+  static RoundedRectangleBorder get defaultBorderShape => RoundedRectangleBorder(borderRadius: BorderRadius.circular(Xbox.TileRadius));
 
   static List<XboxTile> colorTiles(List<Color> colors, {Size size = const Size.square(100), void Function(Color)? onTap}) => colors
       .map(

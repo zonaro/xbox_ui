@@ -73,7 +73,7 @@ extension Xbox on MaterialApp {
   }
 
   /// Help calculate and create [XboxTile] based on aspect ratio
-  static Size getSizefromAspectRatioString(String aspectRatio, {double? width, double? height}) {
+  static Size getSizeFromAspectRatioString(String aspectRatio, {double? width, double? height}) {
     var ratio = aspectRatio.split(':').map((e) => double.parse(e)).toList();
     return getSizeFromAspectRatio(ratio.first / ratio.last);
   }

@@ -67,13 +67,13 @@ class _XboxDashboardState extends State<XboxDashboard> {
         children: [
           if (getWall() != null)
             AnimatedSwitcher(
-              duration: const Duration(seconds: 1),
+              duration: const Duration(seconds: 2),
               child: Container(
                 key: ValueKey(Random().nextInt(9999)),
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height,
                 decoration: BoxDecoration(
-                  image: DecorationImage(image: getWall()!, fit: BoxFit.cover),
+                  image: DecorationImage(image: getWall()!, fit: BoxFit.cover, alignment: Alignment.center),
                   gradient: RadialGradient(
                     center: Alignment.center,
                     radius: 1.0,

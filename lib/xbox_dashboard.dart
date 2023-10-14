@@ -51,25 +51,15 @@ class _XboxDashboardState extends State<XboxDashboard> {
           child: Stack(
             fit: StackFit.expand,
             children: [
-              if (widget.wallpaper != null) SizedBox.expand(child: widget.wallpaper),
+              AnimatedSwitcher(duration: const Duration(seconds: 2), child: newWallpaper ?? widget.wallpaper),
               if (newWallpaper != null)
-                SizedBox.expand(
-                  child: AnimatedSwitcher(
-                    duration: const Duration(seconds: 2),
-                    child: Stack(
-                      children: [
-                        newWallpaper,
-                        Container(
-                          decoration: BoxDecoration(
-                            gradient: RadialGradient(
-                              center: Alignment.center,
-                              radius: 1.0,
-                              colors: [Colors.transparent, Theme.of(context).colorScheme.background],
-                              stops: const [0.5, 1.0],
-                            ),
-                          ),
-                        ),
-                      ],
+                Container(
+                  decoration: BoxDecoration(
+                    gradient: RadialGradient(
+                      center: Alignment.center,
+                      radius: 1.0,
+                      colors: [Colors.transparent, Theme.of(context).colorScheme.background],
+                      stops: const [0.5, 1.0],
                     ),
                   ),
                 ),

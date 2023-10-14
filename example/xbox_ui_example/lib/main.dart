@@ -28,7 +28,7 @@ class _BasicXboxUiState extends State<BasicXboxUi> {
       username: 'XboxUser',
       userdetail: '1234 points',
       wallpaper: Image.network(
-        'https://picsum.photos/100/100?a=999',
+        'https://picsum.photos/1000?a=888',
         fit: BoxFit.cover,
       ),
       menu: const XboxMenu(

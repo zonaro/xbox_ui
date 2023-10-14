@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:xbox_ui/xbox_icon_button.dart';
@@ -52,10 +54,13 @@ class _XboxDashboardState extends State<XboxDashboard> {
               child: AnimatedSwitcher(
                   duration: const Duration(seconds: 2),
                   child: Container(
-                    key: ValueKey(Xbox.tileWallpaper.hashCode),
-                    child: Xbox.tileWallpaper ?? widget.wallpaper,
+                    key: ValueKey(Random().nextInt(9999)),
+                    alignment: Alignment.center,
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height,
+                    child: Xbox.tileWallpaper.value ?? widget.wallpaper,
                   ))),
-          if (Xbox.tileWallpaper != null)
+          if (Xbox.tileWallpaper.value != null)
             Container(
               decoration: BoxDecoration(
                 gradient: RadialGradient(

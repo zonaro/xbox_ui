@@ -173,7 +173,7 @@ class _XboxTileState extends State<XboxTile> {
   void _onFocus(bool value) {
     setState(() {
       hasFocus = value;
-      Xbox.tileWallpaper = widget.dashboardWallpaper;
+      Xbox.tileWallpaper.value = widget.dashboardWallpaper;
     });
   }
 

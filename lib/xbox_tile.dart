@@ -168,6 +168,8 @@ class XboxTile extends StatefulWidget {
 class _XboxTileState extends State<XboxTile> {
   bool hasFocus = false;
 
+  FocusNode node = FocusNode();
+
   void _onFocus(bool value) {
     setState(() {
       Xbox.tileWallpaperNotifier.value = widget.dashboardWallpaper;
@@ -176,7 +178,7 @@ class _XboxTileState extends State<XboxTile> {
   }
 
   _showMenu() async {
-    _onFocus(true);
+    node.requestFocus();
     if (widget.menuItems != null && widget.menuItems!.isNotEmpty) {
       await XboxDialog.menu(context, title: widget.title, menuEntries: widget.menuItems!);
     }
@@ -184,24 +186,22 @@ class _XboxTileState extends State<XboxTile> {
 
   @override
   Widget build(BuildContext context) {
-    var node = FocusNode();
-
     final bool showTitleBox = hasFocus && widget.title.trim().isNotEmpty && widget.description.trim().isEmpty;
 
     final bool isBanner = widget.description.trim().isNotEmpty && !showTitleBox;
 
-    return RawKeyboardListener(
-      onKey: (event) {
+    return KeyboardListener(
+      focusNode: node,
+      onKeyEvent: (event) {
         if (event is RawKeyDownEvent) {
-          if (event.isKeyPressed(LogicalKeyboardKey.gameButtonStart) || event.isKeyPressed(LogicalKeyboardKey.gameButtonX) || event.isKeyPressed(LogicalKeyboardKey.contextMenu)) {
+          if (event.logicalKey == (LogicalKeyboardKey.gameButtonStart) || event.logicalKey == (LogicalKeyboardKey.gameButtonX) || event.logicalKey == (LogicalKeyboardKey.contextMenu)) {
             _showMenu();
           }
         }
       },
-      focusNode: node,
       child: GestureDetector(
         onTap: () {
-          _onFocus(true);
+          node.requestFocus();
           widget.onTap?.call();
         },
         onLongPress: _showMenu,

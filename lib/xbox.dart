@@ -1,6 +1,5 @@
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names
 
- 
 import 'package:flutter/material.dart';
 
 import 'package:xbox_ui/xbox_tile.dart';
@@ -18,7 +17,7 @@ extension Xbox on MaterialApp {
 
   static ThemeData getTheme({Brightness brightness = Brightness.dark}) => ThemeData.from(
         useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(brightness: brightness, seedColor: Xbox.currentAccentColor, background: brightness == Brightness.dark ? Xbox.SlateGray : Xbox.White),
+        colorScheme: ColorScheme.fromSeed(brightness: brightness, seedColor: Xbox.currentAccentColor.value, background: brightness == Brightness.dark ? Xbox.SlateGray : Xbox.White),
       );
 
   static const Green = Color(0xFF107C10);
@@ -29,17 +28,16 @@ extension Xbox on MaterialApp {
 
   static TextStyle get XboxFont => const TextStyle(fontFamily: "Xbox");
 
-  static Color currentAccentColor = Green;
+  static ValueNotifier<Color> currentAccentColor = ValueNotifier(Xbox.Green);
 
-  static Color getReadableColor([Color? color]) => (color ?? currentAccentColor).computeLuminance() > 0.5 ? Colors.black : Colors.white;
+  Color get accentColor => currentAccentColor.value;
+  set accentColor(Color? value) => currentAccentColor.value = value ?? Xbox.Green;
 
-  static Color getContrastThemeColor(BuildContext context) {
-    return Theme.of(context).brightness == Brightness.dark ? White : SlateGray;
-  }
+  static Color getReadableColor([Color? color]) => (color ?? currentAccentColor.value).computeLuminance() > 0.5 ? Colors.black : Colors.white;
 
-  static Color getBackgroundColor(BuildContext context) {
-    return Theme.of(context).brightness == Brightness.dark ? SlateGray : White;
-  }
+  static Color getContrastThemeColor(BuildContext context) => Theme.of(context).brightness == Brightness.dark ? White : SlateGray;
+
+  static Color getBackgroundColor(BuildContext context) => Theme.of(context).brightness == Brightness.dark ? SlateGray : White;
 
   static RoundedRectangleBorder get defaultBorderShape => RoundedRectangleBorder(borderRadius: BorderRadius.circular(Xbox.TileRadius));
 
@@ -62,7 +60,7 @@ extension Xbox on MaterialApp {
         color: Theme.of(context).colorScheme.background,
         boxShadow: [
           BoxShadow(
-            color: Xbox.currentAccentColor,
+            color: Xbox.currentAccentColor.value,
             spreadRadius: 2.0,
           ),
         ],

@@ -34,6 +34,12 @@ class _XboxDashboardState extends State<XboxDashboard> {
       });
     });
 
+    Xbox.currentAccentColor.addListener(() {
+      setState(() {
+        debugPrint("color changed");
+      });
+    });
+
     super.initState();
   }
 
@@ -101,7 +107,7 @@ class _XboxDashboardState extends State<XboxDashboard> {
                     XboxCircleButton(
                       onPressed: () => _showHomeMenu(),
                       size: 50,
-                      backgroundColor: Xbox.currentAccentColor,
+                      backgroundColor: Xbox.currentAccentColor.value,
                       child: widget.avatar ?? const Icon(Icons.person),
                     ),
                     FittedBox(

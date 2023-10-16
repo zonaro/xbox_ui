@@ -184,13 +184,14 @@ class _XboxTileState extends State<XboxTile> {
 
   @override
   Widget build(BuildContext context) {
+var node = FocusNode()
+
     final bool showTitleBox = hasFocus && widget.title.trim().isNotEmpty && widget.description.trim().isEmpty;
 
     final bool isBanner = widget.description.trim().isNotEmpty && !showTitleBox;
 
     return RawKeyboardListener(
-      focusNode: FocusNode(),
-      autofocus: hasFocus,
+ 
       onKey: (event) {
         if (event is RawKeyDownEvent) {
           if (event.isKeyPressed(LogicalKeyboardKey.gameButtonStart) || event.isKeyPressed(LogicalKeyboardKey.gameButtonX) || event.isKeyPressed(LogicalKeyboardKey.contextMenu)) {
@@ -198,6 +199,7 @@ class _XboxTileState extends State<XboxTile> {
           }
         }
       },
+      focusNode: node,
       child: GestureDetector(
         onTap: () {
           _onFocus(true);
@@ -209,6 +211,7 @@ class _XboxTileState extends State<XboxTile> {
           descendantsAreTraversable: false,
           onShowHoverHighlight: _onFocus,
           onShowFocusHighlight: _onFocus,
+          focusNode: node,
           autofocus: widget.autoFocus,
           child: Padding(
             padding: const EdgeInsets.all(8),

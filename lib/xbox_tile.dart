@@ -120,7 +120,7 @@ class XboxTile extends StatefulWidget {
         menuItems: menuItems,
       );
 
-  factory XboxTile.iconGradient({required IconData icon, required String title, required Size size,   required Gradient gradient, double growOnFocus = 0, Color? color, void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false, ImageProvider? dashboardWallpaper}) => XboxTile(
+  factory XboxTile.iconGradient({required IconData icon, required String title, required Size size, required Gradient gradient, double growOnFocus = 0, Color? color, void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false, ImageProvider? dashboardWallpaper}) => XboxTile(
         icon: LayoutBuilder(builder: (context, constraints) {
           return Icon(
             icon,

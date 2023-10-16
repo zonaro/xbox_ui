@@ -53,10 +53,6 @@ class _XboxDashboardState extends State<XboxDashboard> {
     }
   }
 
-  ImageProvider<Object>? getWall() {
-    return Xbox.tileWallpaperNotifier.value ?? widget.wallpaper;
-  }
-
   @override
   Widget build(BuildContext context) {
     return KeyboardListener(
@@ -73,7 +69,15 @@ class _XboxDashboardState extends State<XboxDashboard> {
       child: Stack(
         fit: StackFit.expand,
         children: [
-          if (getWall() != null)
+          if (widget.wallpaper != null)
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
+              decoration: BoxDecoration(
+                image: DecorationImage(image: widget.wallpaper!, fit: BoxFit.cover, alignment: Alignment.center),
+              ),
+            ),
+          if (Xbox.tileWallpaper != null)
             AnimatedSwitcher(
               duration: const Duration(seconds: 2),
               child: Container(
@@ -81,7 +85,7 @@ class _XboxDashboardState extends State<XboxDashboard> {
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height,
                 decoration: BoxDecoration(
-                  image: DecorationImage(image: getWall()!, fit: BoxFit.cover, alignment: Alignment.center),
+                  image: DecorationImage(image: Xbox.tileWallpaper!, fit: BoxFit.cover, alignment: Alignment.center),
                   gradient: RadialGradient(
                     center: Alignment.center,
                     radius: 1.0,

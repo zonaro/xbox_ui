@@ -184,14 +184,13 @@ class _XboxTileState extends State<XboxTile> {
 
   @override
   Widget build(BuildContext context) {
-var node = FocusNode()
+    var node = FocusNode();
 
     final bool showTitleBox = hasFocus && widget.title.trim().isNotEmpty && widget.description.trim().isEmpty;
 
     final bool isBanner = widget.description.trim().isNotEmpty && !showTitleBox;
 
     return RawKeyboardListener(
- 
       onKey: (event) {
         if (event is RawKeyDownEvent) {
           if (event.isKeyPressed(LogicalKeyboardKey.gameButtonStart) || event.isKeyPressed(LogicalKeyboardKey.gameButtonX) || event.isKeyPressed(LogicalKeyboardKey.contextMenu)) {

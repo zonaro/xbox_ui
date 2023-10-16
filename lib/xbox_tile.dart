@@ -61,8 +61,13 @@ class XboxTile extends StatefulWidget {
   @override
   State<XboxTile> createState() => _XboxTileState();
 
-  factory XboxTile.icon({required IconData icon, required String title, required Size size, required double iconSize, double growOnFocus = 0, Color? color, void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false, ImageProvider? dashboardWallpaper}) => XboxTile(
-        icon: Icon(icon, color: Colors.white, size: iconSize),
+  factory XboxTile.icon({required IconData icon, required String title, required Size size, double growOnFocus = 0, Color? color, void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false, ImageProvider? dashboardWallpaper}) => XboxTile(
+        icon: LayoutBuilder(
+            builder: (context, constraints) => Icon(
+                  icon,
+                  color: Colors.white,
+                  size: constraints.maxHeight - constraints.maxHeight * .6,
+                )),
         autoFocus: autoFocus,
         title: title,
         tileColor: color ?? Xbox.accentColorNotifier.value,
@@ -115,7 +120,7 @@ class XboxTile extends StatefulWidget {
         menuItems: menuItems,
       );
 
-  factory XboxTile.iconGradient({required IconData icon, required String title, required Size size, required double iconSize, required Gradient gradient, double growOnFocus = 0, Color? color, void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false, ImageProvider? dashboardWallpaper}) => XboxTile(
+  factory XboxTile.iconGradient({required IconData icon, required String title, required Size size,   required Gradient gradient, double growOnFocus = 0, Color? color, void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false, ImageProvider? dashboardWallpaper}) => XboxTile(
         icon: LayoutBuilder(builder: (context, constraints) {
           return Icon(
             icon,
@@ -153,8 +158,6 @@ class XboxTile extends StatefulWidget {
         menuItems: menuItems,
         dashboardWallpaper: dashboardWallpaper,
       );
-
-    
 
   double getHeight(bool hasFocus) => growOnFocus > 0 && hasFocus ? size.height + (size.height * growOnFocus) : size.height;
 

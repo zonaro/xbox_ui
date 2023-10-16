@@ -1,5 +1,5 @@
 name: xbox_ui_example
-description: "A new Flutter project."
+description: "Show how to use xbox_ui lib"
 publish_to: 'none'
 version: 0.1.0
 
@@ -10,7 +10,8 @@ dependencies:
   flutter:
     sdk: flutter
   xbox_ui:
-    git: https://github.com/zonaro/xbox_ui
+    path: ../
+    # git: https://github.com/zonaro/xbox_ui
 
 dev_dependencies:
   flutter_test:

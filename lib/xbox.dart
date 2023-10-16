@@ -1,5 +1,8 @@
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names
 
+import 'dart:convert';
+ 
+
 import 'package:flutter/material.dart';
 
 import 'package:xbox_ui/xbox_tile.dart';
@@ -8,13 +11,13 @@ typedef XboxMenuEntries = Map<String, void Function()?>;
 typedef XboxApp = MaterialApp;
 
 extension Xbox on MaterialApp {
-
   static const double TileRadius = 7;
 
   static ThemeData get DarkTheme => Xbox.getTheme();
   static ThemeData get LightTheme => Xbox.getTheme(brightness: Brightness.light);
 
   static final ValueNotifier<ImageProvider?> tileWallpaperNotifier = ValueNotifier(null);
+  static final ValueNotifier<ImageProvider?> userWallpaperNotifier = ValueNotifier(null);
   static final ValueNotifier<Color> accentColorNotifier = ValueNotifier(Xbox.Green);
 
   static ThemeData getTheme({Brightness brightness = Brightness.dark}) => ThemeData.from(
@@ -35,6 +38,9 @@ extension Xbox on MaterialApp {
 
   static ImageProvider? get tileWallpaper => tileWallpaperNotifier.value;
   static set tileWallpaper(ImageProvider? value) => tileWallpaperNotifier.value = value;
+
+  static ImageProvider? get userWallpaper => userWallpaperNotifier.value;
+  static set userWallpaper(ImageProvider? value) => userWallpaperNotifier.value = value;
 
   static Color getReadableColor([Color? color]) => (color ?? accentColorNotifier.value).computeLuminance() > 0.5 ? Colors.black : Colors.white;
 
@@ -88,4 +94,6 @@ extension Xbox on MaterialApp {
     var ratio = aspectRatio.split(':').map((e) => double.parse(e)).toList();
     return getSizeFromAspectRatio(ratio.first / ratio.last);
   }
+
+  static final ImageProvider emptyImage = MemoryImage(const Base64Codec().decode("R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"));
 }

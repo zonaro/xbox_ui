@@ -8,12 +8,12 @@ import 'package:xbox_ui/xbox_menu.dart';
 import 'xbox.dart';
 
 class XboxDashboard extends StatefulWidget {
-  const XboxDashboard({super.key, required this.child, required this.topBarItens, this.wallpaper, this.avatar, this.menu, required this.username, required this.userdetail});
+  const XboxDashboard({super.key, required this.child, required this.topBarItens, this.avatar, this.menu, required this.username, required this.userdetail});
 
   final List<Widget> topBarItens;
 
   final Widget child;
-  final ImageProvider<Object>? wallpaper;
+
   final Widget? avatar;
   final XboxMenu? menu;
   final String username;
@@ -30,7 +30,13 @@ class _XboxDashboardState extends State<XboxDashboard> {
   initState() {
     Xbox.tileWallpaperNotifier.addListener(() {
       setState(() {
-        debugPrint("wallpaper changed");
+        debugPrint("tile wallpaper changed");
+      });
+    });
+
+    Xbox.userWallpaperNotifier.addListener(() {
+      setState(() {
+        debugPrint("user wallpaper changed");
       });
     });
 
@@ -44,6 +50,7 @@ class _XboxDashboardState extends State<XboxDashboard> {
   }
 
   _showHomeMenu() {
+    debugPrint("showing home menu");
     if (scaffoldKey.currentState != null) {
       if (scaffoldKey.currentState!.isDrawerOpen) {
         scaffoldKey.currentState!.closeDrawer();
@@ -59,42 +66,40 @@ class _XboxDashboardState extends State<XboxDashboard> {
       focusNode: FocusNode(descendantsAreFocusable: true),
       onKeyEvent: (event) {
         if (event is KeyDownEvent) {
-          if (event.logicalKey != LogicalKeyboardKey.gameButtonB) {
-            if (event.logicalKey == (LogicalKeyboardKey.gameButtonMode) || event.logicalKey == (LogicalKeyboardKey.escape) || event.logicalKey == (LogicalKeyboardKey.goBack)) {
-              _showHomeMenu();
-            }
+          if (event.logicalKey == LogicalKeyboardKey.meta || event.logicalKey == (LogicalKeyboardKey.gameButtonMode) || event.logicalKey == (LogicalKeyboardKey.escape) || event.logicalKey == (LogicalKeyboardKey.goBack)) {
+            _showHomeMenu();
           }
         }
       },
       child: Stack(
         fit: StackFit.expand,
         children: [
-          if (widget.wallpaper != null)
-            Container(
+          // if (Xbox.userWallpaper != null)
+          //   Container(
+          //     width: MediaQuery.of(context).size.width,
+          //     height: MediaQuery.of(context).size.height,
+          //     decoration: BoxDecoration(
+          //       image: DecorationImage(image: Xbox.userWallpaper!, fit: BoxFit.cover, alignment: Alignment.center),
+          //     ),
+          //   ),
+
+          AnimatedSwitcher(
+            duration: const Duration(seconds: 1),
+            child: Container(
+              key: ValueKey(Random().nextInt(9999)),
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
               decoration: BoxDecoration(
-                image: DecorationImage(image: widget.wallpaper!, fit: BoxFit.cover, alignment: Alignment.center),
-              ),
-            ),
-          if (Xbox.tileWallpaper != null)
-            AnimatedSwitcher(
-              duration: const Duration(seconds: 2),
-              child: Container(
-                key: ValueKey(Random().nextInt(9999)),
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
-                decoration: BoxDecoration(
-                  image: DecorationImage(image: Xbox.tileWallpaper!, fit: BoxFit.cover, alignment: Alignment.center),
-                  gradient: RadialGradient(
-                    center: Alignment.center,
-                    radius: 1.0,
-                    colors: [Colors.transparent, Theme.of(context).colorScheme.background],
-                    stops: const [0.5, 1.0],
-                  ),
+                image: DecorationImage(image: Xbox.tileWallpaper ?? Xbox.userWallpaper ?? Xbox.emptyImage, fit: BoxFit.cover, alignment: Alignment.center),
+                gradient: RadialGradient(
+                  center: Alignment.center,
+                  radius: 1.0,
+                  colors: [Colors.transparent, Theme.of(context).colorScheme.background],
+                  stops: const [0.5, 1.0],
                 ),
               ),
             ),
+          ),
           Scaffold(
             key: scaffoldKey,
             backgroundColor: Theme.of(context).colorScheme.background.withOpacity(.7),

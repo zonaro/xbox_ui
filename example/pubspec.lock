@@ -179,11 +179,9 @@ packages:
   xbox_ui:
     dependency: "direct main"
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "9841fb2b2cf20819c327d2f48a9e742dad1e1202"
-      url: "https://github.com/zonaro/xbox_ui"
-    source: git
+      path: ".."
+      relative: true
+    source: path
     version: "0.0.1"
 sdks:
   dart: ">=3.2.0-157.0.dev <4.0.0"

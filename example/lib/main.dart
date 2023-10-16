@@ -2,32 +2,38 @@ import 'package:flutter/material.dart';
 import 'package:xbox_ui/xbox_ui.dart';
 
 void main() {
-  Xbox.currentAccentColor = Xbox.Green; //change this
+  // change this color will reflect the accent color of all xbox_ui components
+  Xbox.accentColor = Xbox.Green; //change this
 
   runApp(
     XboxApp(
       themeMode: ThemeMode.dark,
       theme: Xbox.LightTheme, // getter for light and dark theme. apply the currentAccentColor to all tiles
       darkTheme: Xbox.DarkTheme,
-      home: const BasicXboxUi(),
+      home: const MyApp(),
     ),
   );
 }
 
-class BasicXboxUi extends StatefulWidget {
-  const BasicXboxUi({super.key});
+class MyApp extends StatefulWidget {
+  const MyApp({super.key});
 
   @override
-  State<BasicXboxUi> createState() => _BasicXboxUiState();
+  State<MyApp> createState() => _MyAppState();
 }
 
-class _BasicXboxUiState extends State<BasicXboxUi> {
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    Xbox.userWallpaper = const NetworkImage('https://picsum.photos/1000?a=888');
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return XboxDashboard(
       username: 'XboxUser',
       userdetail: '1234 points',
-      wallpaper: const NetworkImage('https://picsum.photos/1000?a=888'),
       menu: const XboxMenu(
         items: [
           ListTile(title: Text("First")),
@@ -108,10 +114,7 @@ class _BasicXboxUiState extends State<BasicXboxUi> {
           XboxTile.iconBanner(
             description: "Sometimes we have icons",
             size: Xbox.getSizeFromAspectRatio(16 / 9, height: 200),
-            image: Image.network(
-              'https://picsum.photos/200/120?a=3',
-              fit: BoxFit.cover,
-            ),
+            image: const NetworkImage('https://picsum.photos/200/120?a=3'),
             iconSize: 60,
             icon: Icons.gamepad,
           ),
@@ -132,7 +135,7 @@ class _BasicXboxUiState extends State<BasicXboxUi> {
             iconSize: 60,
           ),
         ]),
-        XboxTileList(title: "Colors", tiles: Xbox.colorTiles(Colors.primaries, onTap: (x) => setState(() => Xbox.currentAccentColor = x)))
+        XboxTileList(title: "Colors", tiles: Xbox.colorTiles(Colors.primaries, onTap: (x) => Xbox.accentColor = x))
       ]),
     );
   }

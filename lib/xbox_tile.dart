@@ -179,6 +179,7 @@ class _XboxTileState extends State<XboxTile> {
 
   _showMenu() async {
     node.requestFocus();
+    debugPrint("showing menu");
     if (widget.menuItems != null && widget.menuItems!.isNotEmpty) {
       await XboxDialog.menu(context, title: widget.title, menuEntries: widget.menuItems!);
     }
@@ -193,8 +194,8 @@ class _XboxTileState extends State<XboxTile> {
     return KeyboardListener(
       focusNode: node,
       onKeyEvent: (event) {
-        if (event is RawKeyDownEvent) {
-          if (event.logicalKey == (LogicalKeyboardKey.gameButtonStart) || event.logicalKey == (LogicalKeyboardKey.gameButtonX) || event.logicalKey == (LogicalKeyboardKey.contextMenu)) {
+        if (event is KeyDownEvent) {
+          if (event.logicalKey == LogicalKeyboardKey.gameButtonStart || event.logicalKey == LogicalKeyboardKey.gameButtonX || event.logicalKey == LogicalKeyboardKey.contextMenu) {
             _showMenu();
           }
         }
@@ -210,7 +211,6 @@ class _XboxTileState extends State<XboxTile> {
           descendantsAreTraversable: false,
           onShowHoverHighlight: _onFocus,
           onShowFocusHighlight: _onFocus,
-          focusNode: node,
           autofocus: widget.autoFocus,
           child: Padding(
             padding: const EdgeInsets.all(8),

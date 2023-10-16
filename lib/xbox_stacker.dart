@@ -74,7 +74,7 @@ class XboxImageStacker extends StatelessWidget {
                                 ),
                             ],
                             image: DecorationImage(
-                              image: image,
+                              image: idx == 0 ? Xbox.emptyImage : image,
                               fit: BoxFit.cover,
                             ),
                           ),

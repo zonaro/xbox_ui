@@ -109,7 +109,6 @@ class _MyAppState extends State<MyApp> {
           XboxTile.banner(
             title: "Game Collection",
             icon: Icons.games,
-            iconSize: 50,
             description: "Banner with multiple images and a icon",
             size: Xbox.getSizeFromAspectRatio(16 / 9, height: 200),
             images: const [
@@ -130,7 +129,6 @@ class _MyAppState extends State<MyApp> {
             description: "Sometimes we have icons",
             size: Xbox.getSizeFromAspectRatio(16 / 9, height: 200),
             images: const [NetworkImage('https://picsum.photos/200/120?a=3')],
-            iconSize: 60,
             icon: Icons.gamepad,
           ),
         ]),

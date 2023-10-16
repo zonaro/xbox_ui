@@ -85,21 +85,23 @@ class XboxTile extends StatefulWidget {
         tileColor: color ?? Xbox.accentColorNotifier.value,
       );
 
-  factory XboxTile.banner({IconData? icon, required String description, String title = "", required Size size, double iconSize = 30, double growOnFocus = 0, Color? color, List<ImageProvider?> images = const [], void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false, ImageProvider? dashboardWallpaper}) => XboxTile(
+  factory XboxTile.banner({IconData? icon, required String description, String title = "", required Size size, double growOnFocus = 0, Color? color, List<ImageProvider?> images = const [], void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false, ImageProvider? dashboardWallpaper}) => XboxTile(
         icon: icon != null
-            ? Icon(
-                icon,
-                color: Colors.white,
-                size: iconSize,
-                shadows: const [
-                  BoxShadow(
-                    blurStyle: BlurStyle.solid,
-                    color: Colors.black,
-                    spreadRadius: 20,
-                    blurRadius: 35,
-                  )
-                ],
-              )
+            ? LayoutBuilder(builder: (context, constraints) {
+                return Icon(
+                  icon,
+                  color: Colors.white,
+                  size: constraints.maxHeight - constraints.maxHeight * .6,
+                  shadows: const [
+                    BoxShadow(
+                      blurStyle: BlurStyle.solid,
+                      color: Colors.black,
+                      spreadRadius: 20,
+                      blurRadius: 20,
+                    )
+                  ],
+                );
+              })
             : null,
         autoFocus: autoFocus,
         growOnFocus: growOnFocus,
@@ -114,19 +116,21 @@ class XboxTile extends StatefulWidget {
       );
 
   factory XboxTile.iconGradient({required IconData icon, required String title, required Size size, required double iconSize, required Gradient gradient, double growOnFocus = 0, Color? color, void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false, ImageProvider? dashboardWallpaper}) => XboxTile(
-        icon: Icon(
-          icon,
-          color: Colors.white,
-          size: iconSize,
-          shadows: const [
-            BoxShadow(
-              blurStyle: BlurStyle.solid,
-              color: Colors.black,
-              spreadRadius: 20,
-              blurRadius: 35,
-            )
-          ],
-        ),
+        icon: LayoutBuilder(builder: (context, constraints) {
+          return Icon(
+            icon,
+            color: Colors.white,
+            size: constraints.maxHeight - constraints.maxHeight * .6,
+            shadows: const [
+              BoxShadow(
+                blurStyle: BlurStyle.solid,
+                color: Colors.black,
+                spreadRadius: 20,
+                blurRadius: 35,
+              )
+            ],
+          );
+        }),
         autoFocus: autoFocus,
         title: title,
         size: size,
@@ -149,6 +153,8 @@ class XboxTile extends StatefulWidget {
         menuItems: menuItems,
         dashboardWallpaper: dashboardWallpaper,
       );
+
+    
 
   double getHeight(bool hasFocus) => growOnFocus > 0 && hasFocus ? size.height + (size.height * growOnFocus) : size.height;
 

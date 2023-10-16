@@ -60,29 +60,16 @@ class _XboxDashboardState extends State<XboxDashboard> {
     }
   }
 
+  var keyboardNode = FocusNode(descendantsAreFocusable: true);
+
   @override
   Widget build(BuildContext context) {
     return KeyboardListener(
-      focusNode: FocusNode(descendantsAreFocusable: true),
-      onKeyEvent: (event) {
-        if (event is KeyDownEvent) {
-          if (event.logicalKey == LogicalKeyboardKey.meta || event.logicalKey == (LogicalKeyboardKey.gameButtonMode) || event.logicalKey == (LogicalKeyboardKey.escape) || event.logicalKey == (LogicalKeyboardKey.goBack)) {
-            _showHomeMenu();
-          }
-        }
-      },
+      focusNode: keyboardNode,
+      onKeyEvent: keyEvents,
       child: Stack(
         fit: StackFit.expand,
         children: [
-          // if (Xbox.userWallpaper != null)
-          //   Container(
-          //     width: MediaQuery.of(context).size.width,
-          //     height: MediaQuery.of(context).size.height,
-          //     decoration: BoxDecoration(
-          //       image: DecorationImage(image: Xbox.userWallpaper!, fit: BoxFit.cover, alignment: Alignment.center),
-          //     ),
-          //   ),
-
           AnimatedSwitcher(
             duration: const Duration(seconds: 1),
             child: Container(
@@ -166,5 +153,31 @@ class _XboxDashboardState extends State<XboxDashboard> {
         ],
       ),
     );
+  }
+
+  keyEvents(KeyEvent event) {
+    if (event is KeyDownEvent) {
+      if (event.logicalKey == LogicalKeyboardKey.meta || event.logicalKey == (LogicalKeyboardKey.gameButtonMode) || event.logicalKey == (LogicalKeyboardKey.escape) || event.logicalKey == (LogicalKeyboardKey.goBack)) {
+        _showHomeMenu();
+      }
+
+      if (event.logicalKey == LogicalKeyboardKey.arrowDown) {
+        keyboardNode.focusInDirection(TraversalDirection.down);
+        return;
+      }
+      if (event.logicalKey == LogicalKeyboardKey.arrowUp) {
+        keyboardNode.focusInDirection(TraversalDirection.up);
+        return;
+      }
+      if (event.logicalKey == LogicalKeyboardKey.arrowLeft) {
+        keyboardNode.focusInDirection(TraversalDirection.left);
+        return;
+      }
+
+        if (event.logicalKey == LogicalKeyboardKey.arrowRight) {
+        keyboardNode.focusInDirection(TraversalDirection.right);
+        return;
+      }
+    }
   }
 }

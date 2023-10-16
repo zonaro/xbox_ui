@@ -10,7 +10,7 @@ import 'package:xbox_ui/xbox_tile.dart';
 typedef XboxMenuEntries = Map<String, void Function()?>;
 typedef XboxApp = MaterialApp;
 
-extension Xbox on MaterialApp {
+extension Xbox on XboxApp {
   static const double TileRadius = 7;
 
   static ThemeData get DarkTheme => Xbox.getTheme();

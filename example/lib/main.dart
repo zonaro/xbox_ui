@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:xbox_ui/xbox_ui.dart';
 
 void main() {
@@ -106,15 +107,29 @@ class _MyAppState extends State<MyApp> {
         ]),
         XboxTileList(title: "Banner", tiles: [
           XboxTile.banner(
-            title: "Banner Title",
-            description: "A short banner description",
+            title: "Game Collection",
+            icon: Icons.games,
+            iconSize: 50,
+            description: "Banner with multiple images and a icon",
             size: Xbox.getSizeFromAspectRatio(16 / 9, height: 200),
-            image: const NetworkImage('https://picsum.photos/200/120?a=2'),
+            images: const [
+              NetworkImage('https://picsum.photos/200/?b=2'),
+              NetworkImage('https://picsum.photos/200/?b=3'),
+              NetworkImage('https://picsum.photos/200/?b=4'),
+              NetworkImage('https://picsum.photos/200/?b=5'),
+              NetworkImage('https://picsum.photos/200/?b=6'),
+              NetworkImage('https://picsum.photos/200/?b=7'),
+            ],
           ),
-          XboxTile.iconBanner(
+          XboxTile.banner(
+            description: "A short banner with just description",
+            size: Xbox.getSizeFromAspectRatio(16 / 9, height: 200),
+            images: const [NetworkImage('https://picsum.photos/200/120?a=2')],
+          ),
+          XboxTile.banner(
             description: "Sometimes we have icons",
             size: Xbox.getSizeFromAspectRatio(16 / 9, height: 200),
-            image: const NetworkImage('https://picsum.photos/200/120?a=3'),
+            images: const [NetworkImage('https://picsum.photos/200/120?a=3')],
             iconSize: 60,
             icon: Icons.gamepad,
           ),

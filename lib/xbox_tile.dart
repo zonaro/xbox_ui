@@ -64,7 +64,7 @@ class XboxTile extends StatefulWidget {
         icon: Icon(icon, color: Colors.white, size: iconSize),
         autoFocus: autoFocus,
         title: title,
-        tileColor: color ?? Xbox.currentAccentColor.value,
+        tileColor: color ?? Xbox.accentColorNotifier.value,
         onTap: onTap,
         dashboardWallpaper: dashboardWallpaper,
         growOnFocus: growOnFocus,
@@ -81,7 +81,7 @@ class XboxTile extends StatefulWidget {
         size: size,
         growOnFocus: growOnFocus,
         dashboardWallpaper: dashboardWallpaper,
-        tileColor: color ?? Xbox.currentAccentColor.value,
+        tileColor: color ?? Xbox.accentColorNotifier.value,
       );
 
   factory XboxTile.iconBanner({required IconData icon, required String description, String title = "", required Size size, required double iconSize, double growOnFocus = 0, Color? color, ImageProvider? image, void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false, ImageProvider? dashboardWallpaper}) => XboxTile(
@@ -102,7 +102,7 @@ class XboxTile extends StatefulWidget {
         growOnFocus: growOnFocus,
         description: description,
         size: size,
-        tileColor: color ?? Xbox.currentAccentColor.value,
+        tileColor: color ?? Xbox.accentColorNotifier.value,
         background: image != null ? Image(image: image, fit: BoxFit.cover, alignment: Alignment.center) : null,
         onTap: onTap,
         title: title,
@@ -127,7 +127,7 @@ class XboxTile extends StatefulWidget {
         autoFocus: autoFocus,
         title: title,
         size: size,
-        tileColor: color ?? Xbox.currentAccentColor.value,
+        tileColor: color ?? Xbox.accentColorNotifier.value,
         onTap: onTap,
         menuItems: menuItems,
         dashboardWallpaper: dashboardWallpaper,
@@ -140,7 +140,7 @@ class XboxTile extends StatefulWidget {
         background: (image != null ? Image(image: image, fit: BoxFit.cover, alignment: Alignment.center) : null),
         description: description,
         size: size,
-        tileColor: color ?? Xbox.currentAccentColor.value,
+        tileColor: color ?? Xbox.accentColorNotifier.value,
         onTap: onTap,
         growOnFocus: growOnFocus,
         menuItems: menuItems,
@@ -153,7 +153,7 @@ class XboxTile extends StatefulWidget {
         background: (image != null ? Image(image: image, fit: BoxFit.cover, alignment: Alignment.topCenter) : null),
         title: title,
         size: size,
-        tileColor: color ?? Xbox.currentAccentColor.value,
+        tileColor: color ?? Xbox.accentColorNotifier.value,
         onTap: onTap,
         growOnFocus: growOnFocus,
         menuItems: menuItems,
@@ -170,7 +170,7 @@ class _XboxTileState extends State<XboxTile> {
 
   void _onFocus(bool value) {
     setState(() {
-      Xbox.currentTileWallpaper.value = widget.dashboardWallpaper;
+      Xbox.tileWallpaperNotifier.value = widget.dashboardWallpaper;
       hasFocus = value;
     });
   }
@@ -257,7 +257,7 @@ class _XboxTileState extends State<XboxTile> {
                         fit: StackFit.expand,
                         alignment: Alignment.center,
                         children: [
-                          Container(color: widget.tileColor ?? Xbox.currentAccentColor.value),
+                          Container(color: widget.tileColor ?? Xbox.accentColorNotifier.value),
                           if (widget.background != null)
                             ClipRRect(
                               borderRadius: BorderRadius.circular(Xbox.TileRadius),

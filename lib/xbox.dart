@@ -8,18 +8,18 @@ typedef XboxMenuEntries = Map<String, void Function()?>;
 typedef XboxApp = MaterialApp;
 
 extension Xbox on MaterialApp {
-  
+
   static const double TileRadius = 7;
 
   static ThemeData get DarkTheme => Xbox.getTheme();
   static ThemeData get LightTheme => Xbox.getTheme(brightness: Brightness.light);
 
-  static final ValueNotifier<ImageProvider?> currentTileWallpaper = ValueNotifier(null);
-  static final ValueNotifier<Color> currentAccentColor = ValueNotifier(Xbox.Green);
+  static final ValueNotifier<ImageProvider?> tileWallpaperNotifier = ValueNotifier(null);
+  static final ValueNotifier<Color> accentColorNotifier = ValueNotifier(Xbox.Green);
 
   static ThemeData getTheme({Brightness brightness = Brightness.dark}) => ThemeData.from(
         useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(brightness: brightness, seedColor: Xbox.currentAccentColor.value, background: brightness == Brightness.dark ? Xbox.SlateGray : Xbox.White),
+        colorScheme: ColorScheme.fromSeed(brightness: brightness, seedColor: Xbox.accentColorNotifier.value, background: brightness == Brightness.dark ? Xbox.SlateGray : Xbox.White),
       );
 
   static const Green = Color(0xFF107C10);
@@ -30,13 +30,13 @@ extension Xbox on MaterialApp {
 
   static TextStyle get XboxFont => const TextStyle(fontFamily: "Xbox");
 
-  static Color get accentColor => currentAccentColor.value;
-  static set accentColor(Color? value) => currentAccentColor.value = value ?? Xbox.Green;
+  static Color get accentColor => accentColorNotifier.value;
+  static set accentColor(Color? value) => accentColorNotifier.value = value ?? Xbox.Green;
 
-  static ImageProvider? get tileWallpaper => currentTileWallpaper.value;
-  static set tileWallpaper(ImageProvider? value) => currentTileWallpaper.value = value;
+  static ImageProvider? get tileWallpaper => tileWallpaperNotifier.value;
+  static set tileWallpaper(ImageProvider? value) => tileWallpaperNotifier.value = value;
 
-  static Color getReadableColor([Color? color]) => (color ?? currentAccentColor.value).computeLuminance() > 0.5 ? Colors.black : Colors.white;
+  static Color getReadableColor([Color? color]) => (color ?? accentColorNotifier.value).computeLuminance() > 0.5 ? Colors.black : Colors.white;
 
   static Color getContrastThemeColor(BuildContext context) => Theme.of(context).brightness == Brightness.dark ? White : SlateGray;
 
@@ -63,7 +63,7 @@ extension Xbox on MaterialApp {
         color: Theme.of(context).colorScheme.background,
         boxShadow: [
           BoxShadow(
-            color: Xbox.currentAccentColor.value,
+            color: Xbox.accentColorNotifier.value,
             spreadRadius: 2.0,
           ),
         ],

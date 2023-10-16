@@ -180,7 +180,7 @@ class _XboxNotificationState extends State<XboxNotification> with TickerProvider
         type: MaterialType.transparency,
         elevation: widget.elevation,
         child: Container(
-          color: widget.color ?? Xbox.currentAccentColor.value,
+          color: widget.color ?? Xbox.accentColorNotifier.value,
           child: Container(
             decoration: BoxDecoration(
               borderRadius: _buildBorderCard(),
@@ -213,7 +213,7 @@ class _XboxNotificationState extends State<XboxNotification> with TickerProvider
       child: widget.icon ??
           Icon(
             Icons.diamond,
-            color: widget.color ?? Xbox.currentAccentColor.value,
+            color: widget.color ?? Xbox.accentColorNotifier.value,
           ),
     );
   }
@@ -280,7 +280,7 @@ class _XboxNotificationState extends State<XboxNotification> with TickerProvider
         child: Text(
           title,
           softWrap: true,
-          style: TextStyle(color: Xbox.getReadableColor(widget.color ?? Xbox.currentAccentColor.value), fontWeight: FontWeight.bold),
+          style: TextStyle(color: Xbox.getReadableColor(widget.color ?? Xbox.accentColorNotifier.value), fontWeight: FontWeight.bold),
         ),
       ),
     );
@@ -302,7 +302,7 @@ class _XboxNotificationState extends State<XboxNotification> with TickerProvider
           padding: const EdgeInsets.only(left: 8.0),
           child: Text(
             subTitle,
-            style: TextStyle(color: Xbox.getReadableColor(widget.color ?? Xbox.currentAccentColor.value)),
+            style: TextStyle(color: Xbox.getReadableColor(widget.color ?? Xbox.accentColorNotifier.value)),
           ),
         ));
   }

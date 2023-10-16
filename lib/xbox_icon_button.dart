@@ -42,7 +42,7 @@ class _XboxCircleButtonState extends State<XboxCircleButton> {
       type: MaterialType.transparency,
       child: Ink(
         decoration: BoxDecoration(
-          border: Border.all(color: hasFocus ? Xbox.currentAccentColor.value : Colors.transparent, width: 2.5),
+          border: Border.all(color: hasFocus ? Xbox.accentColorNotifier.value : Colors.transparent, width: 2.5),
           color: widget.backgroundColor ?? Theme.of(context).colorScheme.background.withOpacity(.5),
           shape: BoxShape.circle,
         ),

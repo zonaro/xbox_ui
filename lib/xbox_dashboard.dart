@@ -59,12 +59,14 @@ class _XboxDashboardState extends State<XboxDashboard> {
 
   @override
   Widget build(BuildContext context) {
-    return RawKeyboardListener(
+    return KeyboardListener(
       focusNode: FocusNode(descendantsAreFocusable: true),
-      onKey: (event) {
-        if (event is RawKeyDownEvent) {
-          if (event.isKeyPressed(LogicalKeyboardKey.gameButtonMode) || event.isKeyPressed(LogicalKeyboardKey.escape)) {
-            _showHomeMenu();
+      onKeyEvent: (event) {
+        if (event is KeyDownEvent) {
+          if (event.logicalKey != LogicalKeyboardKey.gameButtonB) {
+            if (event.logicalKey == (LogicalKeyboardKey.gameButtonMode) || event.logicalKey == (LogicalKeyboardKey.escape) || event.logicalKey == (LogicalKeyboardKey.goBack)) {
+              _showHomeMenu();
+            }
           }
         }
       },

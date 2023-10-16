@@ -8,12 +8,14 @@ typedef XboxMenuEntries = Map<String, void Function()?>;
 typedef XboxApp = MaterialApp;
 
 extension Xbox on MaterialApp {
+  
   static const double TileRadius = 7;
 
   static ThemeData get DarkTheme => Xbox.getTheme();
   static ThemeData get LightTheme => Xbox.getTheme(brightness: Brightness.light);
 
-  static ValueNotifier<ImageProvider?> tileWallpaper = ValueNotifier(null);
+  static final ValueNotifier<ImageProvider?> currentTileWallpaper = ValueNotifier(null);
+  static final ValueNotifier<Color> currentAccentColor = ValueNotifier(Xbox.Green);
 
   static ThemeData getTheme({Brightness brightness = Brightness.dark}) => ThemeData.from(
         useMaterial3: true,
@@ -28,10 +30,11 @@ extension Xbox on MaterialApp {
 
   static TextStyle get XboxFont => const TextStyle(fontFamily: "Xbox");
 
-  static ValueNotifier<Color> currentAccentColor = ValueNotifier(Xbox.Green);
+  static Color get accentColor => currentAccentColor.value;
+  static set accentColor(Color? value) => currentAccentColor.value = value ?? Xbox.Green;
 
-  Color get accentColor => currentAccentColor.value;
-  set accentColor(Color? value) => currentAccentColor.value = value ?? Xbox.Green;
+  static ImageProvider? get tileWallpaper => currentTileWallpaper.value;
+  static set tileWallpaper(ImageProvider? value) => currentTileWallpaper.value = value;
 
   static Color getReadableColor([Color? color]) => (color ?? currentAccentColor.value).computeLuminance() > 0.5 ? Colors.black : Colors.white;
 

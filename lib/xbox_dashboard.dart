@@ -28,7 +28,7 @@ class _XboxDashboardState extends State<XboxDashboard> {
 
   @override
   initState() {
-    Xbox.tileWallpaper.addListener(() {
+    Xbox.currentTileWallpaper.addListener(() {
       setState(() {
         debugPrint("wallpaper changed");
       });
@@ -54,7 +54,7 @@ class _XboxDashboardState extends State<XboxDashboard> {
   }
 
   ImageProvider<Object>? getWall() {
-    return Xbox.tileWallpaper.value ?? widget.wallpaper;
+    return Xbox.currentTileWallpaper.value ?? widget.wallpaper;
   }
 
   @override

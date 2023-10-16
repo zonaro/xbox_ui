@@ -84,7 +84,7 @@ class XboxTile extends StatefulWidget {
         tileColor: color ?? Xbox.currentAccentColor,
       );
 
-  factory XboxTile.iconBanner({required IconData icon, required String description, String title = "", required Size size, required double iconSize, double growOnFocus = 0, Color? color, Widget? image, void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false, ImageProvider? dashboardWallpaper}) => XboxTile(
+  factory XboxTile.iconBanner({required IconData icon, required String description, String title = "", required Size size, required double iconSize, double growOnFocus = 0, Color? color, ImageProvider? image, void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false, ImageProvider? dashboardWallpaper}) => XboxTile(
         icon: Icon(
           icon,
           color: Colors.white,
@@ -103,7 +103,7 @@ class XboxTile extends StatefulWidget {
         description: description,
         size: size,
         tileColor: color ?? Xbox.currentAccentColor,
-        background: image,
+        background: image != null ? Image(image: image, fit: BoxFit.cover, alignment: Alignment.center) : null,
         onTap: onTap,
         title: title,
         dashboardWallpaper: dashboardWallpaper,

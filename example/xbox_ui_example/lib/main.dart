@@ -95,7 +95,7 @@ class _BasicXboxUiState extends State<BasicXboxUi> {
             dashboardWallpaper: const NetworkImage(
               'https://picsum.photos/200/100?a=11',
             ),
-            image: Image.network('https://picsum.photos/100/100?a=1'),
+            image: const NetworkImage('https://picsum.photos/100/100?a=1'),
           ),
         ]),
         XboxTileList(title: "Banner", tiles: [
@@ -103,10 +103,7 @@ class _BasicXboxUiState extends State<BasicXboxUi> {
             title: "Banner Title",
             description: "A short banner description",
             size: Xbox.getSizeFromAspectRatio(16 / 9, height: 200),
-            image: Image.network(
-              'https://picsum.photos/200/120?a=2',
-              fit: BoxFit.cover,
-            ),
+            image: const NetworkImage('https://picsum.photos/200/120?a=2'),
           ),
           XboxTile.iconBanner(
             description: "Sometimes we have icons",

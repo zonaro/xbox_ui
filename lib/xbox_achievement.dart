@@ -174,27 +174,30 @@ class _XboxNotificationState extends State<XboxNotification> with TickerProvider
   }
 
   Widget _buildAchievement() {
-    return Align(
-      alignment: widget.alignment,
-      child: Material(
-        type: MaterialType.transparency,
-        elevation: widget.elevation,
-        child: Container(
-          color: widget.color ?? Xbox.accentColorNotifier.value,
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(Xbox.TileRadius),
+      child: Align(
+        alignment: widget.alignment,
+        child: Material(
+          type: MaterialType.transparency,
+          elevation: widget.elevation,
           child: Container(
-            decoration: BoxDecoration(
-              borderRadius: _buildBorderCard(),
-            ),
-            child: Ink(
-              child: InkWell(
-                onTap: widget.onTap,
-                child: IntrinsicHeight(
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      _buildIcon(),
-                      _buildContent(),
-                    ],
+            color: widget.color ?? Xbox.accentColorNotifier.value,
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: _buildBorderCard(),
+              ),
+              child: Ink(
+                child: InkWell(
+                  onTap: widget.onTap,
+                  child: IntrinsicHeight(
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        _buildIcon(),
+                        _buildContent(),
+                      ],
+                    ),
                   ),
                 ),
               ),

@@ -44,15 +44,15 @@ class _MyAppState extends State<MyApp> {
       ),
       topBarItens: [
         XboxCircleButton.icon(
-          20,
-          Icons.music_note,
+          size: 20,
+          icon: Icons.music_note,
           onPressed: () {
             XboxNotification(title: "Playing...").show(context);
           },
         ),
         XboxCircleButton.icon(
-          20,
-          Icons.book,
+          size: 20,
+          icon: Icons.book,
           onPressed: () {
             XboxDialog.menu(
               context,
@@ -69,38 +69,81 @@ class _MyAppState extends State<MyApp> {
           },
         ),
         XboxCircleButton.icon(
-          20,
-          Icons.cancel,
+          size: 20,
+          icon: Icons.cancel,
+          onPressed: () {
+            XboxDialog.confirm(context);
+          },
         ),
         XboxCircleButton.icon(
-          20,
-          Icons.settings,
-          onPressed: () {},
+          size: 20,
+          icon: Icons.numbers,
+          onPressed: () async {
+            var v = XboxDialog.showLoadingBar(context, title: 'Loading...', description: "Waiting for completion");
+
+            await Future.doWhile(() => Future.delayed(const Duration(milliseconds: 50)).then((_) => !v.increaseValue(.01))).then((value) => Navigator.pop(context));
+          },
         ),
       ],
       child: XboxTileView(items: [
-        XboxTileList(title: "Icons with default accent color and growing on focus", tiles: [
+        XboxTileList(title: "Game Style", tiles: [
+          XboxTile.game(
+            title: "Game Name",
+            size: const Size.square(150),
+            dashboardWallpaper: const NetworkImage(
+              'https://picsum.photos/200/100?a=11',
+            ),
+            growOnFocus: .5,
+            image: const NetworkImage('https://picsum.photos/100/100?a=1'),
+          ),
+          XboxTile.game(
+            title: "Game Name 2",
+            growOnFocus: .5,
+            upperText: "Demo version",
+            size: const Size.square(150),
+            dashboardWallpaper: const NetworkImage(
+              'https://picsum.photos/200/100?a=13',
+            ),
+            image: const NetworkImage('https://picsum.photos/100/100?a=11657'),
+          ),
+          XboxTile.game(
+            growOnFocus: .5,
+            title: "Game Name 3",
+            size: const Size.square(150),
+            bottomLeftIcon: Icons.abc,
+            bottomRightIcon: Icons.gamepad,
+            dashboardWallpaper: const NetworkImage(
+              'https://picsum.photos/200/100?a=13',
+            ),
+            image: const NetworkImage('https://picsum.photos/100/100?a=568'),
+          ),
+        ]),
+        XboxTileList(title: "Icons with default accent color", tiles: [
           XboxTile.icon(
             icon: Icons.settings,
             title: "Settings",
-            size: const Size.square(60),
-            growOnFocus: 1,
+            size: const Size.square(100),
+   
           ),
           XboxTile.icon(
             icon: Icons.usb_rounded,
             title: "Devices",
-            size: const Size.square(60),
-            growOnFocus: 1,
+            size: const Size.square(100),
+    
           ),
         ]),
-        XboxTileList(title: "Game Style", tiles: [
-          XboxTile.game(
-            title: "Game Name",
-            size: const Size.square(200),
-            dashboardWallpaper: const NetworkImage(
-              'https://picsum.photos/200/100?a=11',
-            ),
-            image: const NetworkImage('https://picsum.photos/100/100?a=1'),
+        XboxTileList(title: "Button Style", tiles: [
+          XboxTile.button(
+            title: "CONFIRM",
+            icon: Icons.gamepad_outlined,
+            onTap: () => XboxDialog.confirm(context),
+          ),
+          XboxTile.button(
+            title: "BUTTON 02",
+            icon: Icons.settings,
+          ),
+          XboxTile.button(
+            title: "BUTTON 03",
           ),
         ]),
         XboxTileList(title: "Banner", tiles: [
@@ -146,6 +189,66 @@ class _MyAppState extends State<MyApp> {
         ]),
         XboxTileList(title: "Colors", tiles: Xbox.colorTiles(Colors.primaries, onTap: (x) => Xbox.accentColor = x))
       ]),
+    );
+  }
+}
+
+class MyApp2 extends StatelessWidget {
+  const MyApp2({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        backgroundColor: Xbox.SlateGray,
+        body: Column(
+          children: [
+            const Text('Title', style: TextStyle(color: Xbox.White, fontSize: 24)),
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text('Tab 1', style: TextStyle(color: Xbox.White)),
+                Text('Tab 2', style: TextStyle(color: Xbox.White)),
+                Text('Tab 3', style: TextStyle(color: Xbox.White)),
+              ],
+            ),
+            const Text('Sort Field', style: TextStyle(color: Xbox.White)),
+            const Text('Filters Menu', style: TextStyle(color: Xbox.White)),
+            Expanded(
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: ListView(
+                      children: const [
+                        ListTile(title: Text('Games', style: TextStyle(color: Xbox.White))),
+                        ListTile(title: Text('Apps', style: TextStyle(color: Xbox.White))),
+                        ListTile(title: Text('Full Library', style: TextStyle(color: Xbox.White))),
+                        ListTile(title: Text('Queue', style: TextStyle(color: Xbox.White))),
+                        ListTile(title: Text('Update', style: TextStyle(color: Xbox.White))),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    flex: 3,
+                    child: GridView.builder(
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+                      itemBuilder: (context, index) {
+                        return XboxTile.game(
+                          title: "Game Name",
+                          size: const Size.square(200),
+                          dashboardWallpaper: const NetworkImage('https://picsum.photos/200/100?a=11'),
+                          image: const NetworkImage('https://picsum.photos/100/100?a=1'),
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

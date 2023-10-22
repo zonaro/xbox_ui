@@ -1,6 +1,7 @@
 // ignore_for_file: constant_identifier_names, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:xbox_ui/xbox.dart';
 import 'package:xbox_ui/xbox_tile.dart';
 
 class XboxTileList extends StatelessWidget {
@@ -18,9 +19,9 @@ class XboxTileList extends StatelessWidget {
             ? Text(
                 title ?? "",
                 style: const TextStyle(
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.bold,                 
                   fontSize: 25,
-                ),
+                ).merge(Xbox.font),
               )
             : null);
 

@@ -1,11 +1,10 @@
 // ignore_for_file: constant_identifier_names, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
-import 'package:xbox_ui/xbox_tile_list.dart';
 
 class XboxTileView extends StatelessWidget {
   
-  final List<XboxTileList> items;
+  final List<Widget> items;
 
   const XboxTileView({super.key, required this.items});
 
@@ -23,3 +22,5 @@ class XboxTileView extends StatelessWidget {
     );
   }
 }
+
+ 

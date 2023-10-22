@@ -56,21 +56,46 @@ class XboxTile extends StatefulWidget {
 
   final XboxMenuEntries? menuItems;
 
-  const XboxTile({super.key, this.background, this.title = "", this.tileColor, this.growOnFocus = 0, this.icon, required this.size, this.description = "", this.onTap, this.menuItems, required this.autoFocus, this.dashboardWallpaper});
+  final String upperText;
+
+  final Widget? bottomLeftIcon;
+  final Widget? bottomRightIcon;
+
+  const XboxTile({super.key, this.background, this.title = "", this.tileColor, this.growOnFocus = 0, this.icon, required this.size, this.description = "", this.onTap, this.menuItems, this.autoFocus = false, this.dashboardWallpaper, this.upperText = '', this.bottomLeftIcon, this.bottomRightIcon});
 
   @override
   State<XboxTile> createState() => _XboxTileState();
 
+  factory XboxTile.button({IconData? icon, required String title, Size size = const Size(280, 120), Color? color, bool autoFocus = false, void Function()? onTap}) {
+    return XboxTile(
+      size: size,
+      autoFocus: autoFocus,
+      description: title, //title do button é a description mesmo
+      tileColor: color,
+      onTap: onTap,
+      icon: icon != null
+          ? LayoutBuilder(
+              builder: (context, constraints) => Icon(
+                icon,
+                color: Xbox.getReadableColor().withOpacity(.6),
+                size: constraints.maxHeight * .35,
+              ),
+            )
+          : null,
+    );
+  }
+
   factory XboxTile.icon({required IconData icon, required String title, required Size size, double growOnFocus = 0, Color? color, void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false, ImageProvider? dashboardWallpaper}) => XboxTile(
-        icon: LayoutBuilder(
-            builder: (context, constraints) => Icon(
-                  icon,
-                  color: Colors.white,
-                  size: constraints.maxHeight - constraints.maxHeight * .6,
-                )),
+        icon: LayoutBuilder(builder: (context, constraints) {
+          return Icon(
+            icon,
+            color: Xbox.getReadableColor(),
+            size: constraints.maxHeight * .5,
+          );
+        }),
         autoFocus: autoFocus,
         title: title,
-        tileColor: color ?? Xbox.accentColorNotifier.value,
+        tileColor: color,
         onTap: onTap,
         dashboardWallpaper: dashboardWallpaper,
         growOnFocus: growOnFocus,
@@ -87,7 +112,7 @@ class XboxTile extends StatefulWidget {
         size: size,
         growOnFocus: growOnFocus,
         dashboardWallpaper: dashboardWallpaper,
-        tileColor: color ?? Xbox.accentColorNotifier.value,
+        tileColor: color,
       );
 
   factory XboxTile.banner({IconData? icon, required String description, String title = "", required Size size, double growOnFocus = 0, Color? color, List<ImageProvider?> images = const [], void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false, ImageProvider? dashboardWallpaper}) => XboxTile(
@@ -95,8 +120,8 @@ class XboxTile extends StatefulWidget {
             ? LayoutBuilder(builder: (context, constraints) {
                 return Icon(
                   icon,
-                  color: Colors.white,
-                  size: constraints.maxHeight - constraints.maxHeight * .6,
+                  color: Xbox.White,
+                  size: constraints.maxHeight * .5,
                   shadows: const [
                     BoxShadow(
                       blurStyle: BlurStyle.solid,
@@ -112,7 +137,7 @@ class XboxTile extends StatefulWidget {
         growOnFocus: growOnFocus,
         description: description,
         size: size,
-        tileColor: color ?? Xbox.accentColorNotifier.value,
+        tileColor: color,
         background: XboxImageStacker(images: images),
         onTap: onTap,
         title: title,
@@ -124,7 +149,7 @@ class XboxTile extends StatefulWidget {
         icon: LayoutBuilder(builder: (context, constraints) {
           return Icon(
             icon,
-            color: Colors.white,
+            color: Xbox.White,
             size: constraints.maxHeight - constraints.maxHeight * .6,
             shadows: const [
               BoxShadow(
@@ -139,7 +164,7 @@ class XboxTile extends StatefulWidget {
         autoFocus: autoFocus,
         title: title,
         size: size,
-        tileColor: color ?? Xbox.accentColorNotifier.value,
+        tileColor: color,
         onTap: onTap,
         menuItems: menuItems,
         dashboardWallpaper: dashboardWallpaper,
@@ -147,16 +172,31 @@ class XboxTile extends StatefulWidget {
         background: Container(decoration: BoxDecoration(gradient: gradient)),
       );
 
-  factory XboxTile.game({required String title, required Size size, required ImageProvider? image, Color? color, double growOnFocus = 0, void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false, ImageProvider? dashboardWallpaper}) => XboxTile(
+  factory XboxTile.game({required String title, required Size size, required ImageProvider? image, Color? color, double growOnFocus = 0, void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false, ImageProvider? dashboardWallpaper, String upperText = '', IconData? bottomLeftIcon, IconData? bottomRightIcon}) => XboxTile(
         autoFocus: autoFocus,
         background: (image != null ? Image(image: image, fit: BoxFit.cover, alignment: Alignment.topCenter) : null),
         title: title,
         size: size,
-        tileColor: color ?? Xbox.accentColorNotifier.value,
+        tileColor: color,
         onTap: onTap,
         growOnFocus: growOnFocus,
         menuItems: menuItems,
+        upperText: upperText,
         dashboardWallpaper: dashboardWallpaper,
+        bottomLeftIcon: bottomLeftIcon != null
+            ? Icon(
+                bottomLeftIcon,
+                size: size.height * .15,
+                color: Xbox.getReadableColor(color),
+              )
+            : null,
+        bottomRightIcon: bottomRightIcon != null
+            ? Icon(
+                bottomRightIcon,
+                size: size.height * .15,
+                color: Xbox.White,
+              )
+            : null,
       );
 
   double getHeight(bool hasFocus) => growOnFocus > 0 && hasFocus ? size.height + (size.height * growOnFocus) : size.height;
@@ -186,10 +226,9 @@ class _XboxTileState extends State<XboxTile> {
 
   @override
   Widget build(BuildContext context) {
-    final bool showTitleBox = hasFocus && widget.title.trim().isNotEmpty && widget.description.trim().isEmpty;
-
-    final bool isBanner = widget.description.trim().isNotEmpty && !showTitleBox;
-
+    final bool isButton = widget.upperText.trim().isEmpty && widget.description.trim().isNotEmpty && widget.title.isEmpty && widget.background == null;
+    final bool showTitleBox = !isButton && hasFocus && widget.title.trim().isNotEmpty && widget.description.trim().isEmpty;
+    final bool isBanner = widget.background != null && widget.description.trim().isNotEmpty && !showTitleBox;
     return KeyboardListener(
       focusNode: node,
       onKeyEvent: (event) {
@@ -217,90 +256,21 @@ class _XboxTileState extends State<XboxTile> {
               padding: const EdgeInsets.all(2.5),
               width: getWidth(),
               height: getHeight(),
-              decoration: hasFocus ? Xbox.tileInFocus(context) : null,
+              decoration: hasFocus ? Xbox.tileInFocus(context, widget.tileColor) : null,
               child: Stack(
                 fit: StackFit.expand,
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(Xbox.TileRadius),
                     child: GridTile(
-                      footer: !showTitleBox
-                          ? null
-                          : _SlideUpAnimationWrapper(
-                              child: ClipRRect(
-                                borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(Xbox.TileRadius), bottomRight: Radius.circular(Xbox.TileRadius)),
-                                child: Container(
-                                  color: Colors.black.withOpacity(.8),
-                                  child: Align(
-                                    alignment: Alignment.bottomLeft,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(10.0),
-                                      child: Text(
-                                        widget.title,
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16,
-                                          shadows: <Shadow>[
-                                            Shadow(
-                                              offset: const Offset(1.0, 1.0),
-                                              blurRadius: 3.0,
-                                              color: Colors.black.withOpacity(.8),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
+                      header: widget.upperText.trim().isNotEmpty ? _upperTextBuilder() : null,
+                      footer: showTitleBox ? _titleBoxBuilder() : _lowerIconsBuilder(),
                       child: Stack(
                         fit: StackFit.expand,
                         alignment: Alignment.center,
                         children: [
-                          Container(color: widget.tileColor ?? Xbox.accentColorNotifier.value),
-                          if (widget.background != null)
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(Xbox.TileRadius),
-                              child: widget.background,
-                            ),
-                          Container(
-                            decoration: isBanner ? const BoxDecoration(gradient: LinearGradient(colors: [Colors.transparent, Colors.black], begin: Alignment.topCenter, end: Alignment.bottomCenter)) : null,
-                            child: GridTile(
-                                footer: isBanner
-                                    ? Align(
-                                        alignment: Alignment.bottomLeft,
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(10),
-                                          child: SizedBox(
-                                            width: getWidth(),
-                                            child: Column(
-                                              mainAxisAlignment: MainAxisAlignment.end,
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                if (widget.title.trim().isNotEmpty)
-                                                  Text(
-                                                    widget.title,
-                                                    style: const TextStyle(
-                                                      color: Colors.white,
-                                                      fontWeight: FontWeight.bold,
-                                                    ),
-                                                  ),
-                                                if (widget.description.trim().isNotEmpty)
-                                                  Text(
-                                                    widget.description,
-                                                    style: const TextStyle(
-                                                      color: Colors.white,
-                                                    ),
-                                                  ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      )
-                                    : null,
-                                child: Center(child: widget.icon)),
-                          ),
+                          _backgroundBuilder(),
+                          if (isBanner) _bannerBuilder() else if (isButton) _buttonBuilder() else if (widget.icon != null) _iconBuilder(),
                         ],
                       ),
                     ),
@@ -311,6 +281,186 @@ class _XboxTileState extends State<XboxTile> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _iconBuilder() {
+    return GridTile(child: SizedBox.expand(child: Center(child: widget.icon)));
+  }
+
+  Widget _upperTextBuilder() {
+    return ClipRRect(
+      borderRadius: const BorderRadius.only(topLeft: Radius.circular(Xbox.TileRadius), topRight: Radius.circular(Xbox.TileRadius)),
+      child: Container(
+        alignment: Alignment.center,
+        color: Colors.black.withOpacity(.8),
+        child: Align(
+          alignment: Alignment.bottomLeft,
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Center(
+              child: FittedBox(
+                child: Text(
+                  widget.upperText,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Xbox.White,
+                    fontSize: 12,
+                    shadows: <Shadow>[
+                      Shadow(
+                        offset: const Offset(1.0, 1.0),
+                        blurRadius: 3.0,
+                        color: Colors.black.withOpacity(.8),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget? _titleBoxBuilder() {
+    return _SlideUpAnimationWrapper(
+      child: ClipRRect(
+        borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(Xbox.TileRadius), bottomRight: Radius.circular(Xbox.TileRadius)),
+        child: Container(
+          color: Colors.black.withOpacity(.8),
+          alignment: Alignment.bottomLeft,
+          child: Align(
+            alignment: Alignment.bottomLeft,
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Text(
+                widget.title,
+                style: TextStyle(
+                  color: Xbox.White,
+                  fontSize: 16,
+                  shadows: <Shadow>[
+                    Shadow(
+                      offset: const Offset(1.0, 1.0),
+                      blurRadius: 3.0,
+                      color: Colors.black.withOpacity(.8),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _backgroundBuilder() {
+    if (widget.background != null) {
+      return ClipRRect(
+        borderRadius: BorderRadius.circular(Xbox.TileRadius),
+        child: widget.background,
+      );
+    } else {
+      return Container(color: widget.tileColor ?? Xbox.accentColor);
+    }
+  }
+
+  Widget _bannerBuilder() {
+    return Container(
+      decoration: const BoxDecoration(gradient: LinearGradient(colors: [Colors.transparent, Colors.black], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
+      child: GridTile(
+          footer: Align(
+            alignment: Alignment.bottomLeft,
+            child: Padding(
+              padding: const EdgeInsets.all(10),
+              child: SizedBox(
+                width: getWidth(),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    if (widget.title.trim().isNotEmpty)
+                      Text(
+                        widget.title,
+                        style: const TextStyle(
+                          color: Xbox.White,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    if (widget.description.trim().isNotEmpty)
+                      Text(
+                        widget.description,
+                        style: const TextStyle(
+                          color: Xbox.White,
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          child: Center(child: widget.icon)),
+    );
+  }
+
+  Widget _lowerIconsBuilder() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: widget.bottomLeftIcon ?? const SizedBox.shrink(),
+        ),
+        Container(
+          color: widget.bottomRightIcon != null ? Colors.black.withOpacity(0.7) : null,
+          padding: const EdgeInsets.all(8.0),
+          child: widget.bottomRightIcon ?? const SizedBox.shrink(),
+        ),
+      ],
+    );
+  }
+
+  Widget _buttonBuilder() {
+    return GridTile(
+      footer: Align(
+        alignment: Alignment.bottomLeft,
+        child: SizedBox(
+          width: getWidth(),
+          height: getHeight(),
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                if (widget.icon != null)
+                  Align(
+                    alignment: Alignment.topRight,
+                    child: SizedBox(
+                      height: getHeight() * 0.7,
+                      child: widget.icon,
+                    ),
+                  ),
+                if (widget.description.trim().isNotEmpty)
+                  Align(
+                    alignment: Alignment.bottomLeft,
+                    child: Text(
+                      widget.description,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Xbox.getReadableColor(widget.tileColor),
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Xbox',
+                        package: 'xbox_ui',
+                      ),
+                    ),
+                  ),
+              ],
+            ),
+          ),
+        ),
+      ),
+      child: const SizedBox.shrink(),
     );
   }
 

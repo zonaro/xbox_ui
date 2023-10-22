@@ -1,7 +1,8 @@
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names
 
 import 'dart:convert';
- 
+
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 
@@ -18,6 +19,7 @@ extension Xbox on XboxApp {
 
   static final ValueNotifier<ImageProvider?> tileWallpaperNotifier = ValueNotifier(null);
   static final ValueNotifier<ImageProvider?> userWallpaperNotifier = ValueNotifier(null);
+
   static final ValueNotifier<Color> accentColorNotifier = ValueNotifier(Xbox.Green);
 
   static ThemeData getTheme({Brightness brightness = Brightness.dark}) => ThemeData.from(
@@ -31,7 +33,7 @@ extension Xbox on XboxApp {
 
   static const White = Color(0xFFEEEEEE);
 
-  static TextStyle get XboxFont => const TextStyle(fontFamily: "Xbox");
+  static TextStyle get font => const TextStyle(fontFamily: "Xbox", package: 'xbox_ui');
 
   static Color get accentColor => accentColorNotifier.value;
   static set accentColor(Color? value) => accentColorNotifier.value = value ?? Xbox.Green;
@@ -42,7 +44,7 @@ extension Xbox on XboxApp {
   static ImageProvider? get userWallpaper => userWallpaperNotifier.value;
   static set userWallpaper(ImageProvider? value) => userWallpaperNotifier.value = value;
 
-  static Color getReadableColor([Color? color]) => (color ?? accentColorNotifier.value).computeLuminance() > 0.5 ? Colors.black : Colors.white;
+  static Color getReadableColor([Color? color]) => (color ?? accentColorNotifier.value).computeLuminance() > 0.5 ? SlateGray : White;
 
   static Color getContrastThemeColor(BuildContext context) => Theme.of(context).brightness == Brightness.dark ? White : SlateGray;
 
@@ -65,11 +67,11 @@ extension Xbox on XboxApp {
       )
       .toList();
 
-  static BoxDecoration tileInFocus(BuildContext context) => BoxDecoration(
+  static BoxDecoration tileInFocus(BuildContext context, Color? color) => BoxDecoration(
         color: Theme.of(context).colorScheme.background,
         boxShadow: [
           BoxShadow(
-            color: Xbox.accentColorNotifier.value,
+            color: color ?? Xbox.accentColor,
             spreadRadius: 2.0,
           ),
         ],
@@ -96,4 +98,13 @@ extension Xbox on XboxApp {
   }
 
   static final ImageProvider emptyImage = MemoryImage(const Base64Codec().decode("R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"));
+
+  Future<Size> getImageSize(Uint8List image) async {
+    var decodedImage = await decodeImageFromList(image);
+    return Size(decodedImage.width as double, decodedImage.height as double);
+  }
+
+  double calculateProportion(Size size) {
+    return size.width / size.height;
+  }
 }

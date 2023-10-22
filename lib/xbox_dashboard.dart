@@ -8,7 +8,9 @@ import 'package:xbox_ui/xbox_menu.dart';
 import 'xbox.dart';
 
 class XboxDashboard extends StatefulWidget {
-  XboxDashboard({super.key, required this.child, required this.topBarItens, this.avatar, this.menu, required this.username, required this.userdetail});
+  final double topSpace;
+
+  XboxDashboard({super.key, required this.child, required this.topBarItens, this.avatar, this.menu, required this.username, required this.userdetail, this.topSpace = 0});
 
   final List<Widget> topBarItens;
 
@@ -39,6 +41,7 @@ class XboxDashboard extends StatefulWidget {
 class _XboxDashboardState extends State<XboxDashboard> {
   @override
   initState() {
+    
     Xbox.tileWallpaperNotifier.addListener(() {
       setState(() {
         debugPrint("tile wallpaper changed");
@@ -53,7 +56,7 @@ class _XboxDashboardState extends State<XboxDashboard> {
 
     Xbox.accentColorNotifier.addListener(() {
       setState(() {
-        debugPrint("color changed");
+        debugPrint("accent color changed");
       });
     });
 
@@ -145,7 +148,17 @@ class _XboxDashboardState extends State<XboxDashboard> {
               )
             ],
           ),
-          body: widget.child,
+          body: SingleChildScrollView(            
+            child: Column(
+              children: [
+                SizedBox(
+                  height: widget.topSpace,
+                  width: MediaQuery.of(context).size.width,
+                ),
+                widget.child,
+              ],
+            ),
+          ),
         ),
       ],
     );

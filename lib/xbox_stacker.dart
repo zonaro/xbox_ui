@@ -21,68 +21,73 @@ class XboxImageStacker extends StatelessWidget {
   final List<ImageProvider?> images;
 
   final bool parallelogramTile;
+ 
 
-  const XboxImageStacker({super.key, required this.images, this.parallelogramTile = false});
+  const XboxImageStacker({super.key, required this.images, this.parallelogramTile = false });
 
   @override
   Widget build(BuildContext context) => LayoutBuilder(
         builder: (context, constraints) {
           var sliceWidth = constraints.maxWidth / images.length;
           var trueImages = images.where((x) => x != null).map((e) => e!).toList();
-          return Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: trueImages.first,
-                fit: BoxFit.cover,
+          if (trueImages.isNotEmpty) {
+            return Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: trueImages.first,
+                  fit: BoxFit.cover,
+                ),
               ),
-            ),
-            child: Stack(
-              fit: StackFit.expand,
-              children: trueImages.asMap().entries.map((entry) {
-                int idx = entry.key;
-                ImageProvider image = entry.value;
-                return Transform.translate(
-                  offset: Offset(sliceWidth * idx, 0),
-                  child: parallelogramTile
-                      ? CustomPaint(
-                          painter: idx == 0 ? null : _ShadowPainter(),
-                          child: ClipPath(
-                            clipper: _ParallelogramClipper(),
-                            child: Container(
-                              width: sliceWidth,
-                              height: constraints.maxHeight,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: idx == 0 ? Xbox.emptyImage : image,
-                                  fit: BoxFit.cover,
+              child: Stack(
+                fit: StackFit.expand,
+                children: trueImages.asMap().entries.map((entry) {
+                  int idx = entry.key;
+                  ImageProvider image = entry.value;
+                  return Transform.translate(
+                    offset: Offset(sliceWidth * idx, 0),
+                    child: parallelogramTile
+                        ? CustomPaint(
+                            painter: idx == 0 ? null : _ShadowPainter(),
+                            child: ClipPath(
+                              clipper: _ParallelogramClipper(),
+                              child: Container(
+                                width: sliceWidth,
+                                height: constraints.maxHeight,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: idx == 0 ? Xbox.emptyImage : image,
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        )
-                      : Container(
-                          width: sliceWidth,
-                          height: constraints.maxHeight,
-                          decoration: BoxDecoration(
-                            boxShadow: [
-                              if (idx > 0)
-                                BoxShadow(
-                                  color: Xbox.SlateGray.withOpacity(0.8), //color of shadow
-                                  spreadRadius: 5, //spread radius
-                                  blurRadius: 7, // blur radius
-                                  offset: const Offset(0, 2), // changes position of shadow
-                                ),
-                            ],
-                            image: DecorationImage(
-                              image: idx == 0 ? Xbox.emptyImage : image,
-                              fit: BoxFit.cover,
+                          )
+                        : Container(
+                            width: sliceWidth,
+                            height: constraints.maxHeight,
+                            decoration: BoxDecoration(
+                              boxShadow: [
+                                if (idx > 0)
+                                  BoxShadow(
+                                    color: Xbox.SlateGray.withOpacity(0.8), //color of shadow
+                                    spreadRadius: 5, //spread radius
+                                    blurRadius: 7, // blur radius
+                                    offset: const Offset(0, 2), // changes position of shadow
+                                  ),
+                              ],
+                              image: DecorationImage(
+                                image: idx == 0 ? Xbox.emptyImage : image,
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
-                        ),
-                );
-              }).toList(),
-            ),
-          );
+                  );
+                }).toList(),
+              ),
+            );
+          } else {
+            return const SizedBox.shrink();
+          }
         },
       );
 }

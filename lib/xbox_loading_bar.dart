@@ -17,10 +17,13 @@ class XboxLoadingBar extends StatefulWidget {
 
   bool setValue(double? value) {
     _valueBar.value = value;
-    if ((_valueBar.value ?? 0) > 1.0) {
-      _valueBar.value = 1;
+    if (_valueBar.value != null) {
+      if (_valueBar.value! > 1) {
+        _valueBar.value = 1;
+      }
+      return _valueBar.value == 1;
     }
-    return _valueBar.value == 1;
+    return false;
   }
 
   bool increaseValue(double value) {

@@ -85,7 +85,7 @@ class XboxTile extends StatefulWidget {
     );
   }
 
-  factory XboxTile.icon({required IconData icon, required String title, required Size size, double growOnFocus = 0, Color? color, void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false, ImageProvider? dashboardWallpaper}) => XboxTile(
+  factory XboxTile.icon(  {required IconData icon, required String title, required Size size, double growOnFocus = 0, Color? color, void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false, ImageProvider? dashboardWallpaper}) => XboxTile(
         icon: LayoutBuilder(builder: (context, constraints) {
           return Icon(
             icon,
@@ -138,7 +138,7 @@ class XboxTile extends StatefulWidget {
         description: description,
         size: size,
         tileColor: color,
-        background: XboxImageStacker(images: images),
+        background: images.isNotEmpty ? XboxImageStacker(images: images) : null,
         onTap: onTap,
         title: title,
         dashboardWallpaper: dashboardWallpaper,
@@ -357,9 +357,12 @@ class _XboxTileState extends State<XboxTile> {
 
   Widget _backgroundBuilder() {
     if (widget.background != null) {
-      return ClipRRect(
-        borderRadius: BorderRadius.circular(Xbox.TileRadius),
-        child: widget.background,
+      return Container(
+        color:  widget.tileColor ?? Xbox.accentColor,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(Xbox.TileRadius),
+          child: widget.background,
+        ),
       );
     } else {
       return Container(color: widget.tileColor ?? Xbox.accentColor);

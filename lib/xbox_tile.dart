@@ -52,6 +52,8 @@ class XboxTile extends StatefulWidget {
 
   final bool autoFocus;
 
+  final bool fixedFocus;
+
   final void Function()? onTap;
 
   final XboxMenuEntries? menuItems;
@@ -61,7 +63,7 @@ class XboxTile extends StatefulWidget {
   final Widget? bottomLeftIcon;
   final Widget? bottomRightIcon;
 
-  const XboxTile({super.key, this.background, this.title = "", this.tileColor, this.growOnFocus = 0, this.icon, required this.size, this.description = "", this.onTap, this.menuItems, this.autoFocus = false, this.dashboardWallpaper, this.upperText = '', this.bottomLeftIcon, this.bottomRightIcon});
+  const XboxTile({super.key, this.background, this.title = "", this.tileColor, this.growOnFocus = 0, this.icon, required this.size, this.description = "", this.onTap, this.menuItems, this.autoFocus = false, this.dashboardWallpaper, this.upperText = '', this.bottomLeftIcon, this.bottomRightIcon, this.fixedFocus = false});
 
   @override
   State<XboxTile> createState() => _XboxTileState();
@@ -85,7 +87,7 @@ class XboxTile extends StatefulWidget {
     );
   }
 
-  factory XboxTile.icon(  {required IconData icon, required String title, required Size size, double growOnFocus = 0, Color? color, void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false, ImageProvider? dashboardWallpaper}) => XboxTile(
+  factory XboxTile.icon({required IconData icon, required String title, required Size size, double growOnFocus = 0, Color? color, void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false, ImageProvider? dashboardWallpaper}) => XboxTile(
         icon: LayoutBuilder(builder: (context, constraints) {
           return Icon(
             icon,
@@ -172,8 +174,9 @@ class XboxTile extends StatefulWidget {
         background: Container(decoration: BoxDecoration(gradient: gradient)),
       );
 
-  factory XboxTile.game({required String title, required Size size, required ImageProvider? image, Color? color, double growOnFocus = 0, void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false, ImageProvider? dashboardWallpaper, String upperText = '', IconData? bottomLeftIcon, IconData? bottomRightIcon}) => XboxTile(
+  factory XboxTile.game({required String title, required Size size, required ImageProvider? image, Color? color, double growOnFocus = 0, void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false, ImageProvider? dashboardWallpaper, String upperText = '', IconData? bottomLeftIcon, IconData? bottomRightIcon, bool fixedFocus = false}) => XboxTile(
         autoFocus: autoFocus,
+        fixedFocus: fixedFocus,
         background: (image != null ? Image(image: image, fit: BoxFit.cover, alignment: Alignment.topCenter) : null),
         title: title,
         size: size,
@@ -220,14 +223,14 @@ class _XboxTileState extends State<XboxTile> {
     node.requestFocus();
     debugPrint("showing menu");
     if (widget.menuItems != null && widget.menuItems!.isNotEmpty) {
-      await XboxDialog.menu(context, title: widget.title, menuEntries: widget.menuItems!);
+      await XboxDialog.menu(context, title: [widget.title, widget.description].firstWhere((element) => element.trim().isNotEmpty), menuEntries: widget.menuItems!);
     }
   }
 
   @override
   Widget build(BuildContext context) {
     final bool isButton = widget.upperText.trim().isEmpty && widget.description.trim().isNotEmpty && widget.title.isEmpty && widget.background == null;
-    final bool showTitleBox = !isButton && hasFocus && widget.title.trim().isNotEmpty && widget.description.trim().isEmpty;
+    final bool showTitleBox = !isButton && (hasFocus || widget.fixedFocus) && widget.title.trim().isNotEmpty && widget.description.trim().isEmpty;
     final bool isBanner = widget.background != null && widget.description.trim().isNotEmpty && !showTitleBox;
     return KeyboardListener(
       focusNode: node,
@@ -256,7 +259,7 @@ class _XboxTileState extends State<XboxTile> {
               padding: const EdgeInsets.all(2.5),
               width: getWidth(),
               height: getHeight(),
-              decoration: hasFocus ? Xbox.tileInFocus(context, widget.tileColor) : null,
+              decoration: hasFocus ? Xbox.tileInFocus(context) : null,
               child: Stack(
                 fit: StackFit.expand,
                 children: [
@@ -358,7 +361,7 @@ class _XboxTileState extends State<XboxTile> {
   Widget _backgroundBuilder() {
     if (widget.background != null) {
       return Container(
-        color:  widget.tileColor ?? Xbox.accentColor,
+        color: widget.tileColor ?? Xbox.accentColor,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(Xbox.TileRadius),
           child: widget.background,

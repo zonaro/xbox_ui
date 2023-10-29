@@ -36,7 +36,7 @@ class XboxDialog extends StatelessWidget {
         ),
       );
 
-  static XboxLoadingBar showLoadingBar(BuildContext context, {required String title, String description = '', double? value}) => XboxLoadingBar(
+  static XboxLoadingBar loadingBar(BuildContext context, {required String title, String description = '', double? value}) => XboxLoadingBar(
         title: title,
         description: description,
       ).show(context);
@@ -125,8 +125,9 @@ class XboxDialog extends StatelessWidget {
     String? content,
     String? textOK,
     String? textCancel,
+    String? value,
   }) async {
-    final TextEditingController controller = TextEditingController();
+    final TextEditingController controller = TextEditingController(text: value);
     final bool? isConfirm = await showDialog<bool>(
       context: context,
       builder: (_) => AlertDialog(

@@ -79,7 +79,7 @@ class _MyAppState extends State<MyApp> {
           size: 20,
           icon: Icons.numbers,
           onPressed: () async {
-            var v = XboxDialog.showLoadingBar(context, title: 'Loading...', description: "Waiting for completion");
+            var v = XboxDialog.loadingBar(context, title: 'Loading...', description: "Waiting for completion");
 
             await Future.doWhile(() => Future.delayed(const Duration(milliseconds: 50)).then((_) => !v.increaseValue(.01))).then((value) => Navigator.pop(context));
           },

@@ -67,7 +67,7 @@ extension Xbox on XboxApp {
       )
       .toList();
 
-  static BoxDecoration tileInFocus(BuildContext context, Color? color) => BoxDecoration(
+  static BoxDecoration tileInFocus(BuildContext context, [Color? color]) => BoxDecoration(
         color: Theme.of(context).colorScheme.background,
         boxShadow: [
           BoxShadow(

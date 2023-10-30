@@ -51,7 +51,20 @@ flutter:
     - family: Xbox
       fonts:
         - asset: fonts/xbox360.ttf 
+    - family: Segoe
+      fonts:
 
+        - asset: fonts/SegoeProDisplay-Light.ttf
+          weight: 100          
+        - asset: fonts/SegoeProDisplay-Semilight.ttf        
+          weight: 300         
+        - asset: fonts/SegoeProDisplay-Regular.ttf
+          weight: 500  
+        - asset: fonts/SegoeProDisplay-Semibold.ttf
+          weight: 700
+        - asset: fonts/SegoeProDisplay-Bold.ttf
+          weight: 900
+ 
 
   # fonts:
   #   - family: Schyler

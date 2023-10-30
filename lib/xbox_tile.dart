@@ -122,7 +122,7 @@ class XboxTile extends StatefulWidget {
             ? LayoutBuilder(builder: (context, constraints) {
                 return Icon(
                   icon,
-                  color: Xbox.White,
+                  color: Colors.White,
                   size: constraints.maxHeight * .5,
                   shadows: const [
                     BoxShadow(
@@ -151,7 +151,7 @@ class XboxTile extends StatefulWidget {
         icon: LayoutBuilder(builder: (context, constraints) {
           return Icon(
             icon,
-            color: Xbox.White,
+            color: Colors.White,
             size: constraints.maxHeight - constraints.maxHeight * .6,
             shadows: const [
               BoxShadow(
@@ -197,7 +197,7 @@ class XboxTile extends StatefulWidget {
             ? Icon(
                 bottomRightIcon,
                 size: size.height * .15,
-                color: Xbox.White,
+                color: Colors.White,
               )
             : null,
       );
@@ -307,7 +307,7 @@ class _XboxTileState extends State<XboxTile> {
                   widget.upperText,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Xbox.White,
+                    color: Colors.White,
                     fontSize: 12,
                     shadows: <Shadow>[
                       Shadow(
@@ -340,7 +340,7 @@ class _XboxTileState extends State<XboxTile> {
               child: Text(
                 widget.title,
                 style: TextStyle(
-                  color: Xbox.White,
+                  color: Colors.White,
                   fontSize: 16,
                   shadows: <Shadow>[
                     Shadow(
@@ -390,7 +390,7 @@ class _XboxTileState extends State<XboxTile> {
                       Text(
                         widget.title,
                         style: const TextStyle(
-                          color: Xbox.White,
+                          color: Colors.White,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -398,7 +398,7 @@ class _XboxTileState extends State<XboxTile> {
                       Text(
                         widget.description,
                         style: const TextStyle(
-                          color: Xbox.White,
+                          color: Colors.White,
                         ),
                       ),
                   ],

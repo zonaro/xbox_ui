@@ -22,16 +22,13 @@ extension Xbox on XboxApp {
 
   static final ValueNotifier<Color> accentColorNotifier = ValueNotifier(Xbox.Green);
 
-  static ThemeData getTheme({Brightness brightness = Brightness.dark}) => ThemeData.from(
-        useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(brightness: brightness, seedColor: Xbox.accentColorNotifier.value, background: brightness == Brightness.dark ? Xbox.SlateGray : Xbox.White),
-      );
+  static ThemeData getTheme({Brightness brightness = Brightness.dark}) => ThemeData(fontFamily: "Segoe", fontFamilyFallback: const ["Arial"]).copyWith(colorScheme: ColorScheme.fromSeed(brightness: brightness, seedColor: Xbox.accentColor, background: brightness == Brightness.dark ? Xbox.SlateGray : Colors.White));
 
-  static const Green = Color(0xFF107C10);
+  static const Green = Color(0xff107c10);
 
   static const SlateGray = Color(0xFF3A3A3A);
 
-  static const White = Color(0xFFEEEEEE);
+ 
 
   static TextStyle get font => const TextStyle(fontFamily: "Xbox", package: 'xbox_ui');
 

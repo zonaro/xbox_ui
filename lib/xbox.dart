@@ -22,15 +22,26 @@ extension Xbox on XboxApp {
 
   static final ValueNotifier<Color> accentColorNotifier = ValueNotifier(Xbox.Green);
 
-  static ThemeData getTheme({Brightness brightness = Brightness.dark}) => ThemeData(fontFamily: "Segoe", fontFamilyFallback: const ["Arial"]).copyWith(colorScheme: ColorScheme.fromSeed(brightness: brightness, seedColor: Xbox.accentColor, background: brightness == Brightness.dark ? Xbox.SlateGray : Colors.White));
+  static ThemeData getTheme({Brightness brightness = Brightness.dark}) => ThemeData(
+        fontFamily: "SegoePro",
+        package: "xbox_ui",
+        fontFamilyFallback: const ["Arial"],
+      ).copyWith(
+        colorScheme: ColorScheme.fromSeed(
+          brightness: brightness,
+          seedColor: Xbox.accentColor,
+          background: brightness == Brightness.dark ? Xbox.SlateGray : Colors.white,
+          onBackground: brightness == Brightness.dark ? Colors.white : Xbox.SlateGray,
+        ),
+      );
 
   static const Green = Color(0xff107c10);
 
   static const SlateGray = Color(0xFF3A3A3A);
 
- 
+  static const TextStyle logoFont = TextStyle(fontFamily: "Xbox", package: 'xbox_ui');
 
-  static TextStyle get font => const TextStyle(fontFamily: "Xbox", package: 'xbox_ui');
+  static TextStyle getFont({Color? color, FontWeight fontWeight = FontWeight.normal, double? fontSize}) => TextStyle(fontFamily: "SegoePro", fontWeight: fontWeight, package: 'xbox_ui', color: color, fontSize: fontSize);
 
   static Color get accentColor => accentColorNotifier.value;
   static set accentColor(Color? value) => accentColorNotifier.value = value ?? Xbox.Green;
@@ -41,11 +52,11 @@ extension Xbox on XboxApp {
   static ImageProvider? get userWallpaper => userWallpaperNotifier.value;
   static set userWallpaper(ImageProvider? value) => userWallpaperNotifier.value = value;
 
-  static Color getReadableColor([Color? color]) => (color ?? accentColorNotifier.value).computeLuminance() > 0.5 ? SlateGray : White;
+  static Color getReadableColor([Color? color]) => (color ?? accentColor).computeLuminance() > 0.5 ? SlateGray : Colors.white;
 
-  static Color getContrastThemeColor(BuildContext context) => Theme.of(context).brightness == Brightness.dark ? White : SlateGray;
+  static Color getContrastThemeColor(BuildContext context) => Theme.of(context).brightness == Brightness.dark ? Colors.white : SlateGray;
 
-  static Color getBackgroundColor(BuildContext context) => Theme.of(context).brightness == Brightness.dark ? SlateGray : White;
+  static Color getBackgroundColor(BuildContext context) => Theme.of(context).brightness == Brightness.dark ? SlateGray : Colors.white;
 
   static RoundedRectangleBorder get defaultBorderShape => RoundedRectangleBorder(borderRadius: BorderRadius.circular(Xbox.TileRadius));
 

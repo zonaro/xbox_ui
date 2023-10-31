@@ -123,13 +123,11 @@ class _MyAppState extends State<MyApp> {
             icon: Icons.settings,
             title: "Settings",
             size: const Size.square(100),
-   
           ),
           XboxTile.icon(
             icon: Icons.usb_rounded,
             title: "Devices",
             size: const Size.square(100),
-    
           ),
         ]),
         XboxTileList(title: "Button Style", tiles: [
@@ -203,17 +201,17 @@ class MyApp2 extends StatelessWidget {
         backgroundColor: Xbox.SlateGray,
         body: Column(
           children: [
-            const Text('Title', style: TextStyle(color: Colors.White, fontSize: 24)),
+            const Text('Title', style: TextStyle(color: Colors.white, fontSize: 24)),
             const Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Text('Tab 1', style: TextStyle(color: Colors.White)),
-                Text('Tab 2', style: TextStyle(color: Colors.White)),
-                Text('Tab 3', style: TextStyle(color: Colors.White)),
+                Text('Tab 1', style: TextStyle(color: Colors.white)),
+                Text('Tab 2', style: TextStyle(color: Colors.white)),
+                Text('Tab 3', style: TextStyle(color: Colors.white)),
               ],
             ),
-            const Text('Sort Field', style: TextStyle(color: Colors.White)),
-            const Text('Filters Menu', style: TextStyle(color: Colors.White)),
+            const Text('Sort Field', style: TextStyle(color: Colors.white)),
+            const Text('Filters Menu', style: TextStyle(color: Colors.white)),
             Expanded(
               child: Row(
                 children: [
@@ -221,11 +219,11 @@ class MyApp2 extends StatelessWidget {
                     flex: 1,
                     child: ListView(
                       children: const [
-                        ListTile(title: Text('Games', style: TextStyle(color: Colors.White))),
-                        ListTile(title: Text('Apps', style: TextStyle(color: Colors.White))),
-                        ListTile(title: Text('Full Library', style: TextStyle(color: Colors.White))),
-                        ListTile(title: Text('Queue', style: TextStyle(color: Colors.White))),
-                        ListTile(title: Text('Update', style: TextStyle(color: Colors.White))),
+                        ListTile(title: Text('Games', style: TextStyle(color: Colors.white))),
+                        ListTile(title: Text('Apps', style: TextStyle(color: Colors.white))),
+                        ListTile(title: Text('Full Library', style: TextStyle(color: Colors.white))),
+                        ListTile(title: Text('Queue', style: TextStyle(color: Colors.white))),
+                        ListTile(title: Text('Update', style: TextStyle(color: Colors.white))),
                       ],
                     ),
                   ),

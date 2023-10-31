@@ -283,7 +283,7 @@ class _XboxNotificationState extends State<XboxNotification> with TickerProvider
         child: Text(
           title,
           softWrap: true,
-          style: TextStyle(color: Xbox.getReadableColor(widget.color ?? Xbox.accentColorNotifier.value), fontWeight: FontWeight.bold),
+          style: Xbox.getFont(color: Xbox.getReadableColor(widget.color ?? Xbox.accentColorNotifier.value), fontWeight: FontWeight.bold),
         ),
       ),
     );

@@ -122,7 +122,7 @@ class XboxTile extends StatefulWidget {
             ? LayoutBuilder(builder: (context, constraints) {
                 return Icon(
                   icon,
-                  color: Colors.White,
+                  color: Colors.white,
                   size: constraints.maxHeight * .5,
                   shadows: const [
                     BoxShadow(
@@ -151,7 +151,7 @@ class XboxTile extends StatefulWidget {
         icon: LayoutBuilder(builder: (context, constraints) {
           return Icon(
             icon,
-            color: Colors.White,
+            color: Colors.white,
             size: constraints.maxHeight - constraints.maxHeight * .6,
             shadows: const [
               BoxShadow(
@@ -197,7 +197,7 @@ class XboxTile extends StatefulWidget {
             ? Icon(
                 bottomRightIcon,
                 size: size.height * .15,
-                color: Colors.White,
+                color: Colors.white,
               )
             : null,
       );
@@ -306,16 +306,19 @@ class _XboxTileState extends State<XboxTile> {
                 child: Text(
                   widget.upperText,
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.White,
+                  style: Xbox.getFont(
+                    color: Colors.white,
                     fontSize: 12,
-                    shadows: <Shadow>[
-                      Shadow(
-                        offset: const Offset(1.0, 1.0),
-                        blurRadius: 3.0,
-                        color: Colors.black.withOpacity(.8),
-                      ),
-                    ],
+                  ).merge(
+                    TextStyle(
+                      shadows: <Shadow>[
+                        Shadow(
+                          offset: const Offset(1.0, 1.0),
+                          blurRadius: 3.0,
+                          color: Colors.black.withOpacity(.8),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -340,7 +343,7 @@ class _XboxTileState extends State<XboxTile> {
               child: Text(
                 widget.title,
                 style: TextStyle(
-                  color: Colors.White,
+                  color: Colors.white,
                   fontSize: 16,
                   shadows: <Shadow>[
                     Shadow(
@@ -389,17 +392,12 @@ class _XboxTileState extends State<XboxTile> {
                     if (widget.title.trim().isNotEmpty)
                       Text(
                         widget.title,
-                        style: const TextStyle(
-                          color: Colors.White,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: Xbox.getFont(color: Colors.white, fontWeight: FontWeight.bold, fontSize: getWidth() * .06),
                       ),
                     if (widget.description.trim().isNotEmpty)
                       Text(
                         widget.description,
-                        style: const TextStyle(
-                          color: Colors.White,
-                        ),
+                        style: Xbox.getFont(color: Colors.white, fontSize: getWidth() * .06),
                       ),
                   ],
                 ),
@@ -453,11 +451,9 @@ class _XboxTileState extends State<XboxTile> {
                     child: Text(
                       widget.description,
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: Xbox.getFont(
                         color: Xbox.getReadableColor(widget.tileColor),
                         fontWeight: FontWeight.bold,
-                        fontFamily: 'Xbox',
-                        package: 'xbox_ui',
                       ),
                     ),
                   ),

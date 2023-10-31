@@ -25,10 +25,12 @@ class XboxDialog extends StatelessWidget {
                 height: cs.maxHeight,
                 padding: const EdgeInsets.all(15),
                 color: Theme.of(context).colorScheme.background,
-                child: Column(                  
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: children,
+                child: FittedBox(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: children,
+                  ),
                 ),
               );
             }),
@@ -46,12 +48,16 @@ class XboxDialog extends StatelessWidget {
         builder: (BuildContext context) => SimpleDialog(
             shape: Xbox.defaultBorderShape,
             backgroundColor: Theme.of(context).colorScheme.background,
+            titleTextStyle: Xbox.getFont(color: Theme.of(context).colorScheme.onBackground, fontWeight: FontWeight.bold, fontSize: 20),
             title: title.trim().isNotEmpty ? Text(title) : null,
             children: menuEntries.entries
                 .map(
                   (e) => SimpleDialogOption(
                     onPressed: e.value,
-                    child: Text(e.key),
+                    child: Text(
+                      e.key,
+                      style: Xbox.getFont(color: Theme.of(context).colorScheme.onBackground),
+                    ),
                   ),
                 )
                 .toList()),
@@ -132,14 +138,15 @@ class XboxDialog extends StatelessWidget {
       context: context,
       builder: (_) => AlertDialog(
         shape: Xbox.defaultBorderShape,
-        backgroundColor: Theme.of(context).colorScheme.background,
-        title: Text(title ?? ""),
+        backgroundColor: Theme.of(context).colorScheme.background,   
+        title: Text(title ?? "", style: Xbox.getFont(color: Xbox.getContrastThemeColor(context)),),
         content: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              Text(content ?? 'Please enter your input:'),
+              Text(content ?? 'Please enter your input:',style: Xbox.getFont(color: Xbox.getContrastThemeColor(context))),
               TextField(
                 controller: controller,
+                style: Xbox.getFont(color: Xbox.getContrastThemeColor(context)),
               ),
             ],
           ),

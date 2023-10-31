@@ -51,19 +51,41 @@ flutter:
     - family: Xbox
       fonts:
         - asset: fonts/xbox360.ttf 
-    - family: Segoe
+    - family: SegoePro
       fonts:
 
-        - asset: fonts/SegoeProDisplay-Light.ttf
-          weight: 100          
-        - asset: fonts/SegoeProDisplay-Semilight.ttf        
+        - asset: fonts/SegoePro-Light.ttf
+          weight: 200          
+        - asset: fonts/SegoePro-Semilight.ttf        
           weight: 300         
-        - asset: fonts/SegoeProDisplay-Regular.ttf
-          weight: 500  
-        - asset: fonts/SegoeProDisplay-Semibold.ttf
-          weight: 700
-        - asset: fonts/SegoeProDisplay-Bold.ttf
+        - asset: fonts/SegoePro-Regular.ttf
+          weight: 400  
+        - asset: fonts/SegoePro-Semibold.ttf
+          weight: 600
+        - asset: fonts/SegoePro-Bold.ttf
+          weight: 700       
+        - asset: fonts/SegoePro-Black.ttf
           weight: 900
+
+       
+        - asset: fonts/SegoePro-LightItalic.ttf
+          weight: 200   
+          style: italic       
+        - asset: fonts/SegoePro-SemilightItalic.ttf        
+          weight: 300         
+          style: italic 
+        - asset: fonts/SegoePro-SemiboldItalic.ttf
+          weight: 600
+          style: italic       
+        - asset: fonts/SegoePro-BoldItalic.ttf
+          weight: 700       
+          style: italic       
+        - asset: fonts/SegoePro-BlackItalic.ttf
+          weight: 900
+          style: italic       
+
+
+
  
 
   # fonts:

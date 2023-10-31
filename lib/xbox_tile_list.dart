@@ -18,10 +18,11 @@ class XboxTileList extends StatelessWidget {
         ((title ?? "").trim().isNotEmpty
             ? Text(
                 title ?? "",
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,                 
+                style: Xbox.getFont(
+                  fontWeight: FontWeight.bold,
                   fontSize: 25,
-                ).merge(Xbox.font),
+                  color: Xbox.getContrastThemeColor(context)
+                ),
               )
             : null);
 

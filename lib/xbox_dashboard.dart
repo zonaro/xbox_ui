@@ -41,7 +41,7 @@ class XboxDashboard extends StatefulWidget {
 class _XboxDashboardState extends State<XboxDashboard> {
   @override
   initState() {
-    
+    super.initState();
     Xbox.tileWallpaperNotifier.addListener(() {
       setState(() {
         debugPrint("tile wallpaper changed");
@@ -59,8 +59,6 @@ class _XboxDashboardState extends State<XboxDashboard> {
         debugPrint("accent color changed");
       });
     });
-
-    super.initState();
   }
 
   var keyboardNode = FocusNode(descendantsAreFocusable: true);
@@ -148,7 +146,7 @@ class _XboxDashboardState extends State<XboxDashboard> {
               )
             ],
           ),
-          body: SingleChildScrollView(            
+          body: SingleChildScrollView(
             child: Column(
               children: [
                 SizedBox(

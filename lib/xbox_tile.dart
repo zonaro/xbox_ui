@@ -87,7 +87,7 @@ class XboxTile extends StatefulWidget {
     );
   }
 
-  factory XboxTile.icon({required IconData icon, required String title, required Size size, double growOnFocus = 0, Color? color, void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false, ImageProvider? dashboardWallpaper}) => XboxTile(
+  factory XboxTile.icon({required IconData icon, required String title, required Size size, bool fixedFocus = false, double growOnFocus = 0, Color? color, void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false, ImageProvider? dashboardWallpaper}) => XboxTile(
         icon: LayoutBuilder(builder: (context, constraints) {
           return Icon(
             icon,
@@ -103,10 +103,12 @@ class XboxTile extends StatefulWidget {
         growOnFocus: growOnFocus,
         menuItems: menuItems,
         size: size,
+        fixedFocus: fixedFocus,
       );
 
-  factory XboxTile.flatColor({required Color backgroundColor, String title = "", required Size size, double growOnFocus = 0, Color? color, void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false, ImageProvider? dashboardWallpaper}) => XboxTile(
+  factory XboxTile.flatColor({required Color backgroundColor, String title = "", required Size size, bool fixedFocus = false, double growOnFocus = 0, Color? color, void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false, ImageProvider? dashboardWallpaper}) => XboxTile(
         background: Container(width: size.width, height: size.height, color: backgroundColor),
+        fixedFocus: fixedFocus,
         onTap: onTap,
         autoFocus: autoFocus,
         menuItems: menuItems,

@@ -54,7 +54,10 @@ extension Xbox on XboxApp {
 
   static Color getReadableColor([Color? color]) => (color ?? accentColor).computeLuminance() > 0.5 ? SlateGray : Colors.white;
 
-  static Color getContrastThemeColor(BuildContext context) => Theme.of(context).brightness == Brightness.dark ? Colors.white : SlateGray;
+  static Color getContrastThemeColor(BuildContext context) {
+    var b = Theme.of(context).brightness;
+    return b == Brightness.dark ? Colors.white : SlateGray;
+  }
 
   static Color getBackgroundColor(BuildContext context) => Theme.of(context).brightness == Brightness.dark ? SlateGray : Colors.white;
 

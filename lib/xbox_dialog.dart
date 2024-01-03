@@ -138,12 +138,15 @@ class XboxDialog extends StatelessWidget {
       context: context,
       builder: (_) => AlertDialog(
         shape: Xbox.defaultBorderShape,
-        backgroundColor: Theme.of(context).colorScheme.background,   
-        title: Text(title ?? "", style: Xbox.getFont(color: Xbox.getContrastThemeColor(context)),),
+        backgroundColor: Theme.of(context).colorScheme.background,
+        title: Text(
+          title ?? "",
+          style: Xbox.getFont(color: Xbox.getContrastThemeColor(context)),
+        ),
         content: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              Text(content ?? 'Please enter your input:',style: Xbox.getFont(color: Xbox.getContrastThemeColor(context))),
+              Text(content ?? 'Please enter your input:', style: Xbox.getFont(color: Xbox.getContrastThemeColor(context))),
               TextField(
                 controller: controller,
                 style: Xbox.getFont(color: Xbox.getContrastThemeColor(context)),
@@ -167,11 +170,12 @@ class XboxDialog extends StatelessWidget {
     return isConfirm == true ? controller.text : null;
   }
 
-  static void notification(BuildContext context, {required String title, String? subtitle, IconData? icon}) {
+  static void notification(BuildContext context, {required String title, String? subtitle, IconData? icon, AlignmentGeometry alignment = Alignment.bottomCenter}) {
     return XboxNotification(
       title: title,
       subTitle: subtitle,
       icon: icon != null ? Icon(icon) : null,
+      alignment: alignment,
     ).show(context);
   }
 }

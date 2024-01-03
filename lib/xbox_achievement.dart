@@ -46,7 +46,7 @@ class XboxNotification extends StatefulWidget {
     this.iconBorderRadius,
     this.color,
     this.alignment = Alignment.bottomCenter,
-    this.duration = const Duration(seconds: 3),
+    this.duration = const Duration(seconds: 4),
     this.title,
     this.subTitle,
     this.content,
@@ -175,29 +175,27 @@ class _XboxNotificationState extends State<XboxNotification> with TickerProvider
 
   Widget _buildAchievement() {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(Xbox.TileRadius),
+      borderRadius:  BorderRadius.circular(Xbox.TileRadius),
       child: Align(
         alignment: widget.alignment,
         child: Material(
           type: MaterialType.transparency,
           elevation: widget.elevation,
           child: Container(
-            color: widget.color ?? Xbox.accentColorNotifier.value,
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: _buildBorderCard(),
-              ),
-              child: Ink(
-                child: InkWell(
-                  onTap: widget.onTap,
-                  child: IntrinsicHeight(
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        _buildIcon(),
-                        _buildContent(),
-                      ],
-                    ),
+            decoration: BoxDecoration(
+              color: widget.color ?? Xbox.accentColor,
+              borderRadius: _buildBorderCard(),
+            ),
+            child: Ink(
+              child: InkWell(
+                onTap: widget.onTap,
+                child: IntrinsicHeight(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      _buildIcon(),
+                      _buildContent(),
+                    ],
                   ),
                 ),
               ),
@@ -311,7 +309,7 @@ class _XboxNotificationState extends State<XboxNotification> with TickerProvider
   }
 
   BorderRadiusGeometry _buildBorderCard() {
-    return widget.isCircle ? const BorderRadius.all(Radius.circular(double.infinity)) : const BorderRadius.all(Radius.circular(Xbox.TileRadius));
+    return widget.isCircle ? const BorderRadius.all(Radius.circular(1000)) : const BorderRadius.all(Radius.circular(Xbox.TileRadius));
   }
 
   EdgeInsets _buildPaddingContent() => const EdgeInsets.fromLTRB(0, 15, 15, 15);

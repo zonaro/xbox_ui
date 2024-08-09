@@ -27,9 +27,7 @@ class _XboxMenuGridState extends State<XboxMenuGrid> {
 
   @override
   Widget build(BuildContext context) {
-    
     if (widget.views.isNotEmpty) {
-
       if (!menus.contains(currentKey)) {
         currentKey = null;
       }
@@ -41,7 +39,7 @@ class _XboxMenuGridState extends State<XboxMenuGrid> {
           Expanded(
             flex: 2,
             child: Container(
-              color: Theme.of(context).colorScheme.background,
+              color: Theme.of(context).colorScheme.surface,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -56,7 +54,7 @@ class _XboxMenuGridState extends State<XboxMenuGrid> {
           Expanded(
             flex: 5,
             child: Container(
-              color: Theme.of(context).colorScheme.background,
+              color: Theme.of(context).colorScheme.surface,
               child: GridView.count(crossAxisCount: 5, children: widget.views[currentKey] ?? []),
             ),
           ),
@@ -65,7 +63,7 @@ class _XboxMenuGridState extends State<XboxMenuGrid> {
     }
 
     return Container(
-      color: Theme.of(context).colorScheme.background,
+      color: Theme.of(context).colorScheme.surface,
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
       child: const Center(child: Icon(Icons.error)),

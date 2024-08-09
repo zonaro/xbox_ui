@@ -1,11 +1,9 @@
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names
 
 import 'dart:convert';
-
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-
 import 'package:xbox_ui/xbox_tile.dart';
 
 typedef XboxMenuEntries = Map<String, void Function()?>;
@@ -30,8 +28,8 @@ extension Xbox on XboxApp {
         colorScheme: ColorScheme.fromSeed(
           brightness: brightness,
           seedColor: Xbox.accentColor,
-          background: brightness == Brightness.dark ? Xbox.SlateGray : Colors.white,
-          onBackground: brightness == Brightness.dark ? Colors.white : Xbox.SlateGray,
+          surface: brightness == Brightness.dark ? Xbox.SlateGray : Colors.white,
+          onSurface: brightness == Brightness.dark ? Colors.white : Xbox.SlateGray,
         ),
       );
 
@@ -79,7 +77,7 @@ extension Xbox on XboxApp {
       .toList();
 
   static BoxDecoration tileInFocus(BuildContext context, [Color? color]) => BoxDecoration(
-        color: Theme.of(context).colorScheme.background,
+        color: Theme.of(context).colorScheme.surface,
         boxShadow: [
           BoxShadow(
             color: color ?? Xbox.accentColor,

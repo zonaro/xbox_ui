@@ -79,7 +79,7 @@ class _XboxDashboardState extends State<XboxDashboard> {
               gradient: RadialGradient(
                 center: Alignment.center,
                 radius: 1.0,
-                colors: [Colors.transparent, Theme.of(context).colorScheme.background],
+                colors: [Colors.transparent, Theme.of(context).colorScheme.surface],
                 stops: const [0.5, 1.0],
               ),
             ),
@@ -87,7 +87,7 @@ class _XboxDashboardState extends State<XboxDashboard> {
         ),
         Scaffold(
           key: widget.scaffoldKey,
-          backgroundColor: Theme.of(context).colorScheme.background.withOpacity(.7),
+          backgroundColor: Theme.of(context).colorScheme.surface.withOpacity(.7),
           drawer: widget.menu,
           extendBody: true,
           appBar: AppBar(

@@ -81,7 +81,7 @@ class _XboxLoadingBarState extends State<XboxLoadingBar> {
             padding: const EdgeInsets.all(12.0),
             child: Text(
               widget.title,
-              style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.onBackground),
+              style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.onSurface),
             ),
           ),
           if (widget._description.value != null) const SizedBox(height: 10),
@@ -90,7 +90,7 @@ class _XboxLoadingBarState extends State<XboxLoadingBar> {
               padding: const EdgeInsets.all(12.0),
               child: Text(
                 widget._description.value!,
-                style: TextStyle(fontSize: 25, color: Theme.of(context).colorScheme.onBackground),
+                style: TextStyle(fontSize: 25, color: Theme.of(context).colorScheme.onSurface),
               ),
             ),
           const SizedBox(height: 20),

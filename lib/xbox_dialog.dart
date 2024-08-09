@@ -24,7 +24,7 @@ class XboxDialog extends StatelessWidget {
                 width: cs.maxWidth,
                 height: cs.maxHeight,
                 padding: const EdgeInsets.all(15),
-                color: Theme.of(context).colorScheme.background,
+                color: Theme.of(context).colorScheme.surface,
                 child: FittedBox(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -47,8 +47,8 @@ class XboxDialog extends StatelessWidget {
         context: context,
         builder: (BuildContext context) => SimpleDialog(
             shape: Xbox.defaultBorderShape,
-            backgroundColor: Theme.of(context).colorScheme.background,
-            titleTextStyle: Xbox.getFont(color: Theme.of(context).colorScheme.onBackground, fontWeight: FontWeight.bold, fontSize: 20),
+            backgroundColor: Theme.of(context).colorScheme.surface,
+            titleTextStyle: Xbox.getFont(color: Theme.of(context).colorScheme.onSurface, fontWeight: FontWeight.bold, fontSize: 20),
             title: title.trim().isNotEmpty ? Text(title) : null,
             children: menuEntries.entries
                 .map(
@@ -56,7 +56,7 @@ class XboxDialog extends StatelessWidget {
                     onPressed: e.value,
                     child: Text(
                       e.key,
-                      style: Xbox.getFont(color: Theme.of(context).colorScheme.onBackground),
+                      style: Xbox.getFont(color: Theme.of(context).colorScheme.onSurface),
                     ),
                   ),
                 )
@@ -76,7 +76,7 @@ class XboxDialog extends StatelessWidget {
         children: [
           Text(
             content ?? 'Are you sure to continue?',
-            style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.onBackground),
+            style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.onSurface),
           ),
           Align(
             alignment: Alignment.bottomRight,
@@ -138,7 +138,7 @@ class XboxDialog extends StatelessWidget {
       context: context,
       builder: (_) => AlertDialog(
         shape: Xbox.defaultBorderShape,
-        backgroundColor: Theme.of(context).colorScheme.background,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         title: Text(
           title ?? "",
           style: Xbox.getFont(color: Xbox.getContrastThemeColor(context)),

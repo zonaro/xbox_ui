@@ -175,7 +175,7 @@ class _XboxNotificationState extends State<XboxNotification> with TickerProvider
 
   Widget _buildAchievement() {
     return ClipRRect(
-      borderRadius:  BorderRadius.circular(Xbox.TileRadius),
+      borderRadius: BorderRadius.circular(Xbox.TileRadius),
       child: Align(
         alignment: widget.alignment,
         child: Material(
@@ -214,7 +214,7 @@ class _XboxNotificationState extends State<XboxNotification> with TickerProvider
       child: widget.icon ??
           Icon(
             Icons.diamond,
-            color: widget.color ?? Xbox.accentColorNotifier.value,
+            color: widget.color ?? Xbox._accentColorNotifier.value,
           ),
     );
   }
@@ -281,7 +281,7 @@ class _XboxNotificationState extends State<XboxNotification> with TickerProvider
         child: Text(
           title,
           softWrap: true,
-          style: Xbox.getFont(color: Xbox.getReadableColor(widget.color ?? Xbox.accentColorNotifier.value), fontWeight: FontWeight.bold),
+          style: Xbox.getFont(color: Xbox.getReadableColor(widget.color ?? Xbox._accentColorNotifier.value), fontWeight: FontWeight.bold),
         ),
       ),
     );
@@ -303,7 +303,7 @@ class _XboxNotificationState extends State<XboxNotification> with TickerProvider
           padding: const EdgeInsets.only(left: 8.0),
           child: Text(
             subTitle,
-            style: TextStyle(color: Xbox.getReadableColor(widget.color ?? Xbox.accentColorNotifier.value)),
+            style: TextStyle(color: Xbox.getReadableColor(widget.color ?? Xbox._accentColorNotifier.value)),
           ),
         ));
   }

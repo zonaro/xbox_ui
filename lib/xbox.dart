@@ -15,10 +15,10 @@ extension Xbox on XboxApp {
   static ThemeData get DarkTheme => Xbox.getTheme();
   static ThemeData get LightTheme => Xbox.getTheme(brightness: Brightness.light);
 
-  static final ValueNotifier<ImageProvider?> tileWallpaperNotifier = ValueNotifier(null);
-  static final ValueNotifier<ImageProvider?> userWallpaperNotifier = ValueNotifier(null);
+  static final ValueNotifier<ImageProvider?> _tileWallpaperNotifier = ValueNotifier(null);
+  static final ValueNotifier<ImageProvider?> _userWallpaperNotifier = ValueNotifier(null);
 
-  static final ValueNotifier<Color> accentColorNotifier = ValueNotifier(Xbox.Green);
+  static final ValueNotifier<Color> _accentColorNotifier = ValueNotifier(Xbox.Green);
 
   static ThemeData getTheme({Brightness brightness = Brightness.dark}) => ThemeData(
         fontFamily: "SegoePro",
@@ -41,14 +41,14 @@ extension Xbox on XboxApp {
 
   static TextStyle getFont({Color? color, FontWeight fontWeight = FontWeight.normal, double? fontSize}) => TextStyle(fontFamily: "SegoePro", fontWeight: fontWeight, package: 'xbox_ui', color: color, fontSize: fontSize);
 
-  static Color get accentColor => accentColorNotifier.value;
-  static set accentColor(Color? value) => accentColorNotifier.value = value ?? Xbox.Green;
+  static Color get accentColor => _accentColorNotifier.value;
+  static set accentColor(Color? value) => _accentColorNotifier.value = value ?? Xbox.Green;
 
-  static ImageProvider? get tileWallpaper => tileWallpaperNotifier.value;
-  static set tileWallpaper(ImageProvider? value) => tileWallpaperNotifier.value = value;
+  static ImageProvider? get tileWallpaper => _tileWallpaperNotifier.value;
+  static set tileWallpaper(ImageProvider? value) => _tileWallpaperNotifier.value = value;
 
-  static ImageProvider? get userWallpaper => userWallpaperNotifier.value;
-  static set userWallpaper(ImageProvider? value) => userWallpaperNotifier.value = value;
+  static ImageProvider? get userWallpaper => _userWallpaperNotifier.value;
+  static set userWallpaper(ImageProvider? value) => _userWallpaperNotifier.value = value;
 
   static Color getReadableColor([Color? color]) => (color ?? accentColor).computeLuminance() > 0.5 ? SlateGray : Colors.white;
 

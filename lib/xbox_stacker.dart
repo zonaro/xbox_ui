@@ -21,9 +21,8 @@ class XboxImageStacker extends StatelessWidget {
   final List<ImageProvider?> images;
 
   final bool parallelogramTile;
- 
 
-  const XboxImageStacker({super.key, required this.images, this.parallelogramTile = false });
+  const XboxImageStacker({super.key, required this.images, this.parallelogramTile = false});
 
   @override
   Widget build(BuildContext context) => LayoutBuilder(
@@ -69,7 +68,7 @@ class XboxImageStacker extends StatelessWidget {
                               boxShadow: [
                                 if (idx > 0)
                                   BoxShadow(
-                                    color: Xbox.SlateGray.withOpacity(0.8), //color of shadow
+                                    color: Xbox.slateGray.withOpacity(0.8), //color of shadow
                                     spreadRadius: 5, //spread radius
                                     blurRadius: 7, // blur radius
                                     offset: const Offset(0, 2), // changes position of shadow
@@ -103,7 +102,7 @@ class _ShadowPainter extends CustomPainter {
     path.close();
 
     final paint = Paint()
-      ..color = Xbox.SlateGray // Shadow color
+      ..color = Xbox.slateGray // Shadow color
       ..maskFilter = const MaskFilter.blur(BlurStyle.outer, 50); // Increase sigma for larger shadow
 
     canvas.drawPath(path, paint);

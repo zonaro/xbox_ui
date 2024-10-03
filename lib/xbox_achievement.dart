@@ -7,7 +7,10 @@ enum AchievementState {
   opening,
   open,
   closing,
-  closed,
+  closed;
+
+  bool get isOpen => this == AchievementState.open;
+  bool get isClosed => this == AchievementState.closed;
 }
 
 enum AnimationTypeAchievement {
@@ -175,7 +178,7 @@ class _XboxNotificationState extends State<XboxNotification> with TickerProvider
 
   Widget _buildAchievement() {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(Xbox.TileRadius),
+      borderRadius: BorderRadius.circular(1000),
       child: Align(
         alignment: widget.alignment,
         child: Material(
@@ -186,17 +189,15 @@ class _XboxNotificationState extends State<XboxNotification> with TickerProvider
               color: widget.color ?? Xbox.accentColor,
               borderRadius: _buildBorderCard(),
             ),
-            child: Ink(
-              child: InkWell(
-                onTap: widget.onTap,
-                child: IntrinsicHeight(
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      _buildIcon(),
-                      _buildContent(),
-                    ],
-                  ),
+            child: InkWell(
+              onTap: widget.onTap,
+              child: IntrinsicHeight(
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    _buildIcon(),
+                    _buildContent(),
+                  ],
                 ),
               ),
             ),
@@ -208,13 +209,13 @@ class _XboxNotificationState extends State<XboxNotification> with TickerProvider
 
   Widget _buildIcon() {
     return Container(
-      color: Xbox.SlateGray.withOpacity(.9),
+      color: Xbox.slateGray.withOpacity(.9),
       width: heightCard,
       alignment: Alignment.center,
       child: widget.icon ??
           Icon(
             Icons.diamond,
-            color: widget.color ?? Xbox._accentColorNotifier.value,
+            color: widget.color ?? Xbox.accentColorNotifier.value,
           ),
     );
   }
@@ -281,7 +282,7 @@ class _XboxNotificationState extends State<XboxNotification> with TickerProvider
         child: Text(
           title,
           softWrap: true,
-          style: Xbox.getFont(color: Xbox.getReadableColor(widget.color ?? Xbox._accentColorNotifier.value), fontWeight: FontWeight.bold),
+          style: Xbox.getFont(color: Xbox.getReadableColor(widget.color ?? Xbox.accentColorNotifier.value), fontWeight: FontWeight.bold),
         ),
       ),
     );
@@ -303,13 +304,13 @@ class _XboxNotificationState extends State<XboxNotification> with TickerProvider
           padding: const EdgeInsets.only(left: 8.0),
           child: Text(
             subTitle,
-            style: TextStyle(color: Xbox.getReadableColor(widget.color ?? Xbox._accentColorNotifier.value)),
+            style: TextStyle(color: Xbox.getReadableColor(widget.color ?? Xbox.accentColorNotifier.value)),
           ),
         ));
   }
 
   BorderRadiusGeometry _buildBorderCard() {
-    return widget.isCircle ? const BorderRadius.all(Radius.circular(1000)) : const BorderRadius.all(Radius.circular(Xbox.TileRadius));
+    return widget.isCircle ? const BorderRadius.all(Radius.circular(1000)) : const BorderRadius.all(Radius.circular(Xbox.tileRadius));
   }
 
   EdgeInsets _buildPaddingContent() => const EdgeInsets.fromLTRB(0, 15, 15, 15);

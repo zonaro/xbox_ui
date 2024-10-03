@@ -1,16 +1,18 @@
-import 'package:flutter/material.dart';
+// ignore_for_file: use_build_context_synchronously
 
+import 'package:flutter/material.dart';
+import 'package:xbox_ui/context_xbox_ext.dart';
 import 'package:xbox_ui/xbox_ui.dart';
 
 void main() {
   // change this color will reflect the accent color of all xbox_ui components
-  Xbox.accentColor = Xbox.Green; //change this
+  Xbox.accentColor = Xbox.green; //change this
 
   runApp(
     XboxApp(
       themeMode: ThemeMode.dark,
-      theme: Xbox.LightTheme, // getter for light and dark theme. apply the currentAccentColor to all tiles
-      darkTheme: Xbox.DarkTheme,
+      theme: Xbox.lightTheme, // getter for light and dark theme. apply the currentAccentColor to all tiles
+      darkTheme: Xbox.darkTheme,
       home: const MyApp(),
     ),
   );
@@ -47,7 +49,7 @@ class _MyAppState extends State<MyApp> {
           size: 20,
           icon: Icons.music_note,
           onPressed: () {
-            XboxNotification(title: "Playing...").show(context);
+            context.showXboxNotification(title: "Playing...");
           },
         ),
         XboxCircleButton.icon(
@@ -59,10 +61,10 @@ class _MyAppState extends State<MyApp> {
               title: "Book Menu",
               menuEntries: {
                 "Yellow Book": () {
-                  XboxNotification(title: "Book 1", color: Colors.yellow).show(context);
+                  context.showXboxNotification(title: "Book 1", color: Colors.yellow);
                 },
                 "Book": () {
-                  XboxNotification(title: "Book 2").show(context);
+                  context.showXboxNotification(title: "Book 2");
                 },
               },
             );
@@ -198,7 +200,7 @@ class MyApp2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Xbox.SlateGray,
+        backgroundColor: Xbox.slateGray,
         body: Column(
           children: [
             const Text('Title', style: TextStyle(color: Colors.white, fontSize: 24)),

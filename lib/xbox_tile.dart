@@ -119,7 +119,7 @@ class XboxTile extends StatefulWidget {
         tileColor: color,
       );
 
-  factory XboxTile.banner({IconData? icon, required String description, String title = "", required Size size, double growOnFocus = 0, Color? color, List<ImageProvider?> images = const [], void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false, ImageProvider? dashboardWallpaper}) => XboxTile(
+  factory XboxTile.banner({IconData? icon, required String description, String title = "", required Size size, double growOnFocus = 0, Color? color, List<ImageProvider?> images = const [], void Function()? onTap, XboxMenuEntries? menuItems, bool autoFocus = false, ImageProvider? dashboardWallpaper, bool parallelogramTile = false}) => XboxTile(
         icon: icon != null
             ? LayoutBuilder(builder: (context, constraints) {
                 return Icon(
@@ -142,7 +142,12 @@ class XboxTile extends StatefulWidget {
         description: description,
         size: size,
         tileColor: color,
-        background: images.isNotEmpty ? XboxImageStacker(images: images) : null,
+        background: images.isNotEmpty
+            ? XboxImageStacker(
+                images: images,
+                parallelogramTile: parallelogramTile,
+              )
+            : null,
         onTap: onTap,
         title: title,
         dashboardWallpaper: dashboardWallpaper,
@@ -216,7 +221,7 @@ class _XboxTileState extends State<XboxTile> {
 
   void _onFocus(bool value) {
     setState(() {
-      Xbox._tileWallpaperNotifier.value = widget.dashboardWallpaper;
+      Xbox.tileWallpaperNotifier.value = widget.dashboardWallpaper;
       hasFocus = value;
     });
   }
@@ -246,7 +251,9 @@ class _XboxTileState extends State<XboxTile> {
       child: GestureDetector(
         onTap: () {
           node.requestFocus();
-          widget.onTap?.call();
+          if (widget.onTap != null) {
+            widget.onTap!();
+          }
         },
         onLongPress: _showMenu,
         child: FocusableActionDetector(
@@ -266,7 +273,7 @@ class _XboxTileState extends State<XboxTile> {
                 fit: StackFit.expand,
                 children: [
                   ClipRRect(
-                    borderRadius: BorderRadius.circular(Xbox.TileRadius),
+                    borderRadius: BorderRadius.circular(Xbox.tileRadius),
                     child: GridTile(
                       header: widget.upperText.trim().isNotEmpty ? _upperTextBuilder() : null,
                       footer: showTitleBox ? _titleBoxBuilder() : _lowerIconsBuilder(),
@@ -295,7 +302,7 @@ class _XboxTileState extends State<XboxTile> {
 
   Widget _upperTextBuilder() {
     return ClipRRect(
-      borderRadius: const BorderRadius.only(topLeft: Radius.circular(Xbox.TileRadius), topRight: Radius.circular(Xbox.TileRadius)),
+      borderRadius: const BorderRadius.only(topLeft: Radius.circular(Xbox.tileRadius), topRight: Radius.circular(Xbox.tileRadius)),
       child: Container(
         alignment: Alignment.center,
         color: Colors.black.withOpacity(.8),
@@ -334,7 +341,7 @@ class _XboxTileState extends State<XboxTile> {
   Widget? _titleBoxBuilder() {
     return _SlideUpAnimationWrapper(
       child: ClipRRect(
-        borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(Xbox.TileRadius), bottomRight: Radius.circular(Xbox.TileRadius)),
+        borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(Xbox.tileRadius), bottomRight: Radius.circular(Xbox.tileRadius)),
         child: Container(
           color: Colors.black.withOpacity(.8),
           alignment: Alignment.bottomLeft,
@@ -346,7 +353,7 @@ class _XboxTileState extends State<XboxTile> {
                 widget.title,
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 16,
+                  fontSize: 12,
                   shadows: <Shadow>[
                     Shadow(
                       offset: const Offset(1.0, 1.0),
@@ -368,7 +375,7 @@ class _XboxTileState extends State<XboxTile> {
       return Container(
         color: widget.tileColor ?? Xbox.accentColor,
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(Xbox.TileRadius),
+          borderRadius: BorderRadius.circular(Xbox.tileRadius),
           child: widget.background,
         ),
       );
@@ -394,12 +401,12 @@ class _XboxTileState extends State<XboxTile> {
                     if (widget.title.trim().isNotEmpty)
                       Text(
                         widget.title,
-                        style: Xbox.getFont(color: Colors.white, fontWeight: FontWeight.bold, fontSize: getWidth() * .06),
+                        style: Xbox.getFont(color: Colors.white, fontWeight: FontWeight.bold, fontSize: getWidth() * .05),
                       ),
                     if (widget.description.trim().isNotEmpty)
                       Text(
                         widget.description,
-                        style: Xbox.getFont(color: Colors.white, fontSize: getWidth() * .06),
+                        style: Xbox.getFont(color: Colors.white, fontSize: getWidth() * .035),
                       ),
                   ],
                 ),

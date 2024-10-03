@@ -42,19 +42,19 @@ class _XboxDashboardState extends State<XboxDashboard> {
   @override
   initState() {
     super.initState();
-    Xbox._tileWallpaperNotifier.addListener(() {
+    Xbox.tileWallpaperNotifier.addListener(() {
       setState(() {
         debugPrint("tile wallpaper changed");
       });
     });
 
-    Xbox._userWallpaperNotifier.addListener(() {
+    Xbox.userWallpaperNotifier.addListener(() {
       setState(() {
         debugPrint("user wallpaper changed");
       });
     });
 
-    Xbox._accentColorNotifier.addListener(() {
+    Xbox.accentColorNotifier.addListener(() {
       setState(() {
         debugPrint("accent color changed");
       });
@@ -103,7 +103,7 @@ class _XboxDashboardState extends State<XboxDashboard> {
                   XboxCircleButton(
                     onPressed: () => widget.showHomeMenu(),
                     size: 50,
-                    backgroundColor: Xbox._accentColorNotifier.value,
+                    backgroundColor: Xbox.accentColorNotifier.value,
                     child: widget.avatar ?? const Icon(Icons.person),
                   ),
                   FittedBox(

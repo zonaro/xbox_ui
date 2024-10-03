@@ -15,7 +15,7 @@ class XboxDialog extends StatelessWidget {
         shape: Xbox.defaultBorderShape,
         elevation: 2,
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(Xbox.TileRadius),
+          borderRadius: BorderRadius.circular(Xbox.tileRadius),
           child: FractionallySizedBox(
             widthFactor: 1.0,
             heightFactor: 2 / 3,

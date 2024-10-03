@@ -10,15 +10,15 @@ typedef XboxMenuEntries = Map<String, void Function()?>;
 typedef XboxApp = MaterialApp;
 
 extension Xbox on XboxApp {
-  static const double TileRadius = 7;
+  static const double tileRadius = 7;
 
-  static ThemeData get DarkTheme => Xbox.getTheme();
-  static ThemeData get LightTheme => Xbox.getTheme(brightness: Brightness.light);
+  static ThemeData get darkTheme => Xbox.getTheme();
+  static ThemeData get lightTheme => Xbox.getTheme(brightness: Brightness.light);
 
-  static final ValueNotifier<ImageProvider?> _tileWallpaperNotifier = ValueNotifier(null);
-  static final ValueNotifier<ImageProvider?> _userWallpaperNotifier = ValueNotifier(null);
+  static final ValueNotifier<ImageProvider?> tileWallpaperNotifier = ValueNotifier(null);
+  static final ValueNotifier<ImageProvider?> userWallpaperNotifier = ValueNotifier(null);
 
-  static final ValueNotifier<Color> _accentColorNotifier = ValueNotifier(Xbox.Green);
+  static final ValueNotifier<Color> accentColorNotifier = ValueNotifier(Xbox.green);
 
   static ThemeData getTheme({Brightness brightness = Brightness.dark}) => ThemeData(
         fontFamily: "SegoePro",
@@ -28,38 +28,38 @@ extension Xbox on XboxApp {
         colorScheme: ColorScheme.fromSeed(
           brightness: brightness,
           seedColor: Xbox.accentColor,
-          surface: brightness == Brightness.dark ? Xbox.SlateGray : Colors.white,
-          onSurface: brightness == Brightness.dark ? Colors.white : Xbox.SlateGray,
+          surface: brightness == Brightness.dark ? Xbox.slateGray : Colors.white,
+          onSurface: brightness == Brightness.dark ? Colors.white : Xbox.slateGray,
         ),
       );
 
-  static const Green = Color(0xff107c10);
+  static const green = Color(0xff107c10);
 
-  static const SlateGray = Color(0xFF3A3A3A);
+  static const slateGray = Color(0xFF3A3A3A);
 
   static const TextStyle logoFont = TextStyle(fontFamily: "Xbox", package: 'xbox_ui');
 
   static TextStyle getFont({Color? color, FontWeight fontWeight = FontWeight.normal, double? fontSize}) => TextStyle(fontFamily: "SegoePro", fontWeight: fontWeight, package: 'xbox_ui', color: color, fontSize: fontSize);
 
-  static Color get accentColor => _accentColorNotifier.value;
-  static set accentColor(Color? value) => _accentColorNotifier.value = value ?? Xbox.Green;
+  static Color get accentColor => accentColorNotifier.value;
+  static set accentColor(Color? value) => accentColorNotifier.value = value ?? Xbox.green;
 
-  static ImageProvider? get tileWallpaper => _tileWallpaperNotifier.value;
-  static set tileWallpaper(ImageProvider? value) => _tileWallpaperNotifier.value = value;
+  static ImageProvider? get tileWallpaper => tileWallpaperNotifier.value;
+  static set tileWallpaper(ImageProvider? value) => tileWallpaperNotifier.value = value;
 
-  static ImageProvider? get userWallpaper => _userWallpaperNotifier.value;
-  static set userWallpaper(ImageProvider? value) => _userWallpaperNotifier.value = value;
+  static ImageProvider? get userWallpaper => userWallpaperNotifier.value;
+  static set userWallpaper(ImageProvider? value) => userWallpaperNotifier.value = value;
 
-  static Color getReadableColor([Color? color]) => (color ?? accentColor).computeLuminance() > 0.5 ? SlateGray : Colors.white;
+  static Color getReadableColor([Color? color]) => (color ?? accentColor).computeLuminance() > 0.5 ? slateGray : Colors.white;
 
   static Color getContrastThemeColor(BuildContext context) {
     var b = Theme.of(context).brightness;
-    return b == Brightness.dark ? Colors.white : SlateGray;
+    return b == Brightness.dark ? Colors.white : slateGray;
   }
 
-  static Color getBackgroundColor(BuildContext context) => Theme.of(context).brightness == Brightness.dark ? SlateGray : Colors.white;
+  static Color getBackgroundColor(BuildContext context) => Theme.of(context).brightness == Brightness.dark ? slateGray : Colors.white;
 
-  static RoundedRectangleBorder get defaultBorderShape => RoundedRectangleBorder(borderRadius: BorderRadius.circular(Xbox.TileRadius));
+  static RoundedRectangleBorder get defaultBorderShape => RoundedRectangleBorder(borderRadius: BorderRadius.circular(Xbox.tileRadius));
 
   static List<XboxTile> colorTiles(List<Color> colors, {Size size = const Size.square(100), void Function(Color)? onTap}) => colors
       .map(
@@ -84,7 +84,7 @@ extension Xbox on XboxApp {
             spreadRadius: 2.0,
           ),
         ],
-        borderRadius: BorderRadius.circular(Xbox.TileRadius),
+        borderRadius: BorderRadius.circular(Xbox.tileRadius),
       );
 
   /// Help calculate and create [XboxTile] based on aspect ratio

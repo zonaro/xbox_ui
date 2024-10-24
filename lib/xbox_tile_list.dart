@@ -18,11 +18,7 @@ class XboxTileList extends StatelessWidget {
         ((title ?? "").trim().isNotEmpty
             ? Text(
                 title ?? "",
-                style: Xbox.getFont(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 25,
-                  color: Xbox.getContrastThemeColor(context)
-                ),
+                style: Xbox.getFont(fontWeight: FontWeight.bold, fontSize: 25, color: Xbox.getContrastThemeColor(context)),
               )
             : null);
 
@@ -51,6 +47,6 @@ class XboxTileList extends StatelessWidget {
 
   double getHeight() {
     var l = tiles.map((e) => e.getHeight(true)).toList()..sort();
-    return l.last;
+    return l.lastOrNull ?? 0;
   }
 }

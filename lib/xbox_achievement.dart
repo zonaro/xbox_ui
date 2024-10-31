@@ -9,8 +9,8 @@ enum AchievementState {
   closing,
   closed;
 
-  bool get isOpen => this == AchievementState.open;
   bool get isClosed => this == AchievementState.closed;
+  bool get isOpen => this == AchievementState.open;
 }
 
 enum AnimationTypeAchievement {
@@ -36,6 +36,9 @@ class XboxNotification extends StatefulWidget {
   final OverlayState? overlay;
   final Widget? content;
 
+  final VoidCallback? finish;
+
+  OverlayEntry? _overlayEntry;
   XboxNotification({
     super.key,
     this.isCircle = true,
@@ -56,14 +59,8 @@ class XboxNotification extends StatefulWidget {
     this.finish,
   });
 
-  final VoidCallback? finish;
-  OverlayEntry? _overlayEntry;
-
-  OverlayEntry _buildOverlay() {
-    return OverlayEntry(builder: (context) {
-      return this;
-    });
-  }
+  @override
+  createState() => _XboxNotificationState();
 
   void show(BuildContext context) {
     if (_overlayEntry == null) {
@@ -72,8 +69,11 @@ class XboxNotification extends StatefulWidget {
     }
   }
 
-  @override
-  createState() => _XboxNotificationState();
+  OverlayEntry _buildOverlay() {
+    return OverlayEntry(builder: (context) {
+      return this;
+    });
+  }
 }
 
 class _XboxNotificationState extends State<XboxNotification> with TickerProviderStateMixin {
@@ -91,6 +91,29 @@ class _XboxNotificationState extends State<XboxNotification> with TickerProvider
 
   late AnimationController _controllerSubTitle;
   late Animation<Offset> _subTitleSlideUp;
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Container(
+        constraints: const BoxConstraints(minHeight: heightCard),
+        margin: const EdgeInsets.all(marginCard),
+        child: ScaleTransition(
+          scale: _curvedAnimationScale,
+          child: _buildAchievement(),
+        ),
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    _controllerScale.dispose();
+    _controllerSize.dispose();
+    _controllerTitle.dispose();
+    _controllerSubTitle.dispose();
+    super.dispose();
+  }
 
   @override
   void initState() {
@@ -162,20 +185,6 @@ class _XboxNotificationState extends State<XboxNotification> with TickerProvider
     _controllerScale.forward();
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: Container(
-        constraints: const BoxConstraints(minHeight: heightCard),
-        margin: const EdgeInsets.all(marginCard),
-        child: ScaleTransition(
-          scale: _curvedAnimationScale,
-          child: _buildAchievement(),
-        ),
-      ),
-    );
-  }
-
   Widget _buildAchievement() {
     return ClipRRect(
       borderRadius: BorderRadius.circular(1000),
@@ -207,17 +216,29 @@ class _XboxNotificationState extends State<XboxNotification> with TickerProvider
     );
   }
 
-  Widget _buildIcon() {
-    return Container(
-      color: Xbox.slateGray.withOpacity(.9),
-      width: heightCard,
-      alignment: Alignment.center,
-      child: widget.icon ??
-          Icon(
-            Icons.diamond,
-            color: widget.color ?? Xbox.accentColorNotifier.value,
-          ),
-    );
+  Animation<Offset> _buildAnimatedContent(AnimationController controller) {
+    double dx = 0.0;
+    double dy = 0.0;
+    switch (widget.typeAnimationContent) {
+      case AnimationTypeAchievement.fadeSlideToUp:
+        {
+          dy = 2.0;
+        }
+        break;
+      case AnimationTypeAchievement.fadeSlideToLeft:
+        {
+          dx = 2.0;
+        }
+        break;
+      case AnimationTypeAchievement.fade:
+        {}
+        break;
+    }
+    return Tween(begin: Offset(dx, dy), end: const Offset(0.0, 0.0)).animate(CurvedAnimation(parent: controller, curve: Curves.decelerate));
+  }
+
+  BorderRadiusGeometry _buildBorderCard() {
+    return widget.isCircle ? const BorderRadius.all(Radius.circular(1000)) : const BorderRadius.all(Radius.circular(Xbox.tileRadius));
   }
 
   Widget _buildContent() {
@@ -265,6 +286,42 @@ class _XboxNotificationState extends State<XboxNotification> with TickerProvider
     );
   }
 
+  Widget _buildIcon() {
+    return Container(
+      color: Xbox.slateGray.withOpacity(.9),
+      width: heightCard,
+      alignment: Alignment.center,
+      child: widget.icon ??
+          Icon(
+            Icons.diamond,
+            color: widget.color ?? Xbox.accentColorNotifier.value,
+          ),
+    );
+  }
+
+  EdgeInsets _buildPaddingContent() => const EdgeInsets.fromLTRB(0, 15, 15, 15);
+
+  Widget _buildSubTitle(String subTitle) {
+    return AnimatedBuilder(
+        animation: _controllerSubTitle,
+        builder: (_, child) {
+          return SlideTransition(
+            position: _subTitleSlideUp,
+            child: FadeTransition(
+              opacity: _controllerSubTitle,
+              child: child,
+            ),
+          );
+        },
+        child: Padding(
+          padding: const EdgeInsets.only(left: 8.0),
+          child: Text(
+            subTitle,
+            style: TextStyle(color: Xbox.getReadableColor(widget.color ?? Xbox.accentColorNotifier.value)),
+          ),
+        ));
+  }
+
   Widget _buildTitle(String title) {
     return AnimatedBuilder(
       animation: _controllerTitle,
@@ -288,54 +345,6 @@ class _XboxNotificationState extends State<XboxNotification> with TickerProvider
     );
   }
 
-  Widget _buildSubTitle(String subTitle) {
-    return AnimatedBuilder(
-        animation: _controllerSubTitle,
-        builder: (_, child) {
-          return SlideTransition(
-            position: _subTitleSlideUp,
-            child: FadeTransition(
-              opacity: _controllerSubTitle,
-              child: child,
-            ),
-          );
-        },
-        child: Padding(
-          padding: const EdgeInsets.only(left: 8.0),
-          child: Text(
-            subTitle,
-            style: TextStyle(color: Xbox.getReadableColor(widget.color ?? Xbox.accentColorNotifier.value)),
-          ),
-        ));
-  }
-
-  BorderRadiusGeometry _buildBorderCard() {
-    return widget.isCircle ? const BorderRadius.all(Radius.circular(1000)) : const BorderRadius.all(Radius.circular(Xbox.tileRadius));
-  }
-
-  EdgeInsets _buildPaddingContent() => const EdgeInsets.fromLTRB(0, 15, 15, 15);
-
-  Animation<Offset> _buildAnimatedContent(AnimationController controller) {
-    double dx = 0.0;
-    double dy = 0.0;
-    switch (widget.typeAnimationContent) {
-      case AnimationTypeAchievement.fadeSlideToUp:
-        {
-          dy = 2.0;
-        }
-        break;
-      case AnimationTypeAchievement.fadeSlideToLeft:
-        {
-          dx = 2.0;
-        }
-        break;
-      case AnimationTypeAchievement.fade:
-        {}
-        break;
-    }
-    return Tween(begin: Offset(dx, dy), end: const Offset(0.0, 0.0)).animate(CurvedAnimation(parent: controller, curve: Curves.decelerate));
-  }
-
   void _notifyListener(AchievementState state) {
     widget.listener?.call(state);
   }
@@ -345,14 +354,5 @@ class _XboxNotificationState extends State<XboxNotification> with TickerProvider
       _notifyListener(AchievementState.closing);
       _controllerSubTitle.reverse();
     });
-  }
-
-  @override
-  void dispose() {
-    _controllerScale.dispose();
-    _controllerSize.dispose();
-    _controllerTitle.dispose();
-    _controllerSubTitle.dispose();
-    super.dispose();
   }
 }

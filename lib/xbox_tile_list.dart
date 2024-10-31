@@ -22,26 +22,23 @@ class XboxTileList extends StatelessWidget {
               )
             : null);
 
-    return Padding(
-      padding: const EdgeInsets.all(5),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          if (wid != null) Padding(padding: const EdgeInsets.all(8.0), child: wid),
-          SizedBox(
-            height: getHeight(),
-            width: MediaQuery.of(context).size.width,
-            child: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: tiles,
-              ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (wid != null) IgnorePointer(child: Padding(padding: const EdgeInsets.all(8.0), child: wid)),
+        SizedBox(
+          height: getHeight(),
+          width: MediaQuery.of(context).size.width,
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: tiles,
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 

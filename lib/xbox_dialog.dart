@@ -6,9 +6,9 @@ import 'package:xbox_ui/xbox_ui.dart';
 import 'xbox_loading_bar.dart';
 
 class XboxDialog extends StatelessWidget {
-  const XboxDialog({super.key, required this.children});
-
   final List<Widget> children;
+
+  const XboxDialog({super.key, required this.children});
 
   @override
   Widget build(BuildContext context) => Dialog(
@@ -38,30 +38,28 @@ class XboxDialog extends StatelessWidget {
         ),
       );
 
-  static XboxLoadingBar loadingBar(BuildContext context, {required String title, String description = '', double? value}) => XboxLoadingBar(
-        title: title,
-        description: description,
-      ).show(context);
-
-  static Future<void> menu(BuildContext context, {required String title, required XboxMenuEntries menuEntries}) => showDialog(
-        context: context,
-        builder: (BuildContext context) => SimpleDialog(
-            shape: Xbox.defaultBorderShape,
-            backgroundColor: Theme.of(context).colorScheme.surface,
-            titleTextStyle: Xbox.getFont(color: Theme.of(context).colorScheme.onSurface, fontWeight: FontWeight.bold, fontSize: 20),
-            title: title.trim().isNotEmpty ? Text(title) : null,
-            children: menuEntries.entries
-                .map(
-                  (e) => SimpleDialogOption(
-                    onPressed: e.value,
-                    child: Text(
-                      e.key,
-                      style: Xbox.getFont(color: Theme.of(context).colorScheme.onSurface),
-                    ),
-                  ),
-                )
-                .toList()),
-      );
+  static Future<void> alert(
+    BuildContext context, {
+    required String text,
+    String? title,
+    Widget? icon,
+    String? textOK,
+  }) async {
+    showDialog(
+      context: context,
+      builder: (_) => XboxDialog(
+        children: [
+          if (icon != null) icon,
+          const SizedBox(height: 20),
+          Text(text),
+          XboxTile.button(
+            title: (textOK ?? MaterialLocalizations.of(context).okButtonLabel),
+            onTap: () => Navigator.pop(context),
+          ),
+        ],
+      ),
+    );
+  }
 
   static Future<bool> confirm(
     BuildContext context, {
@@ -102,27 +100,23 @@ class XboxDialog extends StatelessWidget {
     return isConfirm ?? false;
   }
 
-  static Future<void> alert(
-    BuildContext context, {
-    required String text,
-    String? title,
-    Widget? icon,
-    String? textOK,
-  }) async {
-    showDialog(
-      context: context,
-      builder: (_) => XboxDialog(
-        children: [
-          if (icon != null) icon,
-          const SizedBox(height: 20),
-          Text(text),
-          XboxTile.button(
-            title: (textOK ?? MaterialLocalizations.of(context).okButtonLabel),
-            onTap: () => Navigator.pop(context),
-          ),
-        ],
-      ),
-    );
+  static XboxLoadingBar loadingBar(BuildContext context, {required String title, String description = '', double? value}) => XboxLoadingBar(
+        title: title,
+        description: description,
+      ).show(context);
+
+  static Future<void> menu(BuildContext context, {required String title, required XboxMenuEntries menuEntries}) => showDialog(
+        context: context,
+        builder: (BuildContext context) => SimpleDialog(shape: Xbox.defaultBorderShape, backgroundColor: Theme.of(context).colorScheme.surface, titleTextStyle: Xbox.getFont(color: Theme.of(context).colorScheme.onSurface, fontWeight: FontWeight.bold, fontSize: 20), title: title.trim().isNotEmpty ? Text(title) : null, children: menuEntries.entries.map((e) => XboxMenuItem(title: e.key, onTap: e.value)).toList()),
+      );
+
+  static void notification(BuildContext context, {required String title, String? subtitle, IconData? icon, AlignmentGeometry alignment = Alignment.bottomCenter}) {
+    return XboxNotification(
+      title: title,
+      subTitle: subtitle,
+      icon: icon != null ? Icon(icon) : null,
+      alignment: alignment,
+    ).show(context);
   }
 
   static Future<String?> prompt(
@@ -169,13 +163,65 @@ class XboxDialog extends StatelessWidget {
 
     return isConfirm == true ? controller.text : null;
   }
+}
 
-  static void notification(BuildContext context, {required String title, String? subtitle, IconData? icon, AlignmentGeometry alignment = Alignment.bottomCenter}) {
-    return XboxNotification(
-      title: title,
-      subTitle: subtitle,
-      icon: icon != null ? Icon(icon) : null,
-      alignment: alignment,
-    ).show(context);
+class XboxMenuItem extends StatefulWidget {
+  final String title;
+
+  final VoidCallback? onTap;
+  final bool? hasFocus;
+  final IconData? icon;
+
+  const XboxMenuItem({
+    super.key,
+    required this.title,
+    required this.onTap,
+    this.hasFocus,
+    this.icon,
+  });
+
+  @override
+  State<XboxMenuItem> createState() => _XboxMenuItemState();
+}
+
+class _XboxMenuItemState extends State<XboxMenuItem> {
+  bool hasFocus = false;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(3),
+      child: FocusScope(
+        child: GestureDetector(
+          onTap: widget.onTap,
+          child: FocusableActionDetector(
+            onFocusChange: (value) => setState(() => hasFocus = value),
+            onShowFocusHighlight: (value) => setState(() => hasFocus = value),
+            onShowHoverHighlight: (value) => setState(() => hasFocus = value),
+            child: Padding(
+              padding: const EdgeInsets.all(1),
+              child: Container(
+                height: 50,
+                alignment: Alignment.centerLeft,
+                decoration: widget.hasFocus ?? hasFocus ? Xbox.tileInFocus(context) : null,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      if (widget.icon != null) Icon(widget.icon),
+                      SizedBox(width: widget.icon != null ? 10 : 0),
+                      Text(
+                        widget.title,
+                        style: Xbox.getFont(color: Theme.of(context).colorScheme.onSurface),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

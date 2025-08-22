@@ -3,43 +3,8 @@
     // Focalizar para exibir as descrições dos atributos existentes.
     // Para obter mais informações, acesse: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "xbox_ui",
-            "request": "launch",
-            "type": "dart"
-        },
-        {
-            "name": "xbox_ui (profile mode)",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "profile"
-        },
-        {
-            "name": "xbox_ui (release mode)",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "release"
-        },
-        {
-            "name": "xbox_ui_example",
-            "cwd": "example\\xbox_ui_example",
-            "request": "launch",
-            "type": "dart"
-        },
-        {
-            "name": "xbox_ui_example (profile mode)",
-            "cwd": "example\\xbox_ui_example",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "profile"
-        },
-        {
-            "name": "xbox_ui_example (release mode)",
-            "cwd": "example\\xbox_ui_example",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "release"
-        }
+    "configurations": [       
+      
+         
     ]
 }
